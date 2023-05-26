@@ -50,7 +50,7 @@ public class View {
         splitPane.setEnabled(false);
  
         // Display it all in a scrolling window and make the window appear
-        JFrame frame = new JFrame("Swing MVC Demo");
+        JFrame frame = new JFrame("Finance");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(splitPane);
         frame.pack();

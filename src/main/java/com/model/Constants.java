@@ -15,4 +15,6 @@ public class Constants {
     { "September", "GROCERY", 8.06, "EUR" },
     { "April", "CAR", 254.67, "CZK"},
     { "June", "OTHER", 7.87, "EUR" } };
+
+    public static Object[][] DB_DATA;
 }
