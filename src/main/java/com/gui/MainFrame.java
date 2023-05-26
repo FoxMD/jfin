@@ -15,12 +15,13 @@ public class MainFrame extends JFrame{
     JTextField tfFirstName, tfLastName;
     JLabel lbWelcome;
 
-    public void initialize() {
+    public void initialize(String Month) {
         JLabel lbFirstName = new JLabel("First name");
         lbFirstName.setFont(mainFont);
 
         tfFirstName = new JTextField();
         tfFirstName.setFont(mainFont);
+        tfFirstName.setText(Month);
 
         JLabel lbLastName = new JLabel("Last name");
         lbLastName.setFont(mainFont);
