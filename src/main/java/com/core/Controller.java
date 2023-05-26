@@ -1,41 +1,47 @@
 package com.core;
 
-import com.gui.TestView;
-import com.model.FinanceModel;
+import com.model.*;
 
-public class Controller {
-    private FinanceModel model;
-    private TestView view;
-
-    public Controller(FinanceModel model, TestView view)
-    {
-        this.model = model;
-        this.view = view;
-    }
-
-    public void setMonth(String name)
-    {
-        model.setMonth(name);      
-    }
-
-    public String getMonth()
-    {
-        return model.getMonth();       
-    }
-
-    public String getType()
-    {
-        return model.getType();     
-    }
-
-    public String getValue()
-    {
-        return model.getValue();       
-    }
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+ 
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+ 
+public class Controller implements ActionListener {
      
-    public void updateView()
-    {                
-        view.printDetails(model.getMonth(), model.getType(), model.getValue());
-    }  
-
+    private JTextField searchTermTextField = new JTextField(26);
+    private DefaultTableModel model;
+ 
+    public Controller(JTextField searchTermTextField, DefaultTableModel model) {
+        super();
+        this.searchTermTextField = searchTermTextField;
+        this.model = model;
+    }
+ 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+ 
+        String searchTerm = searchTermTextField.getText();
+        if (searchTerm != null && !"".equals(searchTerm)) {
+            Object[][] newData = new Object[Constants.DATA.length][];
+            int idx = 0;
+            for (Object[] o: Constants.DATA) {
+                if ("*".equals(searchTerm.trim())) {
+                    newData[idx++] = o;
+                } else {
+                    if(String.valueOf(o[0]).startsWith(searchTerm.toUpperCase().trim())){
+                        newData[idx++] = o;
+                    }   
+                }   
+            }
+            model.setDataVector(newData, Constants.TABLE_HEADER);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Search term is empty", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+ 
 }

@@ -1,34 +1,10 @@
 package com.model;
 
-public class FinanceModel {
-    private String Month;
-    private String Type;
-    private String Value;
-    private String Currency;
+import javax.swing.table.DefaultTableModel;
 
-    public String getMonth()
+public class FinanceModel extends DefaultTableModel{
+    public FinanceModel()
     {
-        return Month;
+        super(Constants.DATA, Constants.TABLE_HEADER);
     }
-
-    public String getType()
-    {
-        return Type;
-    }
-
-    public String getValue()
-    {
-        return Value;
-    }
-
-    public String getCurrency()
-    {
-        return Currency;
-    }
-
-    public void setMonth(String Month)
-    {
-        this.Month = Month;
-    }
-
 }
