@@ -1,5 +1,6 @@
 package com.core;
 
+import com.connector.DBConnector;
 import com.model.*;
 
 import java.awt.event.ActionEvent;
@@ -13,9 +14,11 @@ public class Controller implements ActionListener {
      
     private JTextField searchTermTextField = new JTextField(26);
     private DefaultTableModel model;
+    private DBConnector database;
  
-    public Controller(JTextField searchTermTextField, DefaultTableModel model) {
+    public Controller(JTextField searchTermTextField, DefaultTableModel model, DBConnector database) {
         super();
+        this.database = database;
         this.searchTermTextField = searchTermTextField;
         this.model = model;
     }
@@ -24,6 +27,8 @@ public class Controller implements ActionListener {
     public void actionPerformed(ActionEvent e) {
  
         String searchTerm = searchTermTextField.getText();
+        database.testConnection();
+
         if (searchTerm != null && !"".equals(searchTerm)) {
             Object[][] newData = new Object[Constants.DATA.length][];
             int idx = 0;

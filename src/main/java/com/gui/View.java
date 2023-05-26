@@ -2,6 +2,7 @@ package com.gui;
 
 import com.model.*;
 import com.core.*;
+import com.connector.*;
 
 import java.awt.Dimension;
  
@@ -25,9 +26,13 @@ public class View {
         // Create table model
         FinanceModel model = new FinanceModel();
         table.setModel(model);
+
+        // Create database
+        DBConnector database = new DBConnector();
+        database.testConnection();
  
         // Create controller
-        Controller controller = new Controller(searchTermTextField, model);
+        Controller controller = new Controller(searchTermTextField, model, database);
         filterButton.addActionListener(controller);
  
         // Set the view layout
