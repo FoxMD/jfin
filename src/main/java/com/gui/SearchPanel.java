@@ -11,7 +11,6 @@ import javax.swing.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 
 public class SearchPanel extends VHelperPanel{
@@ -26,7 +25,7 @@ public class SearchPanel extends VHelperPanel{
         JPanel searchPanel = new JPanel();
         searchPanel.setMinimumSize(new Dimension(width, height));
 
-        JButton filterButton = new JButton("Filter month");
+        JButton filterButton = new JButton("Filter");
         JTextField searchTermTextField = new JTextField(26);
 
         JRadioButton monthButton = new JRadioButton("Month");
@@ -72,8 +71,6 @@ public class SearchPanel extends VHelperPanel{
         typeButton.addActionListener(listener);
 
         controller.setFilterTextField(searchTermTextField);
-        //controller.setFilterOption();
-
         
         return searchPanel;
     }

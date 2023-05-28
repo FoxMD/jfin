@@ -23,13 +23,9 @@ public class View {
         // Create table model
         FinanceModel model = new FinanceModel();
         table.setModel(model);
-
-        // Create database
-        DBConnector database = new DBConnector();
-        database.testConnection();
  
         // Create controller
-        Controller controller = new Controller(model, database);
+        Controller controller = new Controller(model);
          
         // Set the view layout - Control Panel, Buttons
         ControlPanel cPanel = new ControlPanel();

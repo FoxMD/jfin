@@ -3,8 +3,6 @@ package com.connector;
 import java.sql.*;
 import com.secret.*;
 
-import javax.lang.model.util.ElementScanner14;
-import javax.swing.table.*;
 import java.util.*;
 public class DBConnector {
     static final String DB_URL = "jdbc:mysql://localhost:3306/mktest";
@@ -78,7 +76,7 @@ public class DBConnector {
         return retData;
     }
 
-    public void testConnection()
+    public int testConnection()
     {
         try 
         (
@@ -101,6 +99,8 @@ public class DBConnector {
         catch (SQLException e)
         {
             e.printStackTrace();
+            return -1;
         }
+        return 0;
     }
 }

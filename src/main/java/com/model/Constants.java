@@ -17,4 +17,20 @@ public class Constants {
     { "June", "OTHER", 7.87, "EUR" } };
 
     public static Object[][] DB_DATA;
+
+    public static int getColumnPosition(String what)
+    {
+        int len = TABLE_HEADER.length;
+        int i = 0;
+
+        while (i < len) {
+            if (TABLE_HEADER[i] == what) {
+                return i;
+            }
+            else {
+                i = i + 1;
+            }
+        }
+        return -1;
+    }
 }

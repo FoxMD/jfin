@@ -1,21 +1,12 @@
 package com.gui;
 
-import com.model.*;
 import com.core.*;
-import com.connector.*;
-
-import java.awt.Dimension;
- 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTable;
-import javax.swing.border.TitledBorder;
 
 import java.awt.GridLayout;
+import java.awt.Dimension;
+ 
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class ControlPanel {
     public JPanel controlPanelComposer(Controller controller)

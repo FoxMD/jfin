@@ -1,35 +1,29 @@
 package com.core;
 
-import com.connector.DBConnector;
 import com.model.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
  
 public class Controller implements ActionListener {
      
     private JTextField searchTermTextField = new JTextField(26);
-    private DefaultTableModel model;
-    private DBConnector database;
+    private FinanceModel model;
+    //private DBConnector database;
 
-    private String searchColumn = "month";
+    private String searchColumn = "Month";
 
     public void setFilterOption(String filterOption)
     {
         this.searchColumn = filterOption;
     }
  
-    public Controller(DefaultTableModel model, DBConnector database) {
+    public Controller(FinanceModel model) {
         super();
-        this.database = database;
-        //this.searchTermTextField = searchTermTextField;
         this.model = model;
     }
 
@@ -39,19 +33,16 @@ public class Controller implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        //JButton source = (JButton)e.getSource();
-
-        
+    public void actionPerformed(ActionEvent e) {      
         String searchTerm = searchTermTextField.getText();
-        if(((JButton)e.getSource()).getActionCommand() == "Filter month")
+        if(((JButton)e.getSource()).getActionCommand() == "Filter")
         {            
             System.out.println("Info od filtru");
-            //searchColumn = "month";
         }
-        Object[][] data = database.getQuery(searchColumn, searchTerm);
+        Object[][] data = ((FinanceModel)model).getDataFromDB(searchColumn, searchTerm);
 
         Constants.DB_DATA = data;
+        int position = Constants.getColumnPosition(searchColumn);
         if (searchTerm != null && !"".equals(searchTerm)) {
             Object[][] newData = new Object[Constants.DB_DATA.length][];
             int idx = 0;
@@ -59,7 +50,7 @@ public class Controller implements ActionListener {
                 if ("*".equals(searchTerm.trim())) {
                     newData[idx++] = o;
                 } else {
-                    if((String.valueOf(o[0]).toUpperCase()).startsWith(searchTerm.toUpperCase().trim())){
+                    if((String.valueOf(o[position]).toUpperCase()).startsWith(searchTerm.toUpperCase().trim())){
                         newData[idx++] = o;
                     }   
                 }   
