@@ -14,12 +14,6 @@ public class DBConnector {
     private static String USER = "";
     private static String PASS = "";
 
-    /* Add to destructor
-     *         rs.close();
-        stmt.close();
-        connection.close();
-     * 
-     */
     public DBConnector()
     {
         Credentials cred = new Credentials();

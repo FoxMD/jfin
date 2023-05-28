@@ -17,11 +17,16 @@ public class Controller implements ActionListener {
     private DefaultTableModel model;
     private DBConnector database;
  
-    public Controller(JTextField searchTermTextField, DefaultTableModel model, DBConnector database) {
+    public Controller(DefaultTableModel model, DBConnector database) {
         super();
         this.database = database;
-        this.searchTermTextField = searchTermTextField;
+        //this.searchTermTextField = searchTermTextField;
         this.model = model;
+    }
+
+    public void setFilterTextField(JTextField searchTermTextField)
+    {
+        this.searchTermTextField = searchTermTextField;
     }
  
     @Override
