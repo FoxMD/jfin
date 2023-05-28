@@ -30,12 +30,12 @@ public class Controller implements ActionListener {
         String searchTerm = searchTermTextField.getText();
         String searchColumn = " ";
 
-        if(source.getActionCommand() == "Filter")
+        if(source.getActionCommand() == "Filter month")
         {
             System.out.println("Info od filtru");
             searchColumn = "month";
         }
-        //database.testConnection();
+
         Object[][] data = database.getQuery(searchColumn, searchTerm);
 
         Constants.DB_DATA = data;
@@ -46,7 +46,7 @@ public class Controller implements ActionListener {
                 if ("*".equals(searchTerm.trim())) {
                     newData[idx++] = o;
                 } else {
-                    if(String.valueOf(o[0]).startsWith(searchTerm.toUpperCase().trim())){
+                    if((String.valueOf(o[0]).toUpperCase()).startsWith(searchTerm.toUpperCase().trim())){
                         newData[idx++] = o;
                     }   
                 }   

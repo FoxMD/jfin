@@ -3,6 +3,7 @@ package com.connector;
 import java.sql.*;
 import com.secret.*;
 
+import javax.lang.model.util.ElementScanner14;
 import javax.swing.table.*;
 import java.util.*;
 public class DBConnector {
@@ -29,7 +30,15 @@ public class DBConnector {
     public Object[][] getQuery(String what, String with)
     {
         ArrayList<Object[]> Data = new ArrayList<>();
-        String REQUEST = this.QUERY + " " + what + " LIKE \"" + with + "%\""; 
+        String REQUEST = "";
+        if("*".equals(with.trim()))
+        {
+            REQUEST = BASE_QUERY;
+        }
+        else
+        {
+            REQUEST = this.QUERY + " " + what + " LIKE \"" + with + "%\""; 
+        }
         
         System.out.println(REQUEST);
         try 
@@ -68,8 +77,6 @@ public class DBConnector {
     {
         ArrayList<Object[]> Data = new ArrayList<>();
 
-        //Object[][] Data = {{"January","GROCERY",199.99,"CZK"}, {"February","GROCERY",9.99,"EUR"}};
-        //Data[0][1] = "month";
         Data.add(new Object[]{"January","GROCERY",199.99,"CZK"});
         Data.add(new Object[]{"February","GROCERY",9.99,"EUR"});
 
@@ -91,6 +98,10 @@ public class DBConnector {
                 System.out.print(", Type: " + rs.getString("type"));
                 System.out.print(", Value: " + rs.getFloat("value"));
                 System.out.println(", Currency: " + rs.getString("currency"));
+
+                //rs.close();
+                //stmt.close();
+                //conn.close();
             }
         }
         catch (SQLException e)

@@ -20,7 +20,7 @@ public class View {
     public View() {
         // Create views swing UI components 
         JTextField searchTermTextField = new JTextField(26);
-        JButton filterButton = new JButton("Filter");
+        JButton filterButton = new JButton("Filter month");
         JTable table = new JTable();
  
         // Create table model
