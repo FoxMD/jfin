@@ -5,7 +5,9 @@ import com.model.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
- 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +18,13 @@ public class Controller implements ActionListener {
     private JTextField searchTermTextField = new JTextField(26);
     private DefaultTableModel model;
     private DBConnector database;
+
+    private String searchColumn = "month";
+
+    public void setFilterOption(String filterOption)
+    {
+        this.searchColumn = filterOption;
+    }
  
     public Controller(DefaultTableModel model, DBConnector database) {
         super();
@@ -28,19 +37,18 @@ public class Controller implements ActionListener {
     {
         this.searchTermTextField = searchTermTextField;
     }
- 
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton source = (JButton)e.getSource();
+        //JButton source = (JButton)e.getSource();
+
+        
         String searchTerm = searchTermTextField.getText();
-        String searchColumn = " ";
-
-        if(source.getActionCommand() == "Filter month")
-        {
+        if(((JButton)e.getSource()).getActionCommand() == "Filter month")
+        {            
             System.out.println("Info od filtru");
-            searchColumn = "month";
+            //searchColumn = "month";
         }
-
         Object[][] data = database.getQuery(searchColumn, searchTerm);
 
         Constants.DB_DATA = data;

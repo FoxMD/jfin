@@ -9,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 
 public class SearchPanel extends VHelperPanel{
@@ -30,14 +33,17 @@ public class SearchPanel extends VHelperPanel{
         monthButton.setMnemonic(KeyEvent.VK_M);
         monthButton.setActionCommand("Month");
         monthButton.setSelected(true);
+        monthButton.setName("Month");
 
         JRadioButton yearButton = new JRadioButton("Year");
-        monthButton.setMnemonic(KeyEvent.VK_Y);
+        yearButton.setMnemonic(KeyEvent.VK_Y);
         yearButton.setActionCommand("Year");
+        yearButton.setName("Year");
 
         JRadioButton typeButton = new JRadioButton("Type");
-        monthButton.setMnemonic(KeyEvent.VK_T);
+        typeButton.setMnemonic(KeyEvent.VK_T);
         typeButton.setActionCommand("Type");
+        typeButton.setName("Type");
 
         ButtonGroup group = new ButtonGroup();
         group.add(monthButton);
@@ -50,13 +56,24 @@ public class SearchPanel extends VHelperPanel{
 
         searchPanel.add(searchTermTextField);
         searchPanel.add(filterButton);
-        
+
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JRadioButton btn = (JRadioButton) e.getSource();
+                System.out.println("Selected Button = " + btn.getName());
+                controller.setFilterOption(btn.getName());
+            }
+        };
+       
         filterButton.addActionListener(controller);
-        typeButton.addActionListener(controller);
-        monthButton.addActionListener(controller);
-        yearButton.addActionListener(controller);
+        monthButton.addActionListener(listener);
+        yearButton.addActionListener(listener);
+        typeButton.addActionListener(listener);
 
         controller.setFilterTextField(searchTermTextField);
+        //controller.setFilterOption();
+
         
         return searchPanel;
     }
