@@ -3,6 +3,8 @@ package com.gui;
 import com.core.*;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -34,6 +36,16 @@ public class SelectorPanel extends VHelperPanel {
         selectorPanel.add(cbMonth);
         selectorPanel.add(cbYear);
         selectorPanel.add(updateButton);
+
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.setOverviewDetails(cbYear.getSelectedItem().toString(), cbMonth.getSelectedItem().toString());
+            }
+        };
+        
+        updateButton.addActionListener(controller);
+        updateButton.addActionListener(listener);
 
         return selectorPanel;
     }

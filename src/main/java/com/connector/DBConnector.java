@@ -5,7 +5,7 @@ import com.secret.*;
 
 import java.util.*;
 public class DBConnector {
-    static final String DB_URL = "jdbc:mysql://localhost:3306/mktest";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/dummy";
     static final String BASE_QUERY = "SELECT * FROM test";
     private String QUERY = "SELECT * FROM test WHERE"; 
 
@@ -41,10 +41,54 @@ public class DBConnector {
         )
         {
             while(rs.next()) {
-                Data.add(new Object[]{  rs.getString("month"),
-                                            rs.getString("type"),
+                Data.add(new Object[]{  rs.getString("year"),
+                                        rs.getString("month"),
+                                        rs.getString("type"),
                                         rs.getFloat("value"),
-                                        rs.getString("currency")
+                                        rs.getString("currency"),
+                                        rs.getString("description"),
+                                    });
+                System.out.print("Month: " + rs.getString("month"));
+                System.out.print(", Type: " + rs.getString("type"));
+                System.out.print(", Value: " + rs.getFloat("value"));
+                System.out.println(", Currency: " + rs.getString("currency"));
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        Object[][] dataObject = Data.toArray(new Object[0][0]);
+        return dataObject; 
+    }
+
+    public Object[][] getQueryForYearAndMonth(String year, String month)
+    {
+        ArrayList<Object[]> Data = new ArrayList<>();
+        String REQUEST = "";
+
+        REQUEST = this.QUERY + " month='" + month + "' AND year='" + year + "'"; 
+        
+        System.out.println(REQUEST);
+        try 
+        (
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(REQUEST);
+        )
+        {
+            while(rs.next()) {
+                Data.add(new Object[]{  rs.getString("year"),
+                                        rs.getString("month"),
+                                        rs.getString("type"),
+                                        rs.getFloat("value"),
+                                        rs.getString("currency"),
+                                        rs.getString("description"),
                                     });
                 System.out.print("Month: " + rs.getString("month"));
                 System.out.print(", Type: " + rs.getString("type"));

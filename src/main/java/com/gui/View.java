@@ -2,7 +2,6 @@ package com.gui;
 
 import com.model.*;
 import com.core.*;
-import com.connector.*;
 
 import java.awt.Dimension;
  
@@ -21,11 +20,14 @@ public class View {
         JTable summary = new JTable();
  
         // Create table model
-        FinanceModel model = new FinanceModel();
-        table.setModel(model);
+        FinanceModel model_db = new FinanceModel();
+        table.setModel(model_db);
+
+        FinanceModel model_sum = new FinanceModel();
+        summary.setModel(model_sum);
  
         // Create controller
-        Controller controller = new Controller(model);
+        Controller controller = new Controller(model_db, model_sum);
          
         // Set the view layout - Control Panel, Buttons
         ControlPanel cPanel = new ControlPanel();
