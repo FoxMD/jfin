@@ -17,7 +17,6 @@ import javax.swing.border.TitledBorder;
 public class View {
     public View() {
         // Create views swing UI components 
-
         JTable table = new JTable();
         JTable summary = new JTable();
  
@@ -37,12 +36,12 @@ public class View {
         JPanel ctrlPanel = cPanel.controlPanelComposer(controller);
 
         // Set the search pannel
-        SearchPanel sPanel = new SearchPanel();
-        JPanel searchPanel = sPanel.searchPanelComposer(controller, 35);
+        SearchPanel sPanel = new SearchPanel(35);
+        JPanel searchPanel = sPanel.searchPanelComposer(controller);
 
         // Set the selector pannel
-        SelectorPanel slPanel = new SelectorPanel();
-        JPanel selectorPanel = slPanel.selectorPanelComposer(controller, 35);
+        SelectorPanel slPanel = new SelectorPanel(35);
+        JPanel selectorPanel = slPanel.selectorPanelComposer(controller);
 
         // Set the database panel
         JScrollPane tableScrollPanel = new JScrollPane(table);

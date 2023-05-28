@@ -8,8 +8,15 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 
-public class SelectorPanel {
-    public JPanel selectorPanelComposer(Controller controller, int height)
+public class SelectorPanel extends VHelperPanel {
+    //private int height;
+
+    SelectorPanel(int height)
+    {
+        super(height);
+    }
+
+    public JPanel selectorPanelComposer(Controller controller)
     {
         String[] choicesMonth = { "January", "February", "March", "April",
         "May", "June", "July", "August", "September", "October", "November", "December" };
@@ -23,7 +30,7 @@ public class SelectorPanel {
         JButton updateButton = new JButton("Update");
 
         JPanel selectorPanel = new JPanel();
-        selectorPanel.setMinimumSize(new Dimension(1024, height));
+        selectorPanel.setMinimumSize(new Dimension(width, height));
         selectorPanel.add(cbMonth);
         selectorPanel.add(cbYear);
         selectorPanel.add(updateButton);
