@@ -38,7 +38,11 @@ public class View {
 
         // Set the search pannel
         SearchPanel sPanel = new SearchPanel();
-        JPanel searchPanel = sPanel.searchPanelComposer(controller);
+        JPanel searchPanel = sPanel.searchPanelComposer(controller, 35);
+
+        // Set the selector pannel
+        SelectorPanel slPanel = new SelectorPanel();
+        JPanel selectorPanel = slPanel.selectorPanelComposer(controller, 35);
 
         // Set the database panel
         JScrollPane tableScrollPanel = new JScrollPane(table);
@@ -46,15 +50,17 @@ public class View {
                 
         // Set the summary pannel
         JScrollPane tableSummaryScrollPanel = new JScrollPane(summary);
-        tableSummaryScrollPanel = stylingDatabasePanel(tableSummaryScrollPanel, "Summary - Test feedback", 500);
-
-        // Set the filter summary panel
+        tableSummaryScrollPanel = stylingDatabasePanel(tableSummaryScrollPanel, "Summary - Test feedback", 400);
 
         // Split Layouts
-        JSplitPane splitVerticalPanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT, searchPanel, tableScrollPanel);
-        splitVerticalPanel.setEnabled(false);
+        // Set the filter summary panel
+        JSplitPane splitVerticalPanelSummary = new JSplitPane(JSplitPane.VERTICAL_SPLIT, selectorPanel, tableSummaryScrollPanel);
+        splitVerticalPanelSummary.setEnabled(false);
 
-        JSplitPane splitVerticalFramePanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tableSummaryScrollPanel, splitVerticalPanel);
+        JSplitPane splitVerticalPanelDatabase = new JSplitPane(JSplitPane.VERTICAL_SPLIT, searchPanel, tableScrollPanel);
+        splitVerticalPanelDatabase.setEnabled(false);
+
+        JSplitPane splitVerticalFramePanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT, splitVerticalPanelSummary, splitVerticalPanelDatabase);
         splitVerticalFramePanel.setEnabled(false);
 
         JSplitPane splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, ctrlPanel, splitVerticalFramePanel);

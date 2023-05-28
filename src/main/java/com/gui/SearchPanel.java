@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.*;
 
 public class SearchPanel extends JPanel{
-    public JPanel searchPanelComposer(Controller controller)
+    public JPanel searchPanelComposer(Controller controller, int height)
     {
         JPanel searchPanel = new JPanel();
         JButton filterButton = new JButton("Filter month");
