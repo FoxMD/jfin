@@ -50,22 +50,7 @@ public class Controller implements ActionListener {
             System.out.println("Info od update");
             Object[][] data = ((FinanceModel)modelOverview).getDataForSpecificDate(searchYear, searchMonth);
         
-            Constants.DB_DATA = data;
-            int position = Constants.getColumnPosition(searchColumn);
-            if (searchTerm != null && !"".equals(searchTerm)) {
-                Object[][] newData = new Object[Constants.DB_DATA.length][];
-                int idx = 0;
-                for (Object[] o: Constants.DB_DATA) {
-                    if ("*".equals(searchTerm.trim())) {
-                        newData[idx++] = o;
-                    } else {
-                        if((String.valueOf(o[position]).toUpperCase()).startsWith(searchTerm.toUpperCase().trim())){
-                            newData[idx++] = o;
-                        }   
-                    }   
-                }
-                modelOverview.setDataVector(newData, Constants.TABLE_HEADER);
-            }
+            modelOverview.setDataVector(data, Constants.TABLE_HEADER);
         }
 
         if(((JButton)e.getSource()).getActionCommand() == "Filter")
