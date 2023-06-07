@@ -1,7 +1,5 @@
 package com.gui;
 
-import com.core.*;
-
 import java.awt.GridLayout;
 import java.awt.Dimension;
  

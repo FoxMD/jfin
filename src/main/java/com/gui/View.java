@@ -4,7 +4,7 @@ import com.model.*;
 import com.core.*;
 
 import java.awt.Dimension;
- 
+
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,50 +18,50 @@ public class View {
         // Create views swing UI components 
         JTable table = new JTable();
         JTable summary = new JTable();
- 
+        
         // Create table model
         FinanceModel model_db = new FinanceModel();
         table.setModel(model_db);
-
+        
         FinanceModel model_sum = new FinanceModel();
         summary.setModel(model_sum);
- 
+        
         // Create controller
         Controller controller = new Controller(model_db, model_sum);
-         
+        
         // Set the view layout - Control Panel, Buttons
         ControlPanel cPanel = new ControlPanel();
         JPanel ctrlPanel = cPanel.controlPanelComposer(controller);
-
+        
         // Set the search pannel
         SearchPanel sPanel = new SearchPanel(35);
         JPanel searchPanel = sPanel.searchPanelComposer(controller);
-
+        
         // Set the selector pannel
         SelectorPanel slPanel = new SelectorPanel(35);
         JPanel selectorPanel = slPanel.selectorPanelComposer(controller);
-
+        
         // Set the database panel
         JScrollPane tableScrollPanel = new JScrollPane(table);
         tableScrollPanel = stylingDatabasePanel(tableScrollPanel, "Database - Test feedback", 200);
-                
+        
         // Set the summary pannel
         JScrollPane tableSummaryScrollPanel = new JScrollPane(summary);
         tableSummaryScrollPanel = stylingDatabasePanel(tableSummaryScrollPanel, "Summary - Test feedback", 400);
-
+        
         // Set the graph pannel
         GraphPanel gPanel = new GraphPanel();
         JPanel graphPanel = gPanel.graphPanelComposer();
-
+        
         // Set the sum action panel
         SumActionPanel saPanel = new SumActionPanel();
         JPanel sumActPanel = saPanel.sumActionPanelComposer();
-
+        
         // Split Layouts
         // Set the filter summary panel
         JSplitPane splitVerticalPanelSummary = new JSplitPane(JSplitPane.VERTICAL_SPLIT, selectorPanel, tableSummaryScrollPanel);
         splitVerticalPanelSummary.setEnabled(false);
-
+        
         JSplitPane splitVerticalPanelDatabase = new JSplitPane(JSplitPane.VERTICAL_SPLIT, searchPanel, tableScrollPanel);
         splitVerticalPanelDatabase.setEnabled(false);
         

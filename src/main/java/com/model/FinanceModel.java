@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class FinanceModel extends DefaultTableModel{
     private DBConnector database;
+    private int data;
 
     public FinanceModel()
     {
@@ -28,6 +29,16 @@ public class FinanceModel extends DefaultTableModel{
     public Object[][] getDataForSpecificDate(String year, String month)
     {
         return database.getQueryForYearAndMonth(year, month);
+    }
+
+    public void setChartValues(int data)
+    {
+        this.data = data;
+    }
+
+    public int getChartValues()
+    {
+        return this.data;
     }
 
     //public void addEntryToDB(String, String, )

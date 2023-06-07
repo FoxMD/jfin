@@ -31,7 +31,8 @@ public class Controller implements ActionListener {
         this.searchMonth = month;
     }
  
-    public Controller(FinanceModel model_db, FinanceModel model_sum) {
+    public Controller(FinanceModel model_db, FinanceModel model_sum) 
+    {
         super();
         this.model = model_db;
         this.modelOverview = model_sum;
@@ -41,7 +42,7 @@ public class Controller implements ActionListener {
     {
         this.searchTermTextField = searchTermTextField;
     }
-
+    private int i = 0;
     @Override
     public void actionPerformed(ActionEvent e) {      
         String searchTerm = searchTermTextField.getText();
@@ -51,6 +52,7 @@ public class Controller implements ActionListener {
             Object[][] data = ((FinanceModel)modelOverview).getDataForSpecificDate(searchYear, searchMonth);
         
             modelOverview.setDataVector(data, Constants.TABLE_HEADER);
+            modelOverview.setChartValues(i++);
         }
 
         if(((JButton)e.getSource()).getActionCommand() == "Filter")
