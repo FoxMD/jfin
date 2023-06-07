@@ -1,26 +1,33 @@
 package com.gui;
 
-import com.core.*;
-
-import java.awt.GridLayout;
-import java.awt.Dimension;
- 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class GraphPanel {
+import org.knowm.xchart.PieChart;
+import org.knowm.xchart.PieChartBuilder;
+import org.knowm.xchart.XChartPanel;
+import org.knowm.xchart.style.PieStyler.AnnotationType;
+import org.knowm.xchart.style.Styler.ChartTheme;
+
+
+public class GraphPanel extends JPanel {
     public JPanel graphPanelComposer()
     {
-        JButton searchButton = new JButton("Search");
-        JButton addButton = new JButton("Add entry");
-        JButton removeButton = new JButton("Remove entry");
-
-        JPanel ctrlPanel = new JPanel(new GridLayout(8, 1, 10, 10));
-        ctrlPanel.setMinimumSize(new Dimension(120, 500));
-        ctrlPanel.add(searchButton);
-        ctrlPanel.add(addButton);
-        ctrlPanel.add(removeButton);
-
-        return ctrlPanel;
+        final PieChart chart = new PieChartBuilder().width(800).height(600).title("My Pie Chart").theme(ChartTheme.GGPlot2).build();
+        // Customize Chart
+        chart.getStyler().setLegendVisible(false);
+        chart.getStyler().setAnnotationType(AnnotationType.LabelAndPercentage);
+        chart.getStyler().setAnnotationDistance(1.15);
+        chart.getStyler().setPlotContentSize(.7);
+        chart.getStyler().setStartAngleInDegrees(90);
+    
+        // Series
+        chart.addSeries("Prague", 2);
+        chart.addSeries("Dresden", 4);
+        chart.addSeries("Munich", 34);
+        chart.addSeries("Hamburg", 22);
+        chart.addSeries("Berlin", 29);
+                
+        JPanel panel = new XChartPanel<PieChart>(chart);
+        return panel;
     }
 }

@@ -43,6 +43,11 @@
       <artifactId>appengine-api-1.0-sdk</artifactId>
       <version>1.9.76</version>
     </dependency>
+    <dependency>
+      <groupId>org.knowm.xchart</groupId>
+      <artifactId>xchart</artifactId>
+      <version>3.4.0</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -80,6 +85,11 @@
             <groupId>com.github.ngeor</groupId>
             <artifactId>checkstyle-rules</artifactId>
             <version>4.9.3</version>
+          </dependency>
+          <dependency>
+            <groupId>org.knowm.xchart</groupId>
+            <artifactId>xchart</artifactId>
+            <version>3.8.3</version>
           </dependency>
         </dependencies>
         <configuration>
