@@ -49,6 +49,14 @@ public class View {
         JScrollPane tableSummaryScrollPanel = new JScrollPane(summary);
         tableSummaryScrollPanel = stylingDatabasePanel(tableSummaryScrollPanel, "Summary - Test feedback", 400);
 
+        // Set the graph pannel
+        GraphPanel gPanel = new GraphPanel();
+        JPanel graphPanel = gPanel.graphPanelComposer();
+
+        // Set the sum action panel
+        SumActionPanel saPanel = new SumActionPanel();
+        JPanel sumActPanel = saPanel.sumActionPanelComposer();
+
         // Split Layouts
         // Set the filter summary panel
         JSplitPane splitVerticalPanelSummary = new JSplitPane(JSplitPane.VERTICAL_SPLIT, selectorPanel, tableSummaryScrollPanel);
@@ -56,8 +64,14 @@ public class View {
 
         JSplitPane splitVerticalPanelDatabase = new JSplitPane(JSplitPane.VERTICAL_SPLIT, searchPanel, tableScrollPanel);
         splitVerticalPanelDatabase.setEnabled(false);
-
-        JSplitPane splitVerticalFramePanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT, splitVerticalPanelSummary, splitVerticalPanelDatabase);
+        
+        JSplitPane splitHorizontalPanelSummary = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, splitVerticalPanelSummary, graphPanel);
+        splitHorizontalPanelSummary.setEnabled(false);
+        
+        JSplitPane splitHorizontalPanelDatabase = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, splitVerticalPanelDatabase, sumActPanel);
+        splitHorizontalPanelDatabase.setEnabled(false);
+        
+        JSplitPane splitVerticalFramePanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT, splitHorizontalPanelSummary, splitHorizontalPanelDatabase);
         splitVerticalFramePanel.setEnabled(false);
 
         JSplitPane splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, ctrlPanel, splitVerticalFramePanel);
