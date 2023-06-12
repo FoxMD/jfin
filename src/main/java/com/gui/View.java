@@ -18,7 +18,9 @@ public class View {
         // Create views swing UI components 
         JTable table = new JTable();
         JTable summary = new JTable();
-        
+        JFrame frame = new JFrame("Finance");
+
+       
         // Create table model
         FinanceModel model_db = new FinanceModel();
         table.setModel(model_db);
@@ -26,8 +28,12 @@ public class View {
         FinanceModel model_sum = new FinanceModel();
         summary.setModel(model_sum);
         
+        // Set the graph pannel
+        GraphPanel gPanel = new GraphPanel();
+        JPanel graphPanel = gPanel.graphPanelComposer(model_sum);
+
         // Create controller
-        Controller controller = new Controller(model_db, model_sum);
+        Controller controller = new Controller(model_db, model_sum, gPanel, frame);
         
         // Set the view layout - Control Panel, Buttons
         ControlPanel cPanel = new ControlPanel();
@@ -49,9 +55,6 @@ public class View {
         JScrollPane tableSummaryScrollPanel = new JScrollPane(summary);
         tableSummaryScrollPanel = stylingDatabasePanel(tableSummaryScrollPanel, "Summary - Test feedback", 400);
         
-        // Set the graph pannel
-        GraphPanel gPanel = new GraphPanel();
-        JPanel graphPanel = gPanel.graphPanelComposer();
         
         // Set the sum action panel
         SumActionPanel saPanel = new SumActionPanel();
@@ -79,7 +82,6 @@ public class View {
         splitPanel.setEnabled(false);
  
         // Display it all in a scrolling window and make the window appear
-        JFrame frame = new JFrame("Finance");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(1200, 600));
         frame.setPreferredSize(new Dimension(1400, 800));

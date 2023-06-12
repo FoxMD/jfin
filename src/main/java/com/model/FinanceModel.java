@@ -19,6 +19,7 @@ public class FinanceModel extends DefaultTableModel{
         if(database.testConnection() != -1)
         {
             this.database = database;
+            this.data = 13;
         }
     }
 
@@ -45,7 +46,7 @@ public class FinanceModel extends DefaultTableModel{
 
     public void setChartValues(int data)
     {
-        this.data = data;
+        this.data += data;
     }
 
     public int getChartValues()
@@ -68,5 +69,9 @@ public class FinanceModel extends DefaultTableModel{
         return this.difference;
     }
 
+    public float getTest()
+    {
+        return data;
+    }
     //public void addEntryToDB(String, String, )
 }

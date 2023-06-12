@@ -1,12 +1,11 @@
 package com.core;
 
+import com.gui.GraphPanel;
 import com.model.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.*;
  
 public class Controller implements ActionListener {
@@ -14,6 +13,8 @@ public class Controller implements ActionListener {
     private JTextField searchTermTextField = new JTextField(26);
     private FinanceModel model;
     private FinanceModel modelOverview;
+    private GraphPanel graph;
+    private JFrame frame;
     //private DBConnector database;
 
     private String searchColumn = "Month";
@@ -31,11 +32,13 @@ public class Controller implements ActionListener {
         this.searchMonth = month;
     }
  
-    public Controller(FinanceModel model_db, FinanceModel model_sum) 
+    public Controller(FinanceModel model_db, FinanceModel model_sum, GraphPanel graph, JFrame frame) 
     {
         super();
         this.model = model_db;
         this.modelOverview = model_sum;
+        this.frame = frame;
+        this.graph = graph;
     }
 
     public void setFilterTextField(JTextField searchTermTextField)
@@ -50,9 +53,13 @@ public class Controller implements ActionListener {
         {            
             System.out.println("Info od update");
             Object[][] data = ((FinanceModel)modelOverview).getDataForSpecificDate(searchYear, searchMonth);
-        
+
+            graph.clearChart();
             modelOverview.setDataVector(data, Constants.TABLE_HEADER);
             modelOverview.setChartValues(i++);
+            graph.updateChart(modelOverview);
+            frame.validate();
+            frame.repaint();
         }
 
         if(((JButton)e.getSource()).getActionCommand() == "Filter")
