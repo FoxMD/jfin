@@ -1,4 +1,6 @@
-repo:
+version: 1
+labels:
+  repo:
   - '*'
 
   test:
