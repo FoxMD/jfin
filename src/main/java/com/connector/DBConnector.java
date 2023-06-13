@@ -7,36 +7,43 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
+/**
+ * Connector for database server, handles work with mysql
+ */
 public class DBConnector {
-    static final String DB_URL = "jdbc:mysql://localhost:3306/dummy";
-    static final String BASE_QUERY = "SELECT * FROM test";
-    private String QUERY = "SELECT * FROM test WHERE"; 
+    final static String dbURL = "jdbc:mysql://localhost:3306/dummy";
+    final static String baseQuery = "SELECT * FROM test";
+    private String query = "SELECT * FROM test WHERE"; 
 
-    private static String USER = "";
-    private static String PASS = "";
+    private static String user = "";
+    private static String pass = "";
 
     public DBConnector() {
         Credentials cred = new Credentials();
-        USER = cred.getUser();
-        PASS = cred.getPassword();
+        user = cred.getUser();
+        pass = cred.getPassword();
     }
-
+/**
+ * returns an array of results from the database
+ * @param what column entry name
+ * @param with entry name starts with
+ * @return array of mysql entry as array
+ */
     public Object[][] getQuery(String what, String with) {
         ArrayList<Object[]> Data = new ArrayList<>();
-        String REQUEST = "";
+        String request = "";
         if ("*".equals(with.trim())) {
-            REQUEST = BASE_QUERY;
+            request = baseQuery;
         } else {
-            REQUEST = this.QUERY + " " + what + " LIKE \"" + with + "%\"";
+            request = this.query + " " + what + " LIKE \"" + with + "%\"";
         }
 
-        System.out.println(REQUEST);
+        System.out.println(request);
         try
         (
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Connection conn = DriverManager.getConnection(dbURL, user, pass);
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(REQUEST);
+            ResultSet rs = stmt.executeQuery(request);
         ) {
             while (rs.next()) {
                 Data.add(new Object[]{rs.getString("year"),
@@ -62,19 +69,24 @@ public class DBConnector {
         Object[][] dataObject = Data.toArray(new Object[0][0]);
         return dataObject;
     }
-
+/**
+ * method to get a specific entries for a month in a year
+ * @param year year you want to search
+ * @param month month in this year
+ * @return array of mysql array entries for this specific date
+ */
     public Object[][] getQueryForYearAndMonth(String year, String month) {
         ArrayList<Object[]> data = new ArrayList<>();
-        String REQUEST = "";
+        String request = "";
 
-        REQUEST = this.QUERY + " month='" + month + "' AND year='" + year + "'";
+        request = this.query + " month='" + month + "' AND year='" + year + "'";
 
-        System.out.println(REQUEST);
+        System.out.println(request);
         try
         (
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Connection conn = DriverManager.getConnection(dbURL, user, pass);
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(REQUEST);
+            ResultSet rs = stmt.executeQuery(request);
         ) {
             while (rs.next()) {
                 data.add(new Object[]{rs.getString("year"),
@@ -100,23 +112,34 @@ public class DBConnector {
         Object[][] dataObject = data.toArray(new Object[0][0]);
         return dataObject;
     }
-
+/**
+ * returns a precize querry
+ * @param what column entry name
+ * @param with what is the value of the coumn
+ * @return array of mysql array entries for this specific date
+ */
     public Object[][] getPreciseQuery(String what, String with) {
         ArrayList<Object[]> data = new ArrayList<>();
 
-        data.add(new Object[]{"January", "GROCERY", 199.99, "CZK"});
-        data.add(new Object[]{"February", "GROCERY", 9.99, "EUR"});
+        final float testCZK = 199.99f;
+        final float testEUR = 9.99f;  
+
+        data.add(new Object[]{"January", "GROCERY", testCZK, "CZK"});
+        data.add(new Object[]{"February", "GROCERY", testEUR, "EUR"});
 
         Object[][] retData = data.toArray(new Object[0][0]);
         return retData;
     }
-
+/**
+ * Method for testing a connection
+ * @return returns true 0 if everythink is OK
+ */
     public int testConnection() {
         try
         (
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Connection conn = DriverManager.getConnection(dbURL, user, pass);
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(BASE_QUERY);
+            ResultSet rs = stmt.executeQuery(baseQuery);
         ) {
             while (rs.next()) {
                 System.out.print("Month: " + rs.getString("month"));
