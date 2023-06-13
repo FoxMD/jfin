@@ -12,12 +12,11 @@ import java.util.ArrayList;
  * Connector for database server, handles work with mysql.
  */
 public class DBConnector {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/dummy";
-    private static final String BASE_QUERY = "SELECT * FROM test";
     private String query = "SELECT * FROM test WHERE";
-
     private static String user = "";
     private static String pass = "";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/dummy";
+    private static final String BASE_QUERY = "SELECT * FROM test";
 
     /**
      * Constructor for the class.
@@ -129,7 +128,7 @@ public class DBConnector {
         ArrayList<Object[]> data = new ArrayList<>();
 
         final float testCZK = 199.99f;
-        final float testEUR = 9.99f;  
+        final float testEUR = 9.99f;
 
         data.add(new Object[]{"January", "GROCERY", testCZK, "CZK"});
         data.add(new Object[]{"February", "GROCERY", testEUR, "EUR"});
