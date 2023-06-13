@@ -64,6 +64,7 @@ public class Controller implements ActionListener {
     public void setFilterTextField(JTextField searchTermTextField) {
         this.searchTermTextField = searchTermTextField;
     }
+
     // delete after debuging
     private int i;
 
@@ -96,16 +97,14 @@ public class Controller implements ActionListener {
                     if ("*".equals(searchTerm.trim())) {
                         newData[idx++] = o;
                     } else {
-                        if((String.valueOf(o[position]).toUpperCase()).startsWith(searchTerm.toUpperCase().trim())){
+                        if ((String.valueOf(o[position]).toUpperCase()).startsWith(searchTerm.toUpperCase().trim())) {
                             newData[idx++] = o;
-                        }   
-                    }   
+                        }
+                    }
                 }
                 model.setDataVector(newData, Constants.TABLE_HEADER);
             } else {
-                JOptionPane.showMessageDialog(null,
-                        "Search term is empty", "Error",
-                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Search term is empty", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

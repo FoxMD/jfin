@@ -1,7 +1,7 @@
 package com.gui;
 
-import com.model.*;
-import com.core.*;
+import com.model.FinanceModel;
+import com.core.Controller;
 
 import java.awt.Dimension;
 
@@ -20,7 +20,6 @@ public class View {
         JTable summary = new JTable();
         JFrame frame = new JFrame("Finance");
 
-       
         // Create table model
         FinanceModel model_db = new FinanceModel();
         table.setModel(model_db);
