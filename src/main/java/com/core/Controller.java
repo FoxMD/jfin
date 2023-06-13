@@ -41,18 +41,18 @@ public class Controller implements ActionListener {
         this.searchYear = year;
         this.searchMonth = month;
     }
- 
+
     /**
      * Contructor for the MVC controller.
-     * @param model_db db pointer
-     * @param model_sum filtered db pointer (year and month)
+     * @param modelDB db pointer
+     * @param modelSum filtered db pointer (year and month)
      * @param graph graph panel for refresh
      * @param frame frame panel for repaint
      */
-    public Controller(FinanceModel model_db, FinanceModel model_sum, GraphPanel graph, JFrame frame) {
+    public Controller(FinanceModel modelDB, FinanceModel modelSum, GraphPanel graph, JFrame frame) {
         super();
-        this.model = model_db;
-        this.modelOverview = model_sum;
+        this.model = modelDB;
+        this.modelOverview = modelSum;
         this.frame = frame;
         this.graph = graph;
     }
@@ -66,13 +66,13 @@ public class Controller implements ActionListener {
     }
     // delete after debuging
     private int i;
-    
+
     @Override
-    public void actionPerformed(ActionEvent e) {      
+    public void actionPerformed(ActionEvent e) {
         String searchTerm = searchTermTextField.getText();
-        if (((JButton)e.getSource()).getActionCommand().equals("Update")) {            
+        if (((JButton) e.getSource()).getActionCommand().equals("Update")) {
             System.out.println("Info od update");
-            Object[][] data = ((FinanceModel)modelOverview).getDataForSpecificDate(searchYear, searchMonth);
+            Object[][] data = ((FinanceModel) modelOverview).getDataForSpecificDate(searchYear, searchMonth);
 
             graph.clearChart();
             modelOverview.setDataVector(data, Constants.TABLE_HEADER);
@@ -82,10 +82,10 @@ public class Controller implements ActionListener {
             frame.repaint();
         }
 
-        if (((JButton)e.getSource()).getActionCommand().equals("Filter")) {            
+        if (((JButton) e.getSource()).getActionCommand().equals("Filter")) {
             System.out.println("Info od filtru");
-        
-            Object[][] data = ((FinanceModel)model).getDataFromDB(searchColumn, searchTerm);
+
+            Object[][] data = ((FinanceModel) model).getDataFromDB(searchColumn, searchTerm);
 
             Constants.databaseData = data;
             int position = Constants.getColumnPosition(searchColumn);
