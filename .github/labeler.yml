@@ -8,13 +8,13 @@ source:
   - src/**
 
 '@domain/gui':
-  - package com/gui/**
+  - package gui/**
 
 '@domain/controller':
-  - package com/core/**
+  - package core/**
 
 '@domain/database':
-  - package com/connector/**
+  - package connector/**
 
 '@domain/model':
-  - package com/model/**
+  - package model/**
