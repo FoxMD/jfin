@@ -6,18 +6,18 @@ import javax.swing.table.DefaultTableModel;
 public class FinanceModel extends DefaultTableModel {
     private DBConnector database;
     private int data;
-    
+
     private float income;
     private float expenses;
     private float difference;
 
-    final private int testValue = 13;
+    private final int testValue = 13;
 
     public FinanceModel() {
-        super(Constants.DB_DATA, Constants.TABLE_HEADER);
-        
+        super(Constants.databaseData, Constants.TABLE_HEADER);
+
         DBConnector database = new DBConnector();
-        if(database.testConnection() != -1){
+        if (database.testConnection() != -1) {
             this.database = database;
             this.data = testValue;
         }
@@ -34,8 +34,7 @@ public class FinanceModel extends DefaultTableModel {
         Object[][] overview;
         overview = database.getQueryForYearAndMonth(year, month);
 
-        for(Object[] o: overview)
-        {
+        for (Object[] o: overview) {
             System.out.println(o[2]);
         }
 

@@ -65,12 +65,12 @@ public class Controller implements ActionListener {
         
             Object[][] data = ((FinanceModel)model).getDataFromDB(searchColumn, searchTerm);
 
-            Constants.DB_DATA = data;
+            Constants.databaseData = data;
             int position = Constants.getColumnPosition(searchColumn);
             if (searchTerm != null && !"".equals(searchTerm)) {
-                Object[][] newData = new Object[Constants.DB_DATA.length][];
+                Object[][] newData = new Object[Constants.databaseData.length][];
                 int idx = 0;
-                for (Object[] o: Constants.DB_DATA) {
+                for (Object[] o: Constants.databaseData) {
                     if ("*".equals(searchTerm.trim())) {
                         newData[idx++] = o;
                     } else {

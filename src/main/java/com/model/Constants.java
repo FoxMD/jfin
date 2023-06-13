@@ -5,13 +5,12 @@ package com.model;
  */
 public class Constants {
     /**
-     * Header
+     * Header.
      */
-    public static final Object[] TABLE_HEADER = {"Year", "Month", "Type",
-    "Price", "Currency", "Description"};
+    public static final Object[] TABLE_HEADER = {"Year", "Month", "Type", "Price", "Currency", "Description"};
 
     /**
-     * Mock data
+     * Mock data.
      */
     public static final Object[][] DATA = {
         {"2021", "January", "CAR", 15.98, "EUR", " "},
@@ -26,9 +25,9 @@ public class Constants {
         {"2023", "June", "OTHER", 7.87, "EUR", "Vyber"}};
 
     /**
-     * Real data
+     * Real data.
      */
-    public static Object[][] DB_DATA;
+    public static Object[][] databaseData;
 
     /**
      * Returns the position of the wanted column.
