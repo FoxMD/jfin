@@ -9,7 +9,7 @@ public class VHelperPanel {
      */
     protected int width;
     protected int height;
-    private final int DEFAULT_WIDTH = 800;
+    private final int defaultWidth = 800;
 
     /**
      * Constructor with variable height.
@@ -17,7 +17,7 @@ public class VHelperPanel {
      */
     VHelperPanel(int height) {
         this.height = height;
-        this.width = DEFAULT_WIDTH;
+        this.width = defaultWidth;
     }
 
     /**
