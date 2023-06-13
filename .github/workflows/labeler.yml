@@ -9,6 +9,8 @@ name: Labeler
 on: [pull_request_target]
 
 jobs:
+  label:
+
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -17,9 +19,4 @@ jobs:
     steps:
     - uses: actions/labeler@v4
       with:
-<<<<<<< HEAD:.github/workflows/labeler.yml
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
-=======
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        dot: enable
->>>>>>> master:.github/workflows/label.yml
