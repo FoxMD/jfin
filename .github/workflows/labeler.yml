@@ -9,6 +9,8 @@ name: Labeler
 on: [pull_request_target]
 
 jobs:
+  label:
+
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -18,4 +20,3 @@ jobs:
     - uses: actions/labeler@v4
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        dot: enable
