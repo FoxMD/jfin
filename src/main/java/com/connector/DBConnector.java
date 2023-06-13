@@ -25,7 +25,7 @@ public class DBConnector {
     public Object[][] getQuery(String what, String with) {
         ArrayList<Object[]> Data = new ArrayList<>();
         String REQUEST = "";
-        if("*".equals(with.trim())){
+        if ("*".equals(with.trim())) {
             REQUEST = BASE_QUERY;
         } else {
             REQUEST = this.QUERY + " " + what + " LIKE \"" + with + "%\"";
@@ -38,14 +38,14 @@ public class DBConnector {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(REQUEST);
         ) {
-            while(rs.next()){
-                Data.add(new Object[]{  rs.getString("year"),
-                                        rs.getString("month"),
-                                        rs.getString("type"),
-                                        rs.getFloat("value"),
-                                        rs.getString("currency"),
-                                        rs.getString("description"),
-                                    });
+            while (rs.next()) {
+                Data.add(new Object[]{rs.getString("year"),
+                                    rs.getString("month"),
+                                    rs.getString("type"),
+                                    rs.getFloat("value"),
+                                    rs.getString("currency"),
+                                    rs.getString("description"),
+                });
                 System.out.print("Month: " + rs.getString("month"));
                 System.out.print(", Type: " + rs.getString("type"));
                 System.out.print(", Value: " + rs.getFloat("value"));
@@ -67,8 +67,8 @@ public class DBConnector {
         ArrayList<Object[]> data = new ArrayList<>();
         String REQUEST = "";
 
-        REQUEST = this.QUERY + " month='" + month + "' AND year='" + year + "'"; 
-        
+        REQUEST = this.QUERY + " month='" + month + "' AND year='" + year + "'";
+
         System.out.println(REQUEST);
         try
         (
@@ -76,14 +76,14 @@ public class DBConnector {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(REQUEST);
         ) {
-            while(rs.next()){
-                data.add(new Object[]{  rs.getString("year"),
-                                        rs.getString("month"),
-                                        rs.getString("type"),
-                                        rs.getFloat("value"),
-                                        rs.getString("currency"),
-                                        rs.getString("description"),
-                                    });
+            while (rs.next()) {
+                data.add(new Object[]{rs.getString("year"),
+                                    rs.getString("month"),
+                                    rs.getString("type"),
+                                    rs.getFloat("value"),
+                                    rs.getString("currency"),
+                                    rs.getString("description"),
+                });
                 System.out.print("Month: " + rs.getString("month"));
                 System.out.print(", Type: " + rs.getString("type"));
                 System.out.print(", Value: " + rs.getFloat("value"));
@@ -107,7 +107,7 @@ public class DBConnector {
         data.add(new Object[]{"January", "GROCERY", 199.99, "CZK"});
         data.add(new Object[]{"February", "GROCERY", 9.99, "EUR"});
 
-        Object retData[][] = data.toArray(new Object[0][0]);
+        Object[][] retData = data.toArray(new Object[0][0]);
         return retData;
     }
 
@@ -118,7 +118,7 @@ public class DBConnector {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(BASE_QUERY);
         ) {
-            while(rs.next()){
+            while (rs.next()) {
                 System.out.print("Month: " + rs.getString("month"));
                 System.out.print(", Type: " + rs.getString("type"));
                 System.out.print(", Value: " + rs.getFloat("value"));
