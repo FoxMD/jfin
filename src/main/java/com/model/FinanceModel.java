@@ -3,7 +3,7 @@ package com.model;
 import com.connector.DBConnector;
 import javax.swing.table.DefaultTableModel;
 
-public class FinanceModel extends DefaultTableModel{
+public class FinanceModel extends DefaultTableModel {
     private DBConnector database;
     private int data;
     
@@ -11,28 +11,26 @@ public class FinanceModel extends DefaultTableModel{
     private float expenses;
     private float difference;
 
-    public FinanceModel()
-    {
+    final private int testValue = 13;
+
+    public FinanceModel() {
         super(Constants.DB_DATA, Constants.TABLE_HEADER);
         
         DBConnector database = new DBConnector();
-        if(database.testConnection() != -1)
-        {
+        if(database.testConnection() != -1){
             this.database = database;
-            this.data = 13;
+            this.data = testValue;
         }
     }
 
     // DB Function abstraction
     // Filter update
-    public Object[][] getDataFromDB(String searchColumn, String searchTerm)
-    {
+    public Object[][] getDataFromDB(String searchColumn, String searchTerm) {
         return database.getQuery(searchColumn, searchTerm);
     }
 
     // Overview update
-    public Object[][] getDataForSpecificDate(String year, String month)
-    {
+    public Object[][] getDataForSpecificDate(String year, String month) {
         Object[][] overview;
         overview = database.getQueryForYearAndMonth(year, month);
 
@@ -44,33 +42,27 @@ public class FinanceModel extends DefaultTableModel{
         return overview;
     }
 
-    public void setChartValues(int data)
-    {
+    public void setChartValues(int data) {
         this.data += data;
     }
 
-    public int getChartValues()
-    {
+    public int getChartValues() {
         return this.data;
     }
 
-    public float getIncome()
-    {
+    public float getIncome() {
         return this.income;
     }
 
-    public float getExpenses()
-    {
+    public float getExpenses() {
         return this.expenses;
     }
 
-    public float getDifference()
-    {
+    public float getDifference() {
         return this.difference;
     }
 
-    public float getTest()
-    {
+    public float getTest() {
         return data;
     }
     //public void addEntryToDB(String, String, )

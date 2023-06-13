@@ -1,9 +1,15 @@
 package com.connector;
 
-import java.sql.*;
-import com.secret.*;
+import com.secret.Credentials;
 
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import java.util.ArrayList;
+
 public class DBConnector {
     static final String DB_URL = "jdbc:mysql://localhost:3306/dummy";
     static final String BASE_QUERY = "SELECT * FROM test";
@@ -12,23 +18,19 @@ public class DBConnector {
     private static String USER = "";
     private static String PASS = "";
 
-    public DBConnector()
-    {
+    public DBConnector() {
         Credentials cred = new Credentials();
         USER = cred.getUser();
         PASS = cred.getPassword();
     }
 
-    public Object[][] getQuery(String what, String with)
-    {
+    public Object[][] getQuery(String what, String with) {
         ArrayList<Object[]> Data = new ArrayList<>();
         String REQUEST = "";
-        if("*".equals(with.trim()))
-        {
+        if("*".equals(with.trim())) {
             REQUEST = BASE_QUERY;
         }
-        else
-        {
+        else {
             REQUEST = this.QUERY + " " + what + " LIKE \"" + with + "%\""; 
         }
         
@@ -38,8 +40,7 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(REQUEST);
-        )
-        {
+        ) {
             while(rs.next()) {
                 Data.add(new Object[]{  rs.getString("year"),
                                         rs.getString("month"),
@@ -58,8 +59,7 @@ public class DBConnector {
             stmt.close();
             conn.close();
         }
-        catch (SQLException e)
-        {
+        catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -67,8 +67,7 @@ public class DBConnector {
         return dataObject; 
     }
 
-    public Object[][] getQueryForYearAndMonth(String year, String month)
-    {
+    public Object[][] getQueryForYearAndMonth(String year, String month) {
         ArrayList<Object[]> Data = new ArrayList<>();
         String REQUEST = "";
 
@@ -80,9 +79,8 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(REQUEST);
-        )
-        {
-            while(rs.next()) {
+        ) {
+            while(rs.next()){
                 Data.add(new Object[]{  rs.getString("year"),
                                         rs.getString("month"),
                                         rs.getString("type"),
@@ -100,8 +98,7 @@ public class DBConnector {
             stmt.close();
             conn.close();
         }
-        catch (SQLException e)
-        {
+        catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -109,8 +106,7 @@ public class DBConnector {
         return dataObject; 
     }
 
-    public Object[][] getPreciseQuery(String what, String with)
-    {
+    public Object[][] getPreciseQuery(String what, String with) {
         ArrayList<Object[]> Data = new ArrayList<>();
 
         Data.add(new Object[]{"January","GROCERY",199.99,"CZK"});
@@ -120,15 +116,13 @@ public class DBConnector {
         return retData;
     }
 
-    public int testConnection()
-    {
+    public int testConnection() {
         try 
         (
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(BASE_QUERY);
-        )
-        {
+        ) {
             while(rs.next()) {
                 System.out.print("Month: " + rs.getString("month"));
                 System.out.print(", Type: " + rs.getString("type"));
@@ -140,8 +134,7 @@ public class DBConnector {
                 //conn.close();
             }
         }
-        catch (SQLException e)
-        {
+        catch (SQLException e) {
             e.printStackTrace();
             return -1;
         }

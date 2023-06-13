@@ -1,15 +1,18 @@
 package com.core;
 
 import com.gui.GraphPanel;
-import com.model.*;
+import com.model.Constants;
+import com.model.FinanceModel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
- 
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 public class Controller implements ActionListener {
-     
     private JTextField searchTermTextField = new JTextField(26);
     private FinanceModel model;
     private FinanceModel modelOverview;
@@ -21,19 +24,16 @@ public class Controller implements ActionListener {
     private String searchYear = "";
     private String searchMonth = "";
     
-    public void setFilterOption(String filterOption)
-    {
+    public void setFilterOption(String filterOption) {
         this.searchColumn = filterOption;
     }
 
-    public void setOverviewDetails(String year, String month)
-    {
+    public void setOverviewDetails(String year, String month) {
         this.searchYear = year;
         this.searchMonth = month;
     }
  
-    public Controller(FinanceModel model_db, FinanceModel model_sum, GraphPanel graph, JFrame frame) 
-    {
+    public Controller(FinanceModel model_db, FinanceModel model_sum, GraphPanel graph, JFrame frame) {
         super();
         this.model = model_db;
         this.modelOverview = model_sum;
@@ -41,16 +41,14 @@ public class Controller implements ActionListener {
         this.graph = graph;
     }
 
-    public void setFilterTextField(JTextField searchTermTextField)
-    {
+    public void setFilterTextField(JTextField searchTermTextField) {
         this.searchTermTextField = searchTermTextField;
     }
-    private int i = 0;
+    private int i;
     @Override
     public void actionPerformed(ActionEvent e) {      
         String searchTerm = searchTermTextField.getText();
-        if(((JButton)e.getSource()).getActionCommand() == "Update")
-        {            
+        if(((JButton)e.getSource()).getActionCommand().equals("Update")){            
             System.out.println("Info od update");
             Object[][] data = ((FinanceModel)modelOverview).getDataForSpecificDate(searchYear, searchMonth);
 
@@ -62,8 +60,7 @@ public class Controller implements ActionListener {
             frame.repaint();
         }
 
-        if(((JButton)e.getSource()).getActionCommand() == "Filter")
-        {            
+        if(((JButton)e.getSource()).getActionCommand().equals("Filter")){            
             System.out.println("Info od filtru");
         
             Object[][] data = ((FinanceModel)model).getDataFromDB(searchColumn, searchTerm);
