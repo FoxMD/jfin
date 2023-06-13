@@ -13,10 +13,10 @@ import java.util.ArrayList;
  */
 public class DBConnector {
     private String query = "SELECT * FROM test WHERE";
-    private static String user = "";
-    private static String pass = "";
     private static final String DB_URL = "jdbc:mysql://localhost:3306/dummy";
     private static final String BASE_QUERY = "SELECT * FROM test";
+    private static String user = "";
+    private static String pass = "";
 
     /**
      * Constructor for the class.
