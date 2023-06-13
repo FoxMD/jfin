@@ -5,9 +5,9 @@ import com.model.Constants;
 import com.model.FinanceModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JTextField;
 import javax.swing.JFrame;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,7 +23,7 @@ public class Controller implements ActionListener {
     private String searchColumn = "Month";
     private String searchYear = "";
     private String searchMonth = "";
-    
+
     /**
     * Contructor for the MVC controller.
     * @param modelDB db pointer
@@ -66,7 +66,7 @@ public class Controller implements ActionListener {
     }
 
     // delete after debuging
-    private int i;
+    int i;
 
     @Override
     public void actionPerformed(ActionEvent e) {

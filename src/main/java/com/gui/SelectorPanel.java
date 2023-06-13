@@ -5,8 +5,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
-import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 /**
  * Panel for selection of year and month.
@@ -28,7 +28,7 @@ public class SelectorPanel extends VHelperPanel {
      */
     public JPanel selectorPanelComposer(Controller controller) {
         String[] choicesMonth = {"January", "February", "March", "April",
-                "May", "June", "July", "August", "September", "October", "November", "December"};
+                                "May", "June", "July", "August", "September", "October", "November", "December"};
 
         String[] choicesYear = {"2019", "2020", "2021", "2022", "2023", "2024"};
 
@@ -50,7 +50,7 @@ public class SelectorPanel extends VHelperPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.setOverviewDetails(cbYear.getSelectedItem().toString(),
-                cbMonth.getSelectedItem().toString());
+                    cbMonth.getSelectedItem().toString());
             }
         };
 
