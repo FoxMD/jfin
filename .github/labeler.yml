@@ -1,22 +1,20 @@
-version: 1
-labels:
-  repo:
+repo:
   - '*'
 
-  test:
+test:
   - test/**
 
-  source:
+source:
   - src/**
 
-  '@domain/gui':
+'@domain/gui':
   - package com/gui/**
 
-  '@domain/controller':
+'@domain/controller':
   - package com/core/**
 
-  '@domain/database':
+'@domain/database':
   - package com/connector/**
 
-  '@domain/model':
+'@domain/model':
   - package com/model/**
