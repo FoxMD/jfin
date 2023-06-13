@@ -7,33 +7,38 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 /**
- * Connector for database server, handles work with mysql
+ * Connector for database server, handles work with mysql.
  */
 public class DBConnector {
-    final static String dbURL = "jdbc:mysql://localhost:3306/dummy";
-    final static String baseQuery = "SELECT * FROM test";
-    private String query = "SELECT * FROM test WHERE"; 
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/dummy";
+    private static final String BASE_QUERY = "SELECT * FROM test";
+    private String query = "SELECT * FROM test WHERE";
 
     private static String user = "";
     private static String pass = "";
 
+    /**
+     * Constructor for the class.
+     */
     public DBConnector() {
         Credentials cred = new Credentials();
         user = cred.getUser();
         pass = cred.getPassword();
     }
-/**
- * returns an array of results from the database
- * @param what column entry name
- * @param with entry name starts with
- * @return array of mysql entry as array
- */
+
+    /**
+     * Returns an array of results from the database.
+     * @param what column entry name
+     * @param with entry name starts with
+     * @return array of mysql entry as array
+     */
     public Object[][] getQuery(String what, String with) {
-        ArrayList<Object[]> Data = new ArrayList<>();
+        ArrayList<Object[]> data = new ArrayList<>();
         String request = "";
         if ("*".equals(with.trim())) {
-            request = baseQuery;
+            request = BASE_QUERY;
         } else {
             request = this.query + " " + what + " LIKE \"" + with + "%\"";
         }
@@ -41,50 +46,7 @@ public class DBConnector {
         System.out.println(request);
         try
         (
-            Connection conn = DriverManager.getConnection(dbURL, user, pass);
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(request);
-        ) {
-            while (rs.next()) {
-                Data.add(new Object[]{rs.getString("year"),
-                                    rs.getString("month"),
-                                    rs.getString("type"),
-                                    rs.getFloat("value"),
-                                    rs.getString("currency"),
-                                    rs.getString("description"),
-                });
-                System.out.print("Month: " + rs.getString("month"));
-                System.out.print(", Type: " + rs.getString("type"));
-                System.out.print(", Value: " + rs.getFloat("value"));
-                System.out.println(", Currency: " + rs.getString("currency"));
-            }
-
-            rs.close();
-            stmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        Object[][] dataObject = Data.toArray(new Object[0][0]);
-        return dataObject;
-    }
-/**
- * method to get a specific entries for a month in a year
- * @param year year you want to search
- * @param month month in this year
- * @return array of mysql array entries for this specific date
- */
-    public Object[][] getQueryForYearAndMonth(String year, String month) {
-        ArrayList<Object[]> data = new ArrayList<>();
-        String request = "";
-
-        request = this.query + " month='" + month + "' AND year='" + year + "'";
-
-        System.out.println(request);
-        try
-        (
-            Connection conn = DriverManager.getConnection(dbURL, user, pass);
+            Connection conn = DriverManager.getConnection(DB_URL, user, pass);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(request);
         ) {
@@ -112,12 +74,57 @@ public class DBConnector {
         Object[][] dataObject = data.toArray(new Object[0][0]);
         return dataObject;
     }
-/**
- * returns a precize querry
- * @param what column entry name
- * @param with what is the value of the coumn
- * @return array of mysql array entries for this specific date
- */
+
+    /**
+     * Method to get a specific entries for a month in a year.
+     * @param year year you want to search
+     * @param month month in this year
+     * @return array of mysql array entries for this specific date
+     */
+    public Object[][] getQueryForYearAndMonth(String year, String month) {
+        ArrayList<Object[]> data = new ArrayList<>();
+        String request = "";
+
+        request = this.query + " month='" + month + "' AND year='" + year + "'";
+
+        System.out.println(request);
+        try
+        (
+            Connection conn = DriverManager.getConnection(DB_URL, user, pass);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(request);
+        ) {
+            while (rs.next()) {
+                data.add(new Object[]{rs.getString("year"),
+                                    rs.getString("month"),
+                                    rs.getString("type"),
+                                    rs.getFloat("value"),
+                                    rs.getString("currency"),
+                                    rs.getString("description"),
+                });
+                System.out.print("Month: " + rs.getString("month"));
+                System.out.print(", Type: " + rs.getString("type"));
+                System.out.print(", Value: " + rs.getFloat("value"));
+                System.out.println(", Currency: " + rs.getString("currency"));
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Object[][] dataObject = data.toArray(new Object[0][0]);
+        return dataObject;
+    }
+
+    /**
+     * Returns a precize querry.
+     * @param what column entry name
+     * @param with what is the value of the coumn
+     * @return array of mysql array entries for this specific date
+     */
     public Object[][] getPreciseQuery(String what, String with) {
         ArrayList<Object[]> data = new ArrayList<>();
 
@@ -130,16 +137,17 @@ public class DBConnector {
         Object[][] retData = data.toArray(new Object[0][0]);
         return retData;
     }
-/**
- * Method for testing a connection
- * @return returns true 0 if everythink is OK
- */
+
+    /**
+     * Method for testing a connection.
+     * @return returns true 0 if everythink is OK
+     */
     public int testConnection() {
         try
         (
-            Connection conn = DriverManager.getConnection(dbURL, user, pass);
+            Connection conn = DriverManager.getConnection(DB_URL, user, pass);
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(baseQuery);
+            ResultSet rs = stmt.executeQuery(BASE_QUERY);
         ) {
             while (rs.next()) {
                 System.out.print("Month: " + rs.getString("month"));
