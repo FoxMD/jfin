@@ -24,7 +24,7 @@ public class SelectorPanel extends VHelperPanel {
     /**
      * Composer of the JPanel.
      * @param controller controller who controls the actions.
-     * @return JPanel type
+     * @return JPanel type.
      */
     public JPanel selectorPanelComposer(Controller controller) {
         String[] choicesMonth = {"January", "February", "March", "April",

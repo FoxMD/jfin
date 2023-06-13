@@ -15,6 +15,7 @@ import javax.swing.border.TitledBorder;
  * View of the MVC model.
  */
 public class View {
+    private static final int SCROLL_PANEL_WIDTH = 800;
     private final int dividerLocation = 150;
     private final int minWidth = 1200;
     private final int prefWidth = 1400;
@@ -23,7 +24,6 @@ public class View {
     private final int helperBarHeight = 35;
     private final int overviewHeight = 400;
     private final int databaseHeight = 200;
-    private final static int scrollPanelWidth = 800;
 
     /**
      * Constructor for the MVC.
@@ -112,7 +112,7 @@ public class View {
     }
 
     private static JScrollPane stylingDatabasePanel(JScrollPane tableScrollPanel, String title, int height) {
-        tableScrollPanel.setMinimumSize(new Dimension(scrollPanelWidth, height));
+        tableScrollPanel.setMinimumSize(new Dimension(SCROLL_PANEL_WIDTH, height));
         tableScrollPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), title,
                 TitledBorder.CENTER, TitledBorder.TOP));
 
