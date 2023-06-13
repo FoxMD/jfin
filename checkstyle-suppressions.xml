@@ -6,4 +6,5 @@
  
 <suppressions>
   <suppress checks="HiddenField" files=".+\.(?:jar|zip|war|class|tar|bin|java)$"/>
+  <suppress checks="ImportOrder" files=".+\.(?:jar|zip|war|class|tar|bin|java)$"/>
 </suppressions>
