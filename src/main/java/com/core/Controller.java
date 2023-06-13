@@ -93,7 +93,8 @@ public class Controller implements ActionListener {
                 for (Object[] o: Constants.databaseData) {
                     if ("*".equals(searchTerm.trim())) {
                         newData[idx++] = o;
-                    } else if ((String.valueOf(o[position]).toUpperCase()).startsWith(searchTerm.toUpperCase().trim())) {
+                    } else if ((String.valueOf(o[position]).toUpperCase())
+                                .startsWith(searchTerm.toUpperCase().trim())) {
                             newData[idx++] = o;
                     }
                 }
