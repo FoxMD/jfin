@@ -1,10 +1,10 @@
 package com.gui;
 
 import com.core.Controller;
-import java.awt.GridLayout;
-import java.awt.Dimension;
- import javax.swing.JPanel;
+import javax.swing.JPanel;
 import javax.swing.JButton;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 
 /**
  * Control panel for buttons.
@@ -16,14 +16,13 @@ public class ControlPanel {
     private final int colmns = 1;
     private final int vGap = 10;
     private final int hGap = 10;
-    
+
     /**
      * Composer for the button pannel.
      * @param controller MVC Controller
      * @return JPanel
      */
-    public JPanel controlPanelComposer(Controller controller)
-    {
+    public JPanel controlPanelComposer(Controller controller) {
         JButton searchButton = new JButton("Search");
         JButton addButton = new JButton("Add entry");
         JButton removeButton = new JButton("Remove entry");

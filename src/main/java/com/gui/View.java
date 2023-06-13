@@ -2,9 +2,6 @@ package com.gui;
 
 import com.model.FinanceModel;
 import com.core.Controller;
-
-import java.awt.Dimension;
-
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,8 +9,24 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
+import java.awt.Dimension;
 
+/**
+ * View of the MVC model.
+ */
 public class View {
+    private final int dividerLocation = 150;
+    private final int minWidth = 1200;
+    private final int prefWidth = 1400;
+    private final int minHeight = 600;
+    private final int prefHeight = 800;
+    private final int helperBarHeight = 35;
+    private final int overviewHeight = 400;
+    private final int databaseHeight = 200;
+
+    /**
+     * Constructor for the MVC.
+     */
     public View() {
         // Create views swing UI components 
         JTable table = new JTable();
@@ -33,69 +46,75 @@ public class View {
 
         // Create controller
         Controller controller = new Controller(model_db, model_sum, gPanel, frame);
-        
+
         // Set the view layout - Control Panel, Buttons
         ControlPanel cPanel = new ControlPanel();
         JPanel ctrlPanel = cPanel.controlPanelComposer(controller);
-        
+
         // Set the search pannel
-        SearchPanel sPanel = new SearchPanel(35);
+        SearchPanel sPanel = new SearchPanel(helperBarHeight);
         JPanel searchPanel = sPanel.searchPanelComposer(controller);
-        
+
         // Set the selector pannel
-        SelectorPanel slPanel = new SelectorPanel(35);
+        SelectorPanel slPanel = new SelectorPanel(helperBarHeight);
         JPanel selectorPanel = slPanel.selectorPanelComposer(controller);
-        
+
         // Set the database panel
         JScrollPane tableScrollPanel = new JScrollPane(table);
-        tableScrollPanel = stylingDatabasePanel(tableScrollPanel, "Database - Test feedback", 200);
-        
+        tableScrollPanel = stylingDatabasePanel(tableScrollPanel,
+                    "Database - Test feedback", databaseHeight);
+
         // Set the summary pannel
         JScrollPane tableSummaryScrollPanel = new JScrollPane(summary);
-        tableSummaryScrollPanel = stylingDatabasePanel(tableSummaryScrollPanel, "Summary - Test feedback", 400);
-        
-        
+        tableSummaryScrollPanel = stylingDatabasePanel(tableSummaryScrollPanel,
+                    "Summary - Test feedback", overviewHeight);
+
         // Set the sum action panel
         SumActionPanel saPanel = new SumActionPanel();
         JPanel sumActPanel = saPanel.sumActionPanelComposer();
-        
+
         // Split Layouts
         // Set the filter summary panel
-        JSplitPane splitVerticalPanelSummary = new JSplitPane(JSplitPane.VERTICAL_SPLIT, selectorPanel, tableSummaryScrollPanel);
+        JSplitPane splitVerticalPanelSummary = new JSplitPane(JSplitPane.VERTICAL_SPLIT, 
+                    selectorPanel, tableSummaryScrollPanel);
         splitVerticalPanelSummary.setEnabled(false);
-        
-        JSplitPane splitVerticalPanelDatabase = new JSplitPane(JSplitPane.VERTICAL_SPLIT, searchPanel, tableScrollPanel);
+
+        JSplitPane splitVerticalPanelDatabase = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
+                    searchPanel, tableScrollPanel);
         splitVerticalPanelDatabase.setEnabled(false);
-        
-        JSplitPane splitHorizontalPanelSummary = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, splitVerticalPanelSummary, graphPanel);
+
+        JSplitPane splitHorizontalPanelSummary = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+                    splitVerticalPanelSummary, graphPanel);
         splitHorizontalPanelSummary.setEnabled(false);
-        
-        JSplitPane splitHorizontalPanelDatabase = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, splitVerticalPanelDatabase, sumActPanel);
+
+        JSplitPane splitHorizontalPanelDatabase = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+                    splitVerticalPanelDatabase, sumActPanel);
         splitHorizontalPanelDatabase.setEnabled(false);
-        
-        JSplitPane splitVerticalFramePanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT, splitHorizontalPanelSummary, splitHorizontalPanelDatabase);
+
+        JSplitPane splitVerticalFramePanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
+                    splitHorizontalPanelSummary, splitHorizontalPanelDatabase);
         splitVerticalFramePanel.setEnabled(false);
 
-        JSplitPane splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, ctrlPanel, splitVerticalFramePanel);
-        splitPanel.setDividerLocation(150);
+        JSplitPane splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+                    ctrlPanel, splitVerticalFramePanel);
+        splitPanel.setDividerLocation(dividerLocation);
         splitPanel.setEnabled(false);
- 
+
         // Display it all in a scrolling window and make the window appear
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(1200, 600));
-        frame.setPreferredSize(new Dimension(1400, 800));
+        frame.setMinimumSize(new Dimension(minWidth, minHeight));
+        frame.setPreferredSize(new Dimension(prefWidth, prefHeight));
         frame.add(splitPanel);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    private static JScrollPane stylingDatabasePanel(JScrollPane tableScrollPanel, String title, int height)
-    {
+    private static JScrollPane stylingDatabasePanel(JScrollPane tableScrollPanel, String title, int height) {
         tableScrollPanel.setMinimumSize(new Dimension(800, height));
         tableScrollPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), title,
                 TitledBorder.CENTER, TitledBorder.TOP));
 
         return tableScrollPanel;
-    } 
+    }
 }

@@ -5,8 +5,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JButton;
 
 /**
  * Panel for selection of year and month.
@@ -17,8 +17,7 @@ public class SelectorPanel extends VHelperPanel {
      * Constructor.
      * @param height height
      */
-    SelectorPanel(int height)
-    {
+    SelectorPanel(int height) {
         super(height);
     }
 
@@ -50,7 +49,8 @@ public class SelectorPanel extends VHelperPanel {
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.setOverviewDetails(cbYear.getSelectedItem().toString(), cbMonth.getSelectedItem().toString());
+                controller.setOverviewDetails(cbYear.getSelectedItem().toString(),
+                cbMonth.getSelectedItem().toString());
             }
         };
 

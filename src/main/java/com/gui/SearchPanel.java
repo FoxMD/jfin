@@ -3,12 +3,12 @@ package com.gui;
 import com.core.Controller;
 import java.awt.Dimension;
 import javax.swing.JPanel;
-import javax.swing.JButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import java.awt.event.ActionEvent;
+import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 /**
@@ -16,6 +16,7 @@ import java.awt.event.KeyEvent;
  */
 public class SearchPanel extends VHelperPanel {
     private final int columns = 26;
+
     /**
      * Contructor with variable height.
      * @param height height

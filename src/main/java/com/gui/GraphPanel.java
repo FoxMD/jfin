@@ -1,53 +1,74 @@
 package com.gui;
 
 import javax.swing.JPanel;
-
+import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.PieChart;
 import org.knowm.xchart.PieChartBuilder;
-import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.PieStyler.AnnotationType;
 import org.knowm.xchart.style.Styler.ChartTheme;
-
 import com.model.FinanceModel;
 
+/**
+ * Graph with overview.
+ */
 public class GraphPanel extends JPanel {
-    private PieChart chart = new PieChartBuilder().width(800).height(600).title("My Pie Chart").theme(ChartTheme.GGPlot2).build();
-    private int i = 2;
+    private final int graphWidth = 800;
+    private final int graphHeight = 600;
+    private final float anotationDst = 1.15f;
+    private final float contentSize = 0.7f;
+    private final int angleOfRotation = 90;
+    
+    private PieChart chart = new PieChartBuilder()
+                        .width(graphWidth)
+                        .height(graphHeight)
+                        .title("My Pie Chart")
+                        .theme(ChartTheme.GGPlot2)
+                        .build();
     private FinanceModel modelOverview;
+    
 
-    public JPanel graphPanelComposer(FinanceModel modelOverview)
-    {
+    /**
+     * Compose the graph.
+     * @param modelOverview model for data.
+     * @return JPanel
+     */
+    public JPanel graphPanelComposer(FinanceModel modelOverview) {
         this.modelOverview = modelOverview;
-        // Customize Chart
         chart.getStyler().setLegendVisible(false);
         chart.getStyler().setAnnotationType(AnnotationType.LabelAndPercentage);
-        chart.getStyler().setAnnotationDistance(1.15);
-        chart.getStyler().setPlotContentSize(.7);
-        chart.getStyler().setStartAngleInDegrees(90);
+        chart.getStyler().setAnnotationDistance(anotationDst);
+        chart.getStyler().setPlotContentSize(contentSize);
+        chart.getStyler().setStartAngleInDegrees(angleOfRotation);
                   
-        //final SwingWrapper<PieChart> sw = new SwingWrapper<PieChart>(chart);
         JPanel panel = new XChartPanel<PieChart>(chart);
         return panel;
     }
 
-    public void updateChart(FinanceModel dataModel)
-    {
-        i = dataModel.getChartValues();
-                // Series
+    /**
+     * Update values in chart.
+     * @param dataModel Data
+     */
+    public void updateChart(FinanceModel dataModel) {
+        final int someValue1 = 4;
+        final int someValue2 = 34;
+        final int someValue3 = 22;
+        final int someValue4 = 29;
+
         chart.addSeries("Prague", this.modelOverview.getTest());
-        chart.addSeries("Dresden", 4);
-        chart.addSeries("Munich", 34);
-        chart.addSeries("Hamburg", 22);
-        chart.addSeries("Berlin", 29);    
+        chart.addSeries("Dresden", someValue1);
+        chart.addSeries("Munich", someValue2);
+        chart.addSeries("Hamburg", someValue3);
+        chart.addSeries("Berlin", someValue4);    
     }
 
-    public void clearChart()
-    {
+    /**
+     * Clear chart before updating.
+     */
+    public void clearChart() {
         chart.removeSeries("Prague");
         chart.removeSeries("Dresden");
         chart.removeSeries("Munich");
         chart.removeSeries("Hamburg");
-        chart.removeSeries("Berlin");
-        
+        chart.removeSeries("Berlin");       
     }
 }
