@@ -65,9 +65,6 @@ public class Controller implements ActionListener {
         this.searchTermTextField = searchTermTextField;
     }
 
-    // delete after debuging
-    int i;
-
     @Override
     public void actionPerformed(ActionEvent e) {
         String searchTerm = searchTermTextField.getText();
@@ -77,7 +74,7 @@ public class Controller implements ActionListener {
 
             graph.clearChart();
             modelOverview.setDataVector(data, Constants.TABLE_HEADER);
-            modelOverview.setChartValues(++i);
+            //modelOverview.setChartValues(++i);
             graph.updateChart(modelOverview);
             frame.validate();
             frame.repaint();
@@ -96,10 +93,8 @@ public class Controller implements ActionListener {
                 for (Object[] o: Constants.databaseData) {
                     if ("*".equals(searchTerm.trim())) {
                         newData[idx++] = o;
-                    } else {
-                        if ((String.valueOf(o[position]).toUpperCase()).startsWith(searchTerm.toUpperCase().trim())) {
+                    } else if ((String.valueOf(o[position]).toUpperCase()).startsWith(searchTerm.toUpperCase().trim())) {
                             newData[idx++] = o;
-                        }
                     }
                 }
                 model.setDataVector(newData, Constants.TABLE_HEADER);
