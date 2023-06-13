@@ -1,32 +1,41 @@
 package com.gui;
 
-import javax.swing.JPanel;
-
-import com.core.*;
+import com.core.Controller;
 import java.awt.Dimension;
-
+import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import javax.swing.*;
-
-import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class SearchPanel extends VHelperPanel{
-    
-    SearchPanel(int height)
-    {
+/**
+ * Vertical helper panel.
+ */
+public class SearchPanel extends VHelperPanel {
+    private final int columns = 26;
+
+    /**
+     * Contructor with variable height.
+     * @param height height
+     */
+    SearchPanel(int height) {
         super(height);
     }
 
-    public JPanel searchPanelComposer(Controller controller)
-    {
+    /**
+     * Composer for the panel.
+     * @param controller MVC Controller
+     * @return JPanel
+     */
+    public JPanel searchPanelComposer(Controller controller) {
         JPanel searchPanel = new JPanel();
         searchPanel.setMinimumSize(new Dimension(width, height));
 
         JButton filterButton = new JButton("Filter");
-        JTextField searchTermTextField = new JTextField(26);
+        JTextField searchTermTextField = new JTextField(columns);
 
         JRadioButton monthButton = new JRadioButton("Month");
         monthButton.setMnemonic(KeyEvent.VK_M);
@@ -64,14 +73,14 @@ public class SearchPanel extends VHelperPanel{
                 controller.setFilterOption(btn.getName());
             }
         };
-       
+
         filterButton.addActionListener(controller);
         monthButton.addActionListener(listener);
         yearButton.addActionListener(listener);
         typeButton.addActionListener(listener);
 
         controller.setFilterTextField(searchTermTextField);
-        
+
         return searchPanel;
     }
 }

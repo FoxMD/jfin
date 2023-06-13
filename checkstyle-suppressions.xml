@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+ 
+<!DOCTYPE suppressions PUBLIC
+     "-//Checkstyle//DTD SuppressionFilter Configuration 1.0//EN"
+     "https://checkstyle.org/dtds/suppressions_1_0.dtd">
+ 
+<suppressions>
+  <suppress checks="HiddenField" files=".+\.(?:jar|zip|war|class|tar|bin|java)$"/>
+  <suppress checks="ImportOrder" files=".+\.(?:jar|zip|war|class|tar|bin|java)$"/>
+  <suppress checks="HideUtilityClassConstructor" files="src/main/java/com/model/Constants.java"/>
+  <suppress checks="VisibilityModifier" files="src/main/java/com/model/Constants.java"/>
+  <suppress checks="JavadocVariable" files="src/main/java/com/gui/VHelperPanel.java"/>
+  <suppress checks="VisibilityModifier" files="src/main/java/com/gui/VHelperPanel.java"/>
+  <suppress checks="DeclarationOrder" files="src/main/java/com/core/Controller.java"/>
+</suppressions>

@@ -1,21 +1,38 @@
 package com.gui;
 
+/**
+ * VHelper abstract class.
+ */
 public class VHelperPanel {
-    protected int width = 800;
+    /**
+     * Dimension variables.
+     */
+    protected int width;
     protected int height;
+    private final int defaultWidth = 800;
 
-    VHelperPanel(int height)
-    {
+    /**
+     * Constructor with variable height.
+     * @param height height
+     */
+    VHelperPanel(int height) {
+        this.height = height;
+        this.width = defaultWidth;
+    }
+
+    /**
+     * Set the height of the panel.
+     * @param height height
+     */
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public void setHeight(int height)
-    {
-        this.height = height;
-    } 
-
-    public void setWidth(int width)
-    {
+    /**
+     * Set the panle width.
+     * @param width width
+     */
+    public void setWidth(int width) {
         this.width = width;
     }
 }
