@@ -9,6 +9,6 @@
   <suppress checks="ImportOrder" files=".+\.(?:jar|zip|war|class|tar|bin|java)$"/>
   SuppressionXpathFilter 
   VisibilityModifier
-  <suppress checks="SuppressionXpathFilter" files="src/main/java/com/model/Constants.java"/>
+  <suppress checks="HideUtilityClassConstructor" files="src/main/java/com/model/Constants.java"/>
   <suppress checks="VisibilityModifier" files="src/main/java/com/model/Constants.java"/>
 </suppressions>
