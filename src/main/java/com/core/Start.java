@@ -13,17 +13,21 @@ public final class Start {
     private Start() {
 
     }
+
+    /**
+     * Main function - heart of the program.
+     * @param args args
+     */
     public static void main(String[] args) {
         System.out.println("Program started");
         SwingUtilities.invokeLater(new Runnable() {
-        public void run() {
-            try
-            {
-                createAndShowGUI();
-            } catch (Exception e) {
-                e.printStackTrace();
+            public void run() {
+                try {
+                    createAndShowGUI();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        }
         });
     }
 
