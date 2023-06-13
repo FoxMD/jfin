@@ -1,9 +1,9 @@
 package com.gui;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.awt.GridLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  * Action panel for sumarisation.

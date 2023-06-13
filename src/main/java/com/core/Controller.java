@@ -23,6 +23,21 @@ public class Controller implements ActionListener {
     private String searchColumn = "Month";
     private String searchYear = "";
     private String searchMonth = "";
+    
+    /**
+    * Contructor for the MVC controller.
+    * @param modelDB db pointer
+    * @param modelSum filtered db pointer (year and month)
+    * @param graph graph panel for refresh
+    * @param frame frame panel for repaint
+    */
+    public Controller(FinanceModel modelDB, FinanceModel modelSum, GraphPanel graph, JFrame frame) {
+        super();
+        this.model = modelDB;
+        this.modelOverview = modelSum;
+        this.frame = frame;
+        this.graph = graph;
+    }
 
     /**
      * Search for a specific string.
@@ -40,21 +55,6 @@ public class Controller implements ActionListener {
     public void setOverviewDetails(String year, String month) {
         this.searchYear = year;
         this.searchMonth = month;
-    }
-
-    /**
-     * Contructor for the MVC controller.
-     * @param modelDB db pointer
-     * @param modelSum filtered db pointer (year and month)
-     * @param graph graph panel for refresh
-     * @param frame frame panel for repaint
-     */
-    public Controller(FinanceModel modelDB, FinanceModel modelSum, GraphPanel graph, JFrame frame) {
-        super();
-        this.model = modelDB;
-        this.modelOverview = modelSum;
-        this.frame = frame;
-        this.graph = graph;
     }
 
     /**

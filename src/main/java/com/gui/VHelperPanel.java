@@ -4,6 +4,9 @@ package com.gui;
  * VHelper abstract class.
  */
 public class VHelperPanel {
+    /**
+     * Dimension variables
+     */
     protected int width = 800;
     protected int height;
 

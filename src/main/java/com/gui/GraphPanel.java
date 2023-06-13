@@ -1,12 +1,12 @@
 package com.gui;
 
+import com.model.FinanceModel;
 import javax.swing.JPanel;
 import org.knowm.xchart.XChartPanel;
+import org.knowm.xchart.style.Styler.ChartTheme;
 import org.knowm.xchart.PieChart;
 import org.knowm.xchart.PieChartBuilder;
 import org.knowm.xchart.style.PieStyler.AnnotationType;
-import org.knowm.xchart.style.Styler.ChartTheme;
-import com.model.FinanceModel;
 
 /**
  * Graph with overview.
@@ -17,7 +17,7 @@ public class GraphPanel extends JPanel {
     private final float anotationDst = 1.15f;
     private final float contentSize = 0.7f;
     private final int angleOfRotation = 90;
-    
+
     private PieChart chart = new PieChartBuilder()
                         .width(graphWidth)
                         .height(graphHeight)
@@ -25,7 +25,6 @@ public class GraphPanel extends JPanel {
                         .theme(ChartTheme.GGPlot2)
                         .build();
     private FinanceModel modelOverview;
-    
 
     /**
      * Compose the graph.
@@ -39,7 +38,7 @@ public class GraphPanel extends JPanel {
         chart.getStyler().setAnnotationDistance(anotationDst);
         chart.getStyler().setPlotContentSize(contentSize);
         chart.getStyler().setStartAngleInDegrees(angleOfRotation);
-                  
+
         JPanel panel = new XChartPanel<PieChart>(chart);
         return panel;
     }
@@ -58,7 +57,7 @@ public class GraphPanel extends JPanel {
         chart.addSeries("Dresden", someValue1);
         chart.addSeries("Munich", someValue2);
         chart.addSeries("Hamburg", someValue3);
-        chart.addSeries("Berlin", someValue4);    
+        chart.addSeries("Berlin", someValue4);
     }
 
     /**
@@ -69,6 +68,6 @@ public class GraphPanel extends JPanel {
         chart.removeSeries("Dresden");
         chart.removeSeries("Munich");
         chart.removeSeries("Hamburg");
-        chart.removeSeries("Berlin");       
+        chart.removeSeries("Berlin");
     }
 }

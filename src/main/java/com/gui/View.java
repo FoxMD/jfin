@@ -1,7 +1,8 @@
 package com.gui;
 
-import com.model.FinanceModel;
 import com.core.Controller;
+import com.model.FinanceModel;
+import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,7 +10,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
-import java.awt.Dimension;
 
 /**
  * View of the MVC model.
@@ -23,29 +23,30 @@ public class View {
     private final int helperBarHeight = 35;
     private final int overviewHeight = 400;
     private final int databaseHeight = 200;
+    private final static int scrollPanelWidth = 800;
 
     /**
      * Constructor for the MVC.
      */
     public View() {
-        // Create views swing UI components 
+        // Create views swing UI components
         JTable table = new JTable();
         JTable summary = new JTable();
         JFrame frame = new JFrame("Finance");
 
         // Create table model
-        FinanceModel model_db = new FinanceModel();
-        table.setModel(model_db);
-        
-        FinanceModel model_sum = new FinanceModel();
-        summary.setModel(model_sum);
-        
+        FinanceModel modelDB = new FinanceModel();
+        table.setModel(modelDB);
+
+        FinanceModel modelSum = new FinanceModel();
+        summary.setModel(modelSum);
+
         // Set the graph pannel
         GraphPanel gPanel = new GraphPanel();
-        JPanel graphPanel = gPanel.graphPanelComposer(model_sum);
+        JPanel graphPanel = gPanel.graphPanelComposer(modelSum);
 
         // Create controller
-        Controller controller = new Controller(model_db, model_sum, gPanel, frame);
+        Controller controller = new Controller(modelDB, modelSum, gPanel, frame);
 
         // Set the view layout - Control Panel, Buttons
         ControlPanel cPanel = new ControlPanel();
@@ -75,7 +76,7 @@ public class View {
 
         // Split Layouts
         // Set the filter summary panel
-        JSplitPane splitVerticalPanelSummary = new JSplitPane(JSplitPane.VERTICAL_SPLIT, 
+        JSplitPane splitVerticalPanelSummary = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
                     selectorPanel, tableSummaryScrollPanel);
         splitVerticalPanelSummary.setEnabled(false);
 
@@ -111,7 +112,7 @@ public class View {
     }
 
     private static JScrollPane stylingDatabasePanel(JScrollPane tableScrollPanel, String title, int height) {
-        tableScrollPanel.setMinimumSize(new Dimension(800, height));
+        tableScrollPanel.setMinimumSize(new Dimension(scrollPanelWidth, height));
         tableScrollPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), title,
                 TitledBorder.CENTER, TitledBorder.TOP));
 
