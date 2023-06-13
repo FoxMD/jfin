@@ -28,7 +28,7 @@ public class SelectorPanel extends VHelperPanel {
      */
     public JPanel selectorPanelComposer(Controller controller) {
         String[] choicesMonth = {"January", "February", "March", "April",
-                                "May", "June", "July", "August", "September", "October", "November", "December"};
+                                 "May", "June", "July", "August", "September", "October", "November", "December"};
 
         String[] choicesYear = {"2019", "2020", "2021", "2022", "2023", "2024"};
 

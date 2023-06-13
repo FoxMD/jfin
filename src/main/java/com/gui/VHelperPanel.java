@@ -5,10 +5,11 @@ package com.gui;
  */
 public class VHelperPanel {
     /**
-     * Dimension variables
+     * Dimension variables.
      */
-    protected int width = 800;
+    protected int width;
     protected int height;
+    private final int DEFAULT_WIDTH = 800;
 
     /**
      * Constructor with variable height.
@@ -16,6 +17,7 @@ public class VHelperPanel {
      */
     VHelperPanel(int height) {
         this.height = height;
+        this.width = DEFAULT_WIDTH;
     }
 
     /**
