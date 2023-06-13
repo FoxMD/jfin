@@ -1,0 +1,20 @@
+repo:
+  - '*'
+
+  test:
+  - test/**
+
+  source:
+  - src/**
+
+  '@domain/gui':
+  - package com/gui/**
+
+  '@domain/controller':
+  - package com/core/**
+
+  '@domain/database':
+  - package com/connector/**
+
+  '@domain/model':
+  - package com/model/**
