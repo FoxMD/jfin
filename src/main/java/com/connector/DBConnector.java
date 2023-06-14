@@ -1,6 +1,5 @@
 package com.connector;
 
-import com.secret.Credentials;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,17 +13,15 @@ import java.util.ArrayList;
 public class DBConnector {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/dummy";
     private static final String BASE_QUERY = "SELECT * FROM test";
-    private static String user = "";
-    private static String pass = "";
+    private static String USER = SysHandler.getVariable("USER_DB_KEY");
+    private static String PASSWORD = SysHandler.getVariable("PASSWORD_DB_KEY");
     private String query = "SELECT * FROM test WHERE";
 
     /**
      * Constructor for the class.
      */
     public DBConnector() {
-        Credentials cred = new Credentials();
-        user = cred.getUser();
-        pass = cred.getPassword();
+        System.out.println("Connecting to database with: "+USER+", PW: "+PASSWORD);
     }
 
     /**
@@ -45,7 +42,7 @@ public class DBConnector {
         System.out.println(request);
         try
         (
-            Connection conn = DriverManager.getConnection(DB_URL, user, pass);
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(request);
         ) {
@@ -89,7 +86,7 @@ public class DBConnector {
         System.out.println(request);
         try
         (
-            Connection conn = DriverManager.getConnection(DB_URL, user, pass);
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(request);
         ) {
@@ -144,7 +141,7 @@ public class DBConnector {
     public int testConnection() {
         try
         (
-            Connection conn = DriverManager.getConnection(DB_URL, user, pass);
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(BASE_QUERY);
         ) {
