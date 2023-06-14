@@ -7,14 +7,14 @@ test:
 source:
   - src/**
 
-'@domain/gui':
+gui:
   - package gui/**
 
-'@domain/controller':
+controller:
   - package core/**
 
-'@domain/database':
+database':
   - package connector/**
 
-'@domain/model':
+model:
   - package model/**
