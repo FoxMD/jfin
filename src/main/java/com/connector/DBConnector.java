@@ -13,15 +13,15 @@ import java.util.ArrayList;
 public class DBConnector {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/dummy";
     private static final String BASE_QUERY = "SELECT * FROM test";
-    private static String USER = SysHandler.getVariable("USER_DB_KEY");
-    private static String PASSWORD = SysHandler.getVariable("PASSWORD_DB_KEY");
+    private static final String USER = SysHandler.getVariable("USER_DB_KEY");
+    private static final String PASSWORD = SysHandler.getVariable("PASSWORD_DB_KEY");
     private String query = "SELECT * FROM test WHERE";
 
     /**
      * Constructor for the class.
      */
     public DBConnector() {
-        System.out.println("Connecting to database with: "+USER+", PW: "+PASSWORD);
+        System.out.println("Connecting to database with: " + USER +", PW: " + PASSWORD);
     }
 
     /**

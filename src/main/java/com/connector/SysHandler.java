@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 /**
- * Handler for getting name and password;
+ * Handler for getting name and password.
  */
 public class SysHandler {
     private static final Map<String, String> VARIABLES = System.getenv();
