@@ -24,7 +24,7 @@ public final class Start {
             public void run() {
                 try {
                     createAndShowGUI();
-                } catch (Exception e) {
+                } catch (RuntimeException e) {
                     e.printStackTrace();
                 }
             }
@@ -35,7 +35,7 @@ public final class Start {
      * Create UI and start the app.
      * @throws Exception For not starting
      */
-    public static void createAndShowGUI() throws Exception {
+    public static void createAndShowGUI() throws RuntimeException {
         System.out.println("Create GUI");
         new View();
     }

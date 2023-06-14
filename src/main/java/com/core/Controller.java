@@ -82,26 +82,34 @@ public class Controller implements ActionListener {
 
         if (((JButton) e.getSource()).getActionCommand().equals("Filter")) {
             System.out.println("Info od filtru");
+            actionOnFilterButton(searchTerm);
+        }
+    }
 
-            Object[][] data = ((FinanceModel) model).getDataFromDB(searchColumn, searchTerm);
+    /**
+     * Filter button handler.
+     * @param searchTerm What is you searching for.
+     */
+    private void actionOnFilterButton(String searchTerm) {
+        Object[][] data = ((FinanceModel) model).getDataFromDB(searchColumn, searchTerm);
 
-            Constants.databaseData = data;
-            int position = Constants.getColumnPosition(searchColumn);
-            if (searchTerm != null && !"".equals(searchTerm)) {
-                Object[][] newData = new Object[Constants.databaseData.length][];
-                int idx = 0;
-                for (Object[] o: Constants.databaseData) {
-                    if ("*".equals(searchTerm.trim())) {
-                        newData[idx++] = o;
-                    } else if ((String.valueOf(o[position]).toUpperCase())
-                                .startsWith(searchTerm.toUpperCase().trim())) {
-                            newData[idx++] = o;
-                    }
-                }
-                model.setDataVector(newData, Constants.TABLE_HEADER);
-            } else {
-                JOptionPane.showMessageDialog(null, "Search term is empty", "Error", JOptionPane.ERROR_MESSAGE);
+        if (!(searchTerm != null && !"".equals(searchTerm))) {
+            JOptionPane.showMessageDialog(null, "Search term is empty", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Constants.databaseData = data;
+        int position = Constants.getColumnPosition(searchColumn);
+        Object[][] newData = new Object[Constants.databaseData.length][];
+        int idx = 0;
+
+        for (Object[] o: Constants.databaseData) {
+            if ("*".equals(searchTerm.trim())) {
+                newData[idx++] = o;
+            } else if ((String.valueOf(o[position]).toUpperCase()).startsWith(searchTerm.toUpperCase().trim())) {
+                newData[idx++] = o;
             }
         }
+        model.setDataVector(newData, Constants.TABLE_HEADER);
     }
 }
