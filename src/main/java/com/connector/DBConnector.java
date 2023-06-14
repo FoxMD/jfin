@@ -21,7 +21,7 @@ public class DBConnector {
      * Constructor for the class.
      */
     public DBConnector() {
-        System.out.println("Connecting to database with: " + USER +", PW: " + PASSWORD);
+        System.out.println("Connecting to database with: " + USER + ", PW: " + PASSWORD);
     }
 
     /**
