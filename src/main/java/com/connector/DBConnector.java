@@ -16,6 +16,7 @@ public class DBConnector {
     private static final String USER = SysHandler.getVariable("USER_DB_KEY");
     private static final String PASSWORD = SysHandler.getVariable("PASSWORD_DB_KEY");
     private String query = "SELECT * FROM test WHERE";
+    private String addQuery = "INSERT INTO test VALUES";
 
     /**
      * Constructor for the class.
@@ -24,6 +25,26 @@ public class DBConnector {
         System.out.println("Connecting to database with: " + USER + ", PW: " + PASSWORD);
     }
 
+    public int writeQuery(String year, String month, String type, float value, String currency, String description) {
+        String request = "";
+        String valueString = String.valueOf(value);
+        request = this.addQuery + " (" + year + ", " + month + ", " + type + ", " + valueString + ", " + currency + ", " + description + ");";
+        try
+        (
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            //ResultSet rs = stmt.executeQuery(request);
+            stmt.executeUpdate(request);
+        ) {
+            //rs.close();
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 0;
+    }
     /**
      * Returns an array of results from the database.
      * @param what column entry name
