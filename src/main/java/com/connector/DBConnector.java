@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.PreparedStatement;
 
 /**
  * Connector for database server, handles work with mysql.
@@ -16,8 +17,7 @@ public class DBConnector {
     private static final String USER = SysHandler.getVariable("USER_DB_KEY");
     private static final String PASSWORD = SysHandler.getVariable("PASSWORD_DB_KEY");
     private String query = "SELECT * FROM test WHERE";
-    private String addQuery = "INSERT INTO test VALUES";
-
+    
     /**
      * Constructor for the class.
      */
@@ -26,18 +26,21 @@ public class DBConnector {
     }
 
     public int writeQuery(String year, String month, String type, float value, String currency, String description) {
-        String request = "";
-        String valueString = String.valueOf(value);
-        request = this.addQuery + " (" + year + ", " + month + ", " + type + ", " + valueString + ", " + currency + ", " + description + ");";
         try
         (
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-            Statement stmt = conn.createStatement();
-            //ResultSet rs = stmt.executeQuery(request);
-            stmt.executeUpdate(request);
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO test VALUES (?,?,?,?,?,?)");
         ) {
+            pstmt.setString(1, year); 
+            pstmt.setString(2, month); 
+            pstmt.setString(3, type); 
+            pstmt.setFloat(4, value); 
+            pstmt.setString(5, currency);
+            pstmt.setString(6, description); 
+            pstmt.executeUpdate(); // "rows" save the affected rows
+
             //rs.close();
-            stmt.close();
+            pstmt.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();

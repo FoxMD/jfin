@@ -25,6 +25,9 @@ public class ControlPanel {
     public JPanel controlPanelComposer(Controller controller) {
         JButton searchButton = new JButton("Search");
         JButton addButton = new JButton("Add entry");
+        addButton.setName("AddEntry");
+        addButton.setActionCommand("AddEntry");
+        addButton.addActionListener(controller);
         JButton removeButton = new JButton("Remove entry");
 
         JPanel ctrlPanel = new JPanel(new GridLayout(rows, colmns, hGap, vGap));

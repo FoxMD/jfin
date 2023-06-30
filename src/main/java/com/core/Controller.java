@@ -84,6 +84,11 @@ public class Controller implements ActionListener {
             System.out.println("Info od filtru");
             actionOnFilterButton(searchTerm);
         }
+
+        if (((JButton) e.getSource()).getActionCommand().equals("AddEntry")) {
+            System.out.println("Update table");
+            model.addEntryToDB("2022","January","Car",1500.0f,"EUR","Something");
+        }
     }
 
     /**

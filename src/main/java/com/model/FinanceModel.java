@@ -103,5 +103,9 @@ public class FinanceModel extends DefaultTableModel {
     public float getTest() {
         return data;
     }
-    //public void addEntryToDB(String, String, )
+    
+    public void addEntryToDB(String year, String month, String type, float value, String currency, String description) {
+        database.writeQuery(year, month, type, value, currency, description);
+    }
+
 }
