@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import com.model.Utils;
+
 import java.sql.PreparedStatement;
 
 /**
@@ -17,7 +20,7 @@ public class DBConnector {
     private static final String USER = SysHandler.getVariable("USER_DB_KEY");
     private static final String PASSWORD = SysHandler.getVariable("PASSWORD_DB_KEY");
     private String query = "SELECT * FROM test WHERE";
-    
+
     /**
      * Constructor for the class.
      */
@@ -31,12 +34,12 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO test VALUES (?,?,?,?,?,?)");
         ) {
-            pstmt.setString(1, year); 
-            pstmt.setString(2, month); 
-            pstmt.setString(3, type); 
-            pstmt.setFloat(4, value); 
-            pstmt.setString(5, currency);
-            pstmt.setString(6, description); 
+            pstmt.setString(Utils.YEAR, year); 
+            pstmt.setString(Utils.MONTH, month); 
+            pstmt.setString(Utils.TYPE, type); 
+            pstmt.setFloat(Utils.VALUE, value); 
+            pstmt.setString(Utils.CURRENCY, currency);
+            pstmt.setString(Utils.DESC, description); 
             pstmt.executeUpdate(); // "rows" save the affected rows
 
             //rs.close();

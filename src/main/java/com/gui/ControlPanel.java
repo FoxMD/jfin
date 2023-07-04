@@ -28,13 +28,13 @@ public class ControlPanel {
         JButton searchButton = new JButton("Search");
         JButton addButton = new JButton("Add entry");
         JButton removeButton = new JButton("Remove entry");
-        
+
         JPanel ctrlPanel = new JPanel(new GridLayout(rows, colmns, hGap, vGap));
         ctrlPanel.setMinimumSize(new Dimension(minHeight, minWidth));
         ctrlPanel.add(searchButton);
         ctrlPanel.add(addButton);
         ctrlPanel.add(removeButton);
-        
+
         /**
          * Action listener for getting info from controller.
          */
@@ -44,7 +44,7 @@ public class ControlPanel {
                 new AddFrame(controller);
             }
         };
-        
+
         addButton.setName("AddEntry");
         addButton.setActionCommand("AddEntry");
         addButton.addActionListener(listener);

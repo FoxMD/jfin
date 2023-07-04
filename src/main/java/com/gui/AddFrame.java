@@ -1,6 +1,8 @@
 package com.gui;
 
 import com.core.Controller;
+import com.model.Utils;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -12,6 +14,9 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Popup frame for adding a value to DB
+ */
 public class AddFrame {
     private final int minWidth = 400;
     private final int minHeight = 120;
@@ -20,16 +25,9 @@ public class AddFrame {
     private final int vGap = 3;
     private final int hGap = 3;
 
-    private String year = "";
-    private String month = "";
-    private String type = "";
-    private String value = "";
-    private String currency = "";
-    private String description = "";
     /**
-     * Composer for the button pannel.
-     * @param controller MVC Controller
-     * @return JPanel
+     * Constructor for the popup frame
+     * @param controller
      */
     public AddFrame(Controller controller) {
         JButton cancelButton = new JButton("Cancel");
@@ -70,18 +68,18 @@ public class AddFrame {
         ctrlPanel.add(cancelButton);
 
         /**
-         * Action listener for getting info from controller.
+         * Action listener for getting info to the controller.
          */
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Object[] data = new Object[6];
-                data[0] = jYear.getText();
-                data[1] = jMonth.getText();
-                data[2] = jType.getText();
-                data[3] = jValue.getText();
-                data[4] = jCurrency.getText();
-                data[5] = jDescription.getText();
+                data[Utils.YEAR] = jYear.getText();
+                data[Utils.MONTH] = jMonth.getText();
+                data[Utils.TYPE] = jType.getText();
+                data[Utils.VALUE] = jValue.getText();
+                data[Utils.CURRENCY] = jCurrency.getText();
+                data[Utils.DESC] = jDescription.getText();
 
                 controller.setValuesFromFormular(data);
             }
