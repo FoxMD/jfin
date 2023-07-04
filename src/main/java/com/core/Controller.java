@@ -23,7 +23,7 @@ public class Controller implements ActionListener {
     private String searchColumn = "Month";
     private String searchYear = "";
     private String searchMonth = "";
-
+    private Object[] valuesToAdd = new Object[6];
     /**
     * Contructor for the MVC controller.
     * @param modelDB db pointer
@@ -87,7 +87,16 @@ public class Controller implements ActionListener {
 
         if (((JButton) e.getSource()).getActionCommand().equals("AddEntry")) {
             System.out.println("Update table");
-            model.addEntryToDB("2022","January","Car",1500.0f,"EUR","Something");
+            for(Object s: this.valuesToAdd) {
+                System.out.println(s);
+            }
+            model.addEntryToDB( (String)this.valuesToAdd[0],
+                                (String)this.valuesToAdd[1],
+                                (String)this.valuesToAdd[2],
+                                Float.parseFloat((String)this.valuesToAdd[3]),
+                                (String)this.valuesToAdd[4],
+                                (String)this.valuesToAdd[5]
+                                );
         }
     }
 
@@ -116,5 +125,9 @@ public class Controller implements ActionListener {
             }
         }
         model.setDataVector(newData, Constants.TABLE_HEADER);
+    }
+
+    public void setValuesFromFormular(Object[] valuesFromForm) {
+        valuesToAdd = valuesFromForm;
     }
 }
