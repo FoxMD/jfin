@@ -3,7 +3,14 @@ package com.model;
 /**
  * Header file for database scheme.
  */
-public class Constants {
+public final class Constants {
+    /**
+     * Private const.
+     */
+    private Constants() {
+
+    }
+
     /**
      * Header.
      */

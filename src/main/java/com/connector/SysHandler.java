@@ -1,13 +1,20 @@
 package com.connector;
 
 import java.util.Map;
-import java.util.NoSuchElementException;
+//import java.util.NoSuchElementException;
 
 /**
  * Handler for getting name and password.
  */
-public class SysHandler {
+public final class SysHandler {
     private static final Map<String, String> VARIABLES = System.getenv();
+
+    /**
+     * Private constructor.
+     */
+    private SysHandler() {
+
+    }
 
     /**
      * Function for searching for username and password.
@@ -18,9 +25,10 @@ public class SysHandler {
         if (VARIABLES.containsKey(label)) {
             return VARIABLES.get(label);
         } else {
-            String excMsg = "No environment variable for label \"" + label
-                    + "\"";
-            throw new NoSuchElementException(excMsg);
+            //String excMsg = "No environment variable for label \"" + label
+            //        + "\"";
+            //throw new NoSuchElementException(excMsg);
+            return "None";
         }
     }
 }

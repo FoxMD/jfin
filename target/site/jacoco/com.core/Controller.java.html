@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Controller.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jfin</a> &gt; <a href="index.source.html" class="el_package">com.core</a> &gt; <span class="el_source">Controller.java</span></div><h1>Controller.java</h1><pre class="source lang-java linenums">package com.core;
+
+import com.gui.GraphPanel;
+import com.model.Constants;
+import com.model.FinanceModel;
+import com.model.Utils;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JTextField;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
+/**
+ * Controller for the MVC.
+ */
+public class Controller implements ActionListener {
+<span class="fc" id="L19">    private JTextField searchTermTextField = new JTextField(26);</span>
+    private FinanceModel model;
+    private FinanceModel modelOverview;
+    private GraphPanel graph;
+    private JFrame frame;
+
+<span class="fc" id="L25">    private String searchColumn = &quot;Month&quot;;</span>
+<span class="fc" id="L26">    private String searchYear = &quot;&quot;;</span>
+<span class="fc" id="L27">    private String searchMonth = &quot;&quot;;</span>
+<span class="fc" id="L28">    private Object[] valuesToAdd = new Object[6];</span>
+
+    /**
+    * Contructor for the MVC controller.
+    * @param modelDB db pointer
+    * @param modelSum filtered db pointer (year and month)
+    * @param graph graph panel for refresh
+    * @param frame frame panel for repaint
+    */
+    public Controller(FinanceModel modelDB, FinanceModel modelSum, GraphPanel graph, JFrame frame) {
+<span class="fc" id="L38">        super();</span>
+<span class="fc" id="L39">        this.model = modelDB;</span>
+<span class="fc" id="L40">        this.modelOverview = modelSum;</span>
+<span class="fc" id="L41">        this.frame = frame;</span>
+<span class="fc" id="L42">        this.graph = graph;</span>
+<span class="fc" id="L43">    }</span>
+
+    /**
+     * Search for a specific string.
+     * @param filterOption search term
+     */
+    public void setFilterOption(String filterOption) {
+<span class="fc" id="L50">        this.searchColumn = filterOption;</span>
+<span class="fc" id="L51">    }</span>
+
+    /**
+     * Sets the year and motnh option.
+     * @param year year
+     * @param month month
+     */
+    public void setOverviewDetails(String year, String month) {
+<span class="fc" id="L59">        this.searchYear = year;</span>
+<span class="fc" id="L60">        this.searchMonth = month;</span>
+<span class="fc" id="L61">    }</span>
+
+    /**
+     * Sets the filter for searching term.
+     * @param searchTermTextField search term
+     */
+    public void setFilterTextField(JTextField searchTermTextField) {
+<span class="fc" id="L68">        this.searchTermTextField = searchTermTextField;</span>
+<span class="fc" id="L69">    }</span>
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L73">        String searchTerm = searchTermTextField.getText();</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (((JButton) e.getSource()).getActionCommand().equals(&quot;Update&quot;)) {</span>
+<span class="nc" id="L75">            System.out.println(&quot;Info od update&quot;);</span>
+<span class="nc" id="L76">            Object[][] data = ((FinanceModel) modelOverview).getDataForSpecificDate(searchYear, searchMonth);</span>
+
+<span class="nc" id="L78">            graph.clearChart();</span>
+<span class="nc" id="L79">            modelOverview.setDataVector(data, Constants.TABLE_HEADER);</span>
+            //modelOverview.setChartValues(++i);
+<span class="nc" id="L81">            graph.updateChart(modelOverview);</span>
+<span class="nc" id="L82">            frame.validate();</span>
+<span class="nc" id="L83">            frame.repaint();</span>
+        }
+
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        if (((JButton) e.getSource()).getActionCommand().equals(&quot;Filter&quot;)) {</span>
+<span class="nc" id="L87">            System.out.println(&quot;Info od filtru&quot;);</span>
+<span class="nc" id="L88">            actionOnFilterButton(searchTerm);</span>
+        }
+
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        if (((JButton) e.getSource()).getActionCommand().equals(&quot;AddEntry&quot;)) {</span>
+<span class="nc" id="L92">            System.out.println(&quot;Update table&quot;);</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">            for (Object s: this.valuesToAdd) {</span>
+<span class="nc" id="L94">                System.out.println(s);</span>
+            }
+<span class="nc" id="L96">            model.addEntryToDB((String) this.valuesToAdd[Utils.Entries.YEAR.ordinal()],</span>
+<span class="nc" id="L97">                (String) this.valuesToAdd[Utils.Entries.MONTH.ordinal()],</span>
+<span class="nc" id="L98">                (String) this.valuesToAdd[Utils.Entries.TYPE.ordinal()],</span>
+<span class="nc" id="L99">                Float.parseFloat((String) this.valuesToAdd[Utils.Entries.VALUE.ordinal()]),</span>
+<span class="nc" id="L100">                (String) this.valuesToAdd[Utils.Entries.CURRENCY.ordinal()],</span>
+<span class="nc" id="L101">                (String) this.valuesToAdd[Utils.Entries.DESC.ordinal()]</span>
+            );
+        }
+<span class="nc" id="L104">    }</span>
+
+    /**
+     * Filter button handler.
+     * @param searchTerm What is you searching for.
+     */
+    private void actionOnFilterButton(String searchTerm) {
+<span class="nc" id="L111">        Object[][] data = ((FinanceModel) model).getDataFromDB(searchColumn, searchTerm);</span>
+
+<span class="nc bnc" id="L113" title="All 4 branches missed.">        if (!(searchTerm != null &amp;&amp; !&quot;&quot;.equals(searchTerm))) {</span>
+<span class="nc" id="L114">            JOptionPane.showMessageDialog(null, &quot;Search term is empty&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L115">            return;</span>
+        }
+
+<span class="nc" id="L118">        Constants.databaseData = data;</span>
+<span class="nc" id="L119">        int position = Constants.getColumnPosition(searchColumn);</span>
+<span class="nc" id="L120">        Object[][] newData = new Object[Constants.databaseData.length][];</span>
+<span class="nc" id="L121">        int idx = 0;</span>
+
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        for (Object[] o: Constants.databaseData) {</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">            if (&quot;*&quot;.equals(searchTerm.trim())) {</span>
+<span class="nc" id="L125">                newData[idx++] = o;</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">            } else if ((String.valueOf(o[position]).toUpperCase()).startsWith(searchTerm.toUpperCase().trim())) {</span>
+<span class="nc" id="L127">                newData[idx++] = o;</span>
+            }
+        }
+<span class="nc" id="L130">        model.setDataVector(newData, Constants.TABLE_HEADER);</span>
+<span class="nc" id="L131">    }</span>
+
+    public void setValuesFromFormular(Object[] valuesFromForm) {
+<span class="fc" id="L134">        valuesToAdd = valuesFromForm;</span>
+<span class="fc" id="L135">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

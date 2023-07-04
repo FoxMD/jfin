@@ -1,0 +1,21 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+jfin,com.core,Start.new Runnable() {...},3,6,0,0,1,4,0,2,0,2
+jfin,com.core,Controller,204,53,18,0,38,20,11,5,2,5
+jfin,com.core,Start,0,14,0,0,0,6,0,2,0,2
+jfin,com.model,Constants,0,350,0,4,0,20,0,4,0,2
+jfin,com.model,Utils.Entries,0,64,0,0,0,1,0,1,0,1
+jfin,com.model,FinanceModel,46,60,3,1,7,19,5,9,3,9
+jfin,com.gui,SelectorPanel.new ActionListener() {...},12,15,0,0,3,1,1,1,1,1
+jfin,com.gui,ControlPanel.new ActionListener() {...},5,9,0,0,2,1,1,1,1,1
+jfin,com.gui,GraphPanel,0,137,0,0,0,33,0,4,0,4
+jfin,com.gui,View,0,231,0,0,0,64,0,2,0,2
+jfin,com.gui,AddFrame,0,210,0,0,0,50,0,1,0,1
+jfin,com.gui,SumActionPanel,0,68,0,0,0,16,0,2,0,2
+jfin,com.gui,VHelperPanel,8,12,0,0,4,5,2,1,2,1
+jfin,com.gui,AddFrame.new ActionListener() {...},51,27,0,0,9,1,1,1,1,1
+jfin,com.gui,SearchPanel.new ActionListener() {...},20,9,0,0,4,1,1,1,1,1
+jfin,com.gui,SearchPanel,0,131,0,0,0,36,0,2,0,2
+jfin,com.gui,SelectorPanel,0,138,0,0,0,17,0,2,0,2
+jfin,com.gui,ControlPanel,0,83,0,0,0,20,0,2,0,2
+jfin,com.connector,SysHandler,0,14,0,2,0,4,0,3,0,2
+jfin,com.connector,DBConnector,381,156,6,2,68,29,6,5,3,4

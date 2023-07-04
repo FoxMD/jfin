@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddFrame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jfin</a> &gt; <a href="index.source.html" class="el_package">com.gui</a> &gt; <span class="el_source">AddFrame.java</span></div><h1>AddFrame.java</h1><pre class="source lang-java linenums">package com.gui;
+
+import com.core.Controller;
+import com.model.Utils;
+
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+/**
+ * Popup frame for adding a value to DB.
+ */
+public class AddFrame {
+<span class="fc" id="L21">    private final int minWidth = 400;</span>
+<span class="fc" id="L22">    private final int minHeight = 120;</span>
+<span class="fc" id="L23">    private final int rows = 7;</span>
+<span class="fc" id="L24">    private final int colmns = 2;</span>
+<span class="fc" id="L25">    private final int vGap = 3;</span>
+<span class="fc" id="L26">    private final int hGap = 3;</span>
+
+    /**
+     * Constructor for the popup frame.
+     * @param controller
+     */
+<span class="fc" id="L32">    public AddFrame(Controller controller) {</span>
+<span class="fc" id="L33">        JButton cancelButton = new JButton(&quot;Cancel&quot;);</span>
+<span class="fc" id="L34">        JButton addButton = new JButton(&quot;Add&quot;);</span>
+<span class="fc" id="L35">        addButton.setName(&quot;AddEntry&quot;);</span>
+<span class="fc" id="L36">        addButton.setActionCommand(&quot;AddEntry&quot;);</span>
+<span class="fc" id="L37">        addButton.addActionListener(controller);</span>
+
+<span class="fc" id="L39">        JTextField jYear = new JTextField();</span>
+<span class="fc" id="L40">        JTextField jMonth = new JTextField();</span>
+<span class="fc" id="L41">        JTextField jType = new JTextField();</span>
+<span class="fc" id="L42">        JTextField jValue = new JTextField();</span>
+<span class="fc" id="L43">        JTextField jCurrency = new JTextField();</span>
+<span class="fc" id="L44">        JTextField jDescription = new JTextField();</span>
+
+<span class="fc" id="L46">        JLabel labelYear = new JLabel(&quot;Year: &quot;);</span>
+<span class="fc" id="L47">        JLabel labelMonth = new JLabel(&quot;Month: &quot;);</span>
+<span class="fc" id="L48">        JLabel labelType = new JLabel(&quot;Type: &quot;);</span>
+<span class="fc" id="L49">        JLabel labelValue = new JLabel(&quot;Value: &quot;);</span>
+<span class="fc" id="L50">        JLabel labelCurrency = new JLabel(&quot;Currency: &quot;);</span>
+<span class="fc" id="L51">        JLabel labelDescription = new JLabel(&quot;Description: &quot;);</span>
+
+<span class="fc" id="L53">        JPanel ctrlPanel = new JPanel(new GridLayout(rows, colmns, hGap, vGap));</span>
+<span class="fc" id="L54">        ctrlPanel.setMinimumSize(new Dimension(minHeight, minWidth));</span>
+<span class="fc" id="L55">        ctrlPanel.add(labelYear);</span>
+<span class="fc" id="L56">        ctrlPanel.add(jYear);</span>
+<span class="fc" id="L57">        ctrlPanel.add(labelMonth);</span>
+<span class="fc" id="L58">        ctrlPanel.add(jMonth);</span>
+<span class="fc" id="L59">        ctrlPanel.add(labelType);</span>
+<span class="fc" id="L60">        ctrlPanel.add(jType);</span>
+<span class="fc" id="L61">        ctrlPanel.add(labelValue);</span>
+<span class="fc" id="L62">        ctrlPanel.add(jValue);</span>
+<span class="fc" id="L63">        ctrlPanel.add(labelCurrency);</span>
+<span class="fc" id="L64">        ctrlPanel.add(jCurrency);</span>
+<span class="fc" id="L65">        ctrlPanel.add(labelDescription);</span>
+<span class="fc" id="L66">        ctrlPanel.add(jDescription);</span>
+<span class="fc" id="L67">        ctrlPanel.add(addButton);</span>
+<span class="fc" id="L68">        ctrlPanel.add(cancelButton);</span>
+
+        /**
+         * Action listener for getting info to the controller.
+         */
+<span class="fc" id="L73">        ActionListener listener = new ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L76">                Object[] data = new Object[Utils.Entries.values().length];</span>
+<span class="nc" id="L77">                data[Utils.Entries.YEAR.ordinal()] = jYear.getText();</span>
+<span class="nc" id="L78">                data[Utils.Entries.MONTH.ordinal()] = jMonth.getText();</span>
+<span class="nc" id="L79">                data[Utils.Entries.TYPE.ordinal()] = jType.getText();</span>
+<span class="nc" id="L80">                data[Utils.Entries.VALUE.ordinal()] = jValue.getText();</span>
+<span class="nc" id="L81">                data[Utils.Entries.CURRENCY.ordinal()] = jCurrency.getText();</span>
+<span class="nc" id="L82">                data[Utils.Entries.DESC.ordinal()] = jDescription.getText();</span>
+
+<span class="nc" id="L84">                controller.setValuesFromFormular(data);</span>
+<span class="nc" id="L85">            }</span>
+        };
+
+<span class="fc" id="L88">        addButton.addActionListener(listener);</span>
+
+<span class="fc" id="L90">        JFrame addFrame = new JFrame(&quot;Add entry&quot;);</span>
+<span class="fc" id="L91">        addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</span>
+<span class="fc" id="L92">        addFrame.setMinimumSize(new Dimension(minWidth, minHeight));</span>
+<span class="fc" id="L93">        addFrame.add(ctrlPanel);</span>
+<span class="fc" id="L94">        addFrame.pack();</span>
+<span class="fc" id="L95">        addFrame.setLocationRelativeTo(null);</span>
+<span class="fc" id="L96">        addFrame.setVisible(true);</span>
+<span class="fc" id="L97">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
