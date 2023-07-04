@@ -61,7 +61,7 @@ public class DBConnector {
         }
         return 0;
     }
-    
+
     /**
      * Returns an array of results from the database.
      * @param what column entry name
