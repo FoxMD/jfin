@@ -24,7 +24,6 @@ public class AddFrame {
     private final int colmns = 2;
     private final int vGap = 3;
     private final int hGap = 3;
-    private final int countOfInputData = 6;
 
     /**
      * Constructor for the popup frame.
@@ -74,13 +73,13 @@ public class AddFrame {
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Object[] data = new Object[countOfInputData];
-                data[Utils.YEAR] = jYear.getText();
-                data[Utils.MONTH] = jMonth.getText();
-                data[Utils.TYPE] = jType.getText();
-                data[Utils.VALUE] = jValue.getText();
-                data[Utils.CURRENCY] = jCurrency.getText();
-                data[Utils.DESC] = jDescription.getText();
+                Object[] data = new Object[Utils.Entries.values().length];
+                data[Utils.Entries.YEAR.ordinal()] = jYear.getText();
+                data[Utils.Entries.MONTH.ordinal()] = jMonth.getText();
+                data[Utils.Entries.TYPE.ordinal()] = jType.getText();
+                data[Utils.Entries.VALUE.ordinal()] = jValue.getText();
+                data[Utils.Entries.CURRENCY.ordinal()] = jCurrency.getText();
+                data[Utils.Entries.DESC.ordinal()] = jDescription.getText();
 
                 controller.setValuesFromFormular(data);
             }

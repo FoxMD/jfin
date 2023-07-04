@@ -93,12 +93,12 @@ public class Controller implements ActionListener {
             for (Object s: this.valuesToAdd) {
                 System.out.println(s);
             }
-            model.addEntryToDB((String) this.valuesToAdd[Utils.YEAR],
-                (String) this.valuesToAdd[Utils.MONTH],
-                (String) this.valuesToAdd[Utils.TYPE],
-                Float.parseFloat((String) this.valuesToAdd[Utils.VALUE]),
-                (String) this.valuesToAdd[Utils.CURRENCY],
-                (String) this.valuesToAdd[Utils.DESC]
+            model.addEntryToDB((String) this.valuesToAdd[Utils.Entries.YEAR.ordinal()],
+                (String) this.valuesToAdd[Utils.Entries.MONTH.ordinal()],
+                (String) this.valuesToAdd[Utils.Entries.TYPE.ordinal()],
+                Float.parseFloat((String) this.valuesToAdd[Utils.Entries.VALUE.ordinal()]),
+                (String) this.valuesToAdd[Utils.Entries.CURRENCY.ordinal()],
+                (String) this.valuesToAdd[Utils.Entries.DESC.ordinal()]
             );
         }
     }

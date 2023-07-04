@@ -44,12 +44,12 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO test VALUES (?,?,?,?,?,?)");
         ) {
-            pstmt.setString(Utils.YEAR + 1, year);
-            pstmt.setString(Utils.MONTH + 1, month);
-            pstmt.setString(Utils.TYPE + 1, type);
-            pstmt.setFloat(Utils.VALUE + 1, value);
-            pstmt.setString(Utils.CURRENCY + 1, currency);
-            pstmt.setString(Utils.DESC + 1, description);
+            pstmt.setString(Utils.Entries.YEAR.ordinal() + 1, year);
+            pstmt.setString(Utils.Entries.MONTH.ordinal() + 1, month);
+            pstmt.setString(Utils.Entries.TYPE.ordinal() + 1, type);
+            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + 1, value);
+            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + 1, currency);
+            pstmt.setString(Utils.Entries.DESC.ordinal() + 1, description);
             pstmt.executeUpdate(); // "rows" save the affected rows
 
             //rs.close();
