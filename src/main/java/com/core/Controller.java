@@ -3,6 +3,8 @@ package com.core;
 import com.gui.GraphPanel;
 import com.model.Constants;
 import com.model.FinanceModel;
+import com.model.Utils;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
@@ -23,6 +25,7 @@ public class Controller implements ActionListener {
     private String searchColumn = "Month";
     private String searchYear = "";
     private String searchMonth = "";
+    private Object[] valuesToAdd = new Object[6];
 
     /**
     * Contructor for the MVC controller.
@@ -87,7 +90,16 @@ public class Controller implements ActionListener {
 
         if (((JButton) e.getSource()).getActionCommand().equals("AddEntry")) {
             System.out.println("Update table");
-            model.addEntryToDB("2022","January","Car",1500.0f,"EUR","Something");
+            for (Object s: this.valuesToAdd) {
+                System.out.println(s);
+            }
+            model.addEntryToDB((String) this.valuesToAdd[Utils.YEAR],
+                (String) this.valuesToAdd[Utils.MONTH],
+                (String) this.valuesToAdd[Utils.TYPE],
+                Float.parseFloat((String) this.valuesToAdd[Utils.VALUE]),
+                (String) this.valuesToAdd[Utils.CURRENCY],
+                (String) this.valuesToAdd[Utils.DESC]
+            );
         }
     }
 
@@ -116,5 +128,9 @@ public class Controller implements ActionListener {
             }
         }
         model.setDataVector(newData, Constants.TABLE_HEADER);
+    }
+
+    public void setValuesFromFormular(Object[] valuesFromForm) {
+        valuesToAdd = valuesFromForm;
     }
 }

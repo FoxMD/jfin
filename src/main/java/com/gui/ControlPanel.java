@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * Control panel for buttons.
@@ -25,9 +27,6 @@ public class ControlPanel {
     public JPanel controlPanelComposer(Controller controller) {
         JButton searchButton = new JButton("Search");
         JButton addButton = new JButton("Add entry");
-        addButton.setName("AddEntry");
-        addButton.setActionCommand("AddEntry");
-        addButton.addActionListener(controller);
         JButton removeButton = new JButton("Remove entry");
 
         JPanel ctrlPanel = new JPanel(new GridLayout(rows, colmns, hGap, vGap));
@@ -35,6 +34,20 @@ public class ControlPanel {
         ctrlPanel.add(searchButton);
         ctrlPanel.add(addButton);
         ctrlPanel.add(removeButton);
+
+        /**
+         * Action listener for getting info from controller.
+         */
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddFrame(controller);
+            }
+        };
+
+        addButton.setName("AddEntry");
+        addButton.setActionCommand("AddEntry");
+        addButton.addActionListener(listener);
 
         return ctrlPanel;
     }
