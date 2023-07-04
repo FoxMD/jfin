@@ -28,18 +28,28 @@ public class DBConnector {
         System.out.println("Connecting to database with: " + USER + ", PW: " + PASSWORD);
     }
 
+    /**
+     * Write a query request for the DB.
+     * @param year Year.
+     * @param month Month.
+     * @param type Type of expense.
+     * @param value Cost of it.
+     * @param currency EUR or CZK.
+     * @param description Description of buyed item.
+     * @return
+     */
     public int writeQuery(String year, String month, String type, float value, String currency, String description) {
         try
         (
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO test VALUES (?,?,?,?,?,?)");
         ) {
-            pstmt.setString(Utils.YEAR + 1, year); 
-            pstmt.setString(Utils.MONTH + 1, month); 
-            pstmt.setString(Utils.TYPE + 1, type); 
-            pstmt.setFloat(Utils.VALUE + 1, value); 
+            pstmt.setString(Utils.YEAR + 1, year);
+            pstmt.setString(Utils.MONTH + 1, month);
+            pstmt.setString(Utils.TYPE + 1, type);
+            pstmt.setFloat(Utils.VALUE + 1, value);
             pstmt.setString(Utils.CURRENCY + 1, currency);
-            pstmt.setString(Utils.DESC + 1, description); 
+            pstmt.setString(Utils.DESC + 1, description);
             pstmt.executeUpdate(); // "rows" save the affected rows
 
             //rs.close();

@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
- * Popup frame for adding a value to DB
+ * Popup frame for adding a value to DB.
  */
 public class AddFrame {
     private final int minWidth = 400;
@@ -24,9 +24,10 @@ public class AddFrame {
     private final int colmns = 2;
     private final int vGap = 3;
     private final int hGap = 3;
+    private final int countOfInputData = 6;
 
     /**
-     * Constructor for the popup frame
+     * Constructor for the popup frame.
      * @param controller
      */
     public AddFrame(Controller controller) {
@@ -73,7 +74,7 @@ public class AddFrame {
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Object[] data = new Object[6];
+                Object[] data = new Object[countOfInputData];
                 data[Utils.YEAR] = jYear.getText();
                 data[Utils.MONTH] = jMonth.getText();
                 data[Utils.TYPE] = jType.getText();
