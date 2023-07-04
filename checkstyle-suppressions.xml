@@ -14,4 +14,7 @@
   <suppress checks="VisibilityModifier" files="src/main/java/com/gui/VHelperPanel.java"/>
   <suppress checks="DeclarationOrder" files="src/main/java/com/core/Controller.java"/>
   <suppress checks="IllegalCatch" files="src/main/java/com/core/Start.java"/>
+  <suppress checks="JavadocVariable" files="src/main/java/com/model/Utils.java"/>
+  <suppress checks="ModifierOrder" files="src/main/java/com/model/Utils.java"/>
+  <suppress checks="HideUtilityClassConstructor" files="src/main/java/com/model/Utils.java"/>
 </suppressions>
