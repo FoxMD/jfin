@@ -6,7 +6,6 @@ import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.Styler.ChartTheme;
 import org.knowm.xchart.PieChart;
 import org.knowm.xchart.PieChartBuilder;
-import org.knowm.xchart.style.PieStyler.AnnotationType;
 
 /**
  * Graph with overview.
@@ -14,7 +13,6 @@ import org.knowm.xchart.style.PieStyler.AnnotationType;
 public class GraphPanel extends JPanel {
     private final int graphWidth = 800;
     private final int graphHeight = 600;
-    private final float anotationDst = 1.15f;
     private final float contentSize = 0.7f;
     private final int angleOfRotation = 90;
 
@@ -34,8 +32,6 @@ public class GraphPanel extends JPanel {
     public JPanel graphPanelComposer(FinanceModel modelOverview) {
         this.modelOverview = modelOverview;
         chart.getStyler().setLegendVisible(false);
-        chart.getStyler().setAnnotationType(AnnotationType.LabelAndPercentage);
-        chart.getStyler().setAnnotationDistance(anotationDst);
         chart.getStyler().setPlotContentSize(contentSize);
         chart.getStyler().setStartAngleInDegrees(angleOfRotation);
 
