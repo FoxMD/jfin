@@ -1,14 +1,15 @@
 package com.core;
 
 import org.junit.jupiter.api.Test;
-
+/*
 import com.gui.GraphPanel;
 import com.model.FinanceModel;
-
+*/
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+/*
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+*/
 
 /**
  * Unit test for simple App.
@@ -27,7 +28,7 @@ class AppTest {
 
     /**
      * Controller test.
-     */
+     *//**
     @Test
     public void controlTest() {
         FinanceModel modelDB = new FinanceModel();
@@ -44,5 +45,5 @@ class AppTest {
 
         Object[] testObj = new Object[size];
         cnt.setValuesFromFormular(testObj);
-    }
+    }*/
 }

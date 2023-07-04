@@ -1,10 +1,10 @@
-#Tue Jul 04 20:24:37 CEST 2023
+#Tue Jul 04 20:33:20 CEST 2023
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\model\\Constants.java=1688484039480
 configuration*?=6AE0AD1B71AD12B4A3A6DF59F50012EA5C75227
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\View.java=1686684345041
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\connector\\SysHandler.java=1688492515616
 E\:\\Programming\\Java\\JFin\\jfin\\src\\test\\java\\com\\connector\\ConnectorTest.java=1688493290630
-E\:\\Programming\\Java\\JFin\\jfin\\src\\test\\java\\com\\gui\\AddTest.java=1688494681714
+E\:\\Programming\\Java\\JFin\\jfin\\src\\test\\java\\com\\gui\\AddTest.java=1688495595034
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\SearchPanel.java=1686684345040
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\SelectorPanel.java=1686684345041
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\core\\Controller.java=1688479699415
@@ -14,7 +14,7 @@ E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\VHelperPanel.java
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\SumActionPanel.java=1688121513720
 module-resource*?\:checkstyle/suppressions.xml=1F42F972F7D0D003D0922A1142D605D389D054F1
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\AddFrame.java=1688479812263
-E\:\\Programming\\Java\\JFin\\jfin\\src\\test\\java\\com\\core\\AppTest.java=1688494112982
+E\:\\Programming\\Java\\JFin\\jfin\\src\\test\\java\\com\\core\\AppTest.java=1688495537971
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\ControlPanel.java=1688478965195
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\model\\FinanceModel.java=1688491626256
 E\:\\Programming\\Java\\JFin\\jfin\\src\\test\\java\\com\\model\\FinanceModelTest.java=1688492084200
