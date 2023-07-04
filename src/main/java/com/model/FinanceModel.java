@@ -81,6 +81,14 @@ public class FinanceModel extends DefaultTableModel {
     }
 
     /**
+     * Sets income value.
+     * @param income complete income;
+     */
+    public void setIncome(float income) {
+        this.income = income;
+    }
+
+    /**
      * Returns all the expenses.
      * @return expenses
      */
@@ -89,10 +97,19 @@ public class FinanceModel extends DefaultTableModel {
     }
 
     /**
+     * Sets the complete amount on expenses.
+     * @param expenses Sum of expenses.
+     */
+    public void setExpenses(float expenses) {
+        this.expenses = expenses;
+    }
+
+    /**
      * Returns the difference between income and expenses.
      * @return difference
      */
     public float getDifference() {
+        this.difference = this.income - this.expenses;
         return this.difference;
     }
 
