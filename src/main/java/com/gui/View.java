@@ -46,7 +46,7 @@ public class View {
         JPanel graphPanel = gPanel.graphPanelComposer(modelSum);
 
         // Create controller
-        Controller controller = new Controller(modelDB, modelSum, gPanel, frame);
+        Controller controller = new Controller(modelDB, modelSum, gPanel, frame, summary);
 
         // Set the view layout - Control Panel, Buttons
         ControlPanel cPanel = new ControlPanel();

@@ -21,9 +21,9 @@ public class SumActionPanel {
      * @return JPanel
      */
     public JPanel sumActionPanelComposer() {
-        JButton searchButton = new JButton("Search");
-        JButton addButton = new JButton("Add entry");
-        JButton removeButton = new JButton("Remove entry");
+        JButton searchButton = new JButton("Nope");
+        JButton addButton = new JButton("Nada");
+        JButton removeButton = new JButton("Niet");
 
         JPanel ctrlPanel = new JPanel(new GridLayout(rows, colmns, hGap, vGap));
         ctrlPanel.setMinimumSize(new Dimension(minHeight, minWidth));

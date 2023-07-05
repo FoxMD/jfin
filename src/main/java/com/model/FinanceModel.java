@@ -122,6 +122,14 @@ public class FinanceModel extends DefaultTableModel {
     }
 
     public void addEntryToDB(String year, String month, String type, float value, String currency, String description) {
-        database.writeQuery(year, month, type, value, currency, description);
+        //database.writeQuery(year, month, type, value, currency, description);
+    }
+
+    public void addEntryToDB(Object[] entry) {
+        database.writeQuery(entry);
+    }
+
+    public void removeEntryFromDB(Object[] entry) {
+        database.removeEntryFromDB(entry);
     }
 }

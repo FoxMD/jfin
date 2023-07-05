@@ -14,20 +14,20 @@ public class FinanceModel extends DefaultTableModel {
     private float expenses;
     private float difference;
 
-<span class="fc" id="L17">    private final int testValue = 13;</span>
+<span class="nc" id="L17">    private final int testValue = 13;</span>
 
     /**
      * Constructor for the financial model.
      */
     public FinanceModel() {
-<span class="fc" id="L23">        super(Constants.databaseData, Constants.TABLE_HEADER);</span>
+<span class="nc" id="L23">        super(Constants.databaseData, Constants.TABLE_HEADER);</span>
 
-<span class="fc" id="L25">        DBConnector database = new DBConnector();</span>
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if (database.testConnection() != -1) {</span>
-<span class="fc" id="L27">            this.database = database;</span>
-<span class="fc" id="L28">            this.data = testValue;</span>
+<span class="nc" id="L25">        DBConnector database = new DBConnector();</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        if (database.testConnection() != -1) {</span>
+<span class="nc" id="L27">            this.database = database;</span>
+<span class="nc" id="L28">            this.data = testValue;</span>
         }
-<span class="fc" id="L30">    }</span>
+<span class="nc" id="L30">    }</span>
 
     /**
      * Return data from a database.
@@ -61,15 +61,15 @@ public class FinanceModel extends DefaultTableModel {
      * @param data input data
      */
     public void setChartValues(int data) {
-<span class="fc" id="L64">        this.data += data;</span>
-<span class="fc" id="L65">    }</span>
+<span class="nc" id="L64">        this.data += data;</span>
+<span class="nc" id="L65">    }</span>
 
     /**
      * Returns the private data for the chart.
      * @return chart values.
      */
     public int getChartValues() {
-<span class="fc" id="L72">        return this.data;</span>
+<span class="nc" id="L72">        return this.data;</span>
     }
 
     /**
@@ -77,7 +77,7 @@ public class FinanceModel extends DefaultTableModel {
      * @return income
      */
     public float getIncome() {
-<span class="fc" id="L80">        return this.income;</span>
+<span class="nc" id="L80">        return this.income;</span>
     }
 
     /**
@@ -85,15 +85,15 @@ public class FinanceModel extends DefaultTableModel {
      * @param income complete income;
      */
     public void setIncome(float income) {
-<span class="fc" id="L88">        this.income = income;</span>
-<span class="fc" id="L89">    }</span>
+<span class="nc" id="L88">        this.income = income;</span>
+<span class="nc" id="L89">    }</span>
 
     /**
      * Returns all the expenses.
      * @return expenses
      */
     public float getExpenses() {
-<span class="fc" id="L96">        return this.expenses;</span>
+<span class="nc" id="L96">        return this.expenses;</span>
     }
 
     /**
@@ -101,16 +101,16 @@ public class FinanceModel extends DefaultTableModel {
      * @param expenses Sum of expenses.
      */
     public void setExpenses(float expenses) {
-<span class="fc" id="L104">        this.expenses = expenses;</span>
-<span class="fc" id="L105">    }</span>
+<span class="nc" id="L104">        this.expenses = expenses;</span>
+<span class="nc" id="L105">    }</span>
 
     /**
      * Returns the difference between income and expenses.
      * @return difference
      */
     public float getDifference() {
-<span class="fc" id="L112">        this.difference = this.income - this.expenses;</span>
-<span class="fc" id="L113">        return this.difference;</span>
+<span class="nc" id="L112">        this.difference = this.income - this.expenses;</span>
+<span class="nc" id="L113">        return this.difference;</span>
     }
 
     /**
@@ -118,11 +118,19 @@ public class FinanceModel extends DefaultTableModel {
      * @return some data
      */
     public float getTest() {
-<span class="fc" id="L121">        return data;</span>
+<span class="nc" id="L121">        return data;</span>
     }
 
     public void addEntryToDB(String year, String month, String type, float value, String currency, String description) {
-<span class="nc" id="L125">        database.writeQuery(year, month, type, value, currency, description);</span>
+        //database.writeQuery(year, month, type, value, currency, description);
 <span class="nc" id="L126">    }</span>
+
+    public void addEntryToDB(Object[] entry) {
+<span class="nc" id="L129">        database.writeQuery(entry);</span>
+<span class="nc" id="L130">    }</span>
+
+    public void removeEntryFromDB(Object[] entry) {
+<span class="nc" id="L133">        database.removeEntryFromDB(entry);</span>
+<span class="nc" id="L134">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
