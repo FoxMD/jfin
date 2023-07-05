@@ -38,18 +38,20 @@ public class DBConnector {
      * @param description Description of buyed item.
      * @return
      */
-    public int writeQuery(String year, String month, String type, float value, String currency, String description) {
+    public int writeQuery(Object[] entry) {
         try
         (
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO test VALUES (?,?,?,?,?,?)");
         ) {
-            pstmt.setString(Utils.Entries.YEAR.ordinal() + 1, year);
-            pstmt.setString(Utils.Entries.MONTH.ordinal() + 1, month);
-            pstmt.setString(Utils.Entries.TYPE.ordinal() + 1, type);
-            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + 1, value);
-            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + 1, currency);
-            pstmt.setString(Utils.Entries.DESC.ordinal() + 1, description);
+            pstmt.setString(Utils.Entries.YEAR.ordinal() + 1, (String) entry[Utils.Entries.YEAR.ordinal()]);
+            pstmt.setString(Utils.Entries.MONTH.ordinal() + 1, (String) entry[Utils.Entries.MONTH.ordinal()]);
+            pstmt.setString(Utils.Entries.TYPE.ordinal() + 1, (String) entry[Utils.Entries.TYPE.ordinal()]);
+            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + 1,
+                        Float.parseFloat((String) entry[Utils.Entries.VALUE.ordinal()])
+            );
+            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + 1, (String) entry[Utils.Entries.CURRENCY.ordinal()]);
+            pstmt.setString(Utils.Entries.DESC.ordinal() + 1, (String) entry[Utils.Entries.DESC.ordinal()]);
             pstmt.executeUpdate(); // "rows" save the affected rows
 
             //rs.close();
@@ -170,6 +172,32 @@ public class DBConnector {
 
         Object[][] retData = data.toArray(new Object[0][0]);
         return retData;
+    }
+
+    public int removeEntryFromDB(Object[] entry) {
+        try
+        (
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            PreparedStatement pstmt = conn.prepareStatement(
+                "DELETE FROM test WHERE year=? AND month=? AND type=? AND value=? AND currency=? AND description=?"
+            );
+        ) {
+            pstmt.setString(Utils.Entries.YEAR.ordinal() + 1, (String) entry[Utils.Entries.YEAR.ordinal()]);
+            pstmt.setString(Utils.Entries.MONTH.ordinal() + 1, (String) entry[Utils.Entries.MONTH.ordinal()]);
+            pstmt.setString(Utils.Entries.TYPE.ordinal() + 1, (String) entry[Utils.Entries.TYPE.ordinal()]);
+            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + 1, (Float) entry[Utils.Entries.VALUE.ordinal()]);
+            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + 1, (String) entry[Utils.Entries.CURRENCY.ordinal()]);
+            pstmt.setString(Utils.Entries.DESC.ordinal() + 1, (String) entry[Utils.Entries.DESC.ordinal()]);
+            pstmt.executeUpdate(); // "rows" save the affected rows
+
+            //rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 0;
     }
 
     /**

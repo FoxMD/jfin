@@ -3,14 +3,16 @@ package com.core;
 import com.gui.GraphPanel;
 import com.model.Constants;
 import com.model.FinanceModel;
-import com.model.Utils;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
+
 import javax.swing.JTextField;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  * Controller for the MVC.
@@ -21,6 +23,7 @@ public class Controller implements ActionListener {
     private FinanceModel modelOverview;
     private GraphPanel graph;
     private JFrame frame;
+    private JTable summary;
 
     private String searchColumn = "Month";
     private String searchYear = "";
@@ -34,12 +37,13 @@ public class Controller implements ActionListener {
     * @param graph graph panel for refresh
     * @param frame frame panel for repaint
     */
-    public Controller(FinanceModel modelDB, FinanceModel modelSum, GraphPanel graph, JFrame frame) {
+    public Controller(FinanceModel modelDB, FinanceModel modelSum, GraphPanel graph, JFrame frame, JTable sum) {
         super();
         this.model = modelDB;
         this.modelOverview = modelSum;
         this.frame = frame;
         this.graph = graph;
+        this.summary = sum;
     }
 
     /**
@@ -90,16 +94,7 @@ public class Controller implements ActionListener {
 
         if (((JButton) e.getSource()).getActionCommand().equals("AddEntry")) {
             System.out.println("Update table");
-            for (Object s: this.valuesToAdd) {
-                System.out.println(s);
-            }
-            model.addEntryToDB((String) this.valuesToAdd[Utils.Entries.YEAR.ordinal()],
-                (String) this.valuesToAdd[Utils.Entries.MONTH.ordinal()],
-                (String) this.valuesToAdd[Utils.Entries.TYPE.ordinal()],
-                Float.parseFloat((String) this.valuesToAdd[Utils.Entries.VALUE.ordinal()]),
-                (String) this.valuesToAdd[Utils.Entries.CURRENCY.ordinal()],
-                (String) this.valuesToAdd[Utils.Entries.DESC.ordinal()]
-            );
+            model.addEntryToDB(this.valuesToAdd);
         }
     }
 
@@ -132,5 +127,17 @@ public class Controller implements ActionListener {
 
     public void setValuesFromFormular(Object[] valuesFromForm) {
         valuesToAdd = valuesFromForm;
+    }
+
+    public String getActiveEntry() {
+        Vector<Vector> table = modelOverview.getDataVector();
+        int row = summary.getSelectedRow();
+        if (row != -1) {
+            Object[] entry = table.get(row).toArray();
+            model.removeEntryFromDB(entry);
+            System.out.println(entry);
+        }
+        System.out.println(row);
+        return "jeej";
     }
 }

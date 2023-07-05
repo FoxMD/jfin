@@ -25,13 +25,13 @@ public class ControlPanel {
      * @return JPanel
      */
     public JPanel controlPanelComposer(Controller controller) {
-        JButton searchButton = new JButton("Search");
-        JButton addButton = new JButton("Add entry");
-        JButton removeButton = new JButton("Remove entry");
+        JButton updateButton = new JButton("Modify");
+        JButton addButton = new JButton("Add");
+        JButton removeButton = new JButton("Remove");
 
         JPanel ctrlPanel = new JPanel(new GridLayout(rows, colmns, hGap, vGap));
         ctrlPanel.setMinimumSize(new Dimension(minHeight, minWidth));
-        ctrlPanel.add(searchButton);
+        ctrlPanel.add(updateButton);
         ctrlPanel.add(addButton);
         ctrlPanel.add(removeButton);
 
@@ -41,13 +41,28 @@ public class ControlPanel {
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddFrame(controller);
+                if (((JButton) e.getSource()).getActionCommand().equals("AddEntry")) {
+                    new AddFrame(controller);
+                }
+                if (((JButton) e.getSource()).getActionCommand().equals("Remove")) {
+                    System.out.println("From remove");
+                    System.out.println(controller.getActiveEntry());
+                }
+                if (((JButton) e.getSource()).getActionCommand().equals("Update")) {
+                    System.out.println("From update");
+                }
             }
         };
 
         addButton.setName("AddEntry");
         addButton.setActionCommand("AddEntry");
         addButton.addActionListener(listener);
+
+        updateButton.setActionCommand("Update");
+        updateButton.addActionListener(listener);
+
+        removeButton.setActionCommand("Remove");
+        removeButton.addActionListener(listener);
 
         return ctrlPanel;
     }
