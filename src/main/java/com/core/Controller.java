@@ -156,6 +156,10 @@ public class Controller implements ActionListener {
         return error;
     }
 
+    /**
+     * Remove an entry from DB.
+     * @return Status.
+     */
     public String removeEntryRequest() {
         Object[] entry = getEntry();
         if (entry[0].equals("-1")) {
