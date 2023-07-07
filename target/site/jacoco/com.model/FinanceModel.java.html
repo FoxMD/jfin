@@ -126,15 +126,17 @@ public class FinanceModel extends DefaultTableModel {
 <span class="nc" id="L126">    }</span>
 
     public void addEntryToDB(Object[] entry) {
-<span class="nc" id="L129">        database.writeQuery(entry);</span>
-<span class="nc" id="L130">    }</span>
+<span class="nc" id="L129">        String uniqueID = com.model.Utils.getUniqueID(entry);</span>
+<span class="nc" id="L130">        entry[com.model.Utils.Entries.ID.ordinal()] = uniqueID;</span>
+<span class="nc" id="L131">        database.writeQuery(entry);</span>
+<span class="nc" id="L132">    }</span>
 
     public void removeEntryFromDB(Object[] entry) {
-<span class="nc" id="L133">        database.removeEntryFromDB(entry);</span>
-<span class="nc" id="L134">    }</span>
+<span class="nc" id="L135">        database.removeEntryFromDB(entry);</span>
+<span class="nc" id="L136">    }</span>
 
-    public void modifyEntryFromDB(Object[] entry, Object[] original) {
-<span class="nc" id="L137">        database.modifyEntryFromDB(entry, original);</span>
-<span class="nc" id="L138">    }</span>
+    public void modifyEntryFromDB(Object[] entry) {
+<span class="nc" id="L139">        database.modifyEntryFromDB(entry);</span>
+<span class="nc" id="L140">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

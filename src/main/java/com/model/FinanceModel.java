@@ -126,6 +126,8 @@ public class FinanceModel extends DefaultTableModel {
     }
 
     public void addEntryToDB(Object[] entry) {
+        String uniqueID = com.model.Utils.getUniqueID(entry);
+        entry[com.model.Utils.Entries.ID.ordinal()] = uniqueID;
         database.writeQuery(entry);
     }
 
@@ -133,7 +135,7 @@ public class FinanceModel extends DefaultTableModel {
         database.removeEntryFromDB(entry);
     }
 
-    public void modifyEntryFromDB(Object[] entry, Object[] original) {
-        database.modifyEntryFromDB(entry, original);
+    public void modifyEntryFromDB(Object[] entry) {
+        database.modifyEntryFromDB(entry);
     }
 }

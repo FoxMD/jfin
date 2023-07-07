@@ -14,7 +14,7 @@ public final class Constants {
     /**
      * Header.
      */
-    public static final Object[] TABLE_HEADER = {"Year", "Month", "Type", "Price", "Currency", "Description"};
+    public static final Object[] TABLE_HEADER = {"Year", "Month", "Type", "Price", "Currency", "Description", "uid"};
 
     /**
      * Mock data.

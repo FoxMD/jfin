@@ -97,41 +97,39 @@ public class AddFrame {
 <span class="nc" id="L97">        ActionListener listener = new ActionListener() {</span>
             @Override
             public void actionPerformed(ActionEvent e) {
-<span class="nc bnc" id="L100" title="All 2 branches missed.">                if (((JButton) e.getSource()).getActionCommand().equals(&quot;ModifyEntry&quot;)) {</span>
-<span class="nc" id="L101">                    controller.setOriginalEntry(descObj);</span>
-                }
-<span class="nc" id="L103">                Object[] data = new Object[Utils.Entries.values().length];</span>
-<span class="nc" id="L104">                data[Utils.Entries.YEAR.ordinal()] = jYear.getText();</span>
-<span class="nc" id="L105">                data[Utils.Entries.MONTH.ordinal()] = jMonth.getText();</span>
-<span class="nc" id="L106">                data[Utils.Entries.TYPE.ordinal()] = jType.getText();</span>
-<span class="nc" id="L107">                data[Utils.Entries.VALUE.ordinal()] = jValue.getText();</span>
-<span class="nc" id="L108">                data[Utils.Entries.CURRENCY.ordinal()] = jCurrency.getText();</span>
-<span class="nc" id="L109">                data[Utils.Entries.DESC.ordinal()] = jDescription.getText();</span>
+<span class="nc" id="L100">                Object[] data = new Object[Utils.Entries.values().length];</span>
+<span class="nc" id="L101">                data[Utils.Entries.YEAR.ordinal()] = jYear.getText();</span>
+<span class="nc" id="L102">                data[Utils.Entries.MONTH.ordinal()] = jMonth.getText();</span>
+<span class="nc" id="L103">                data[Utils.Entries.TYPE.ordinal()] = jType.getText();</span>
+<span class="nc" id="L104">                data[Utils.Entries.VALUE.ordinal()] = jValue.getText();</span>
+<span class="nc" id="L105">                data[Utils.Entries.CURRENCY.ordinal()] = jCurrency.getText();</span>
+<span class="nc" id="L106">                data[Utils.Entries.DESC.ordinal()] = jDescription.getText();</span>
+<span class="nc" id="L107">                data[Utils.Entries.ID.ordinal()] = descObj[Utils.Entries.ID.ordinal()];</span>
 
-<span class="nc" id="L111">                controller.setValuesFromFormular(data);</span>
-<span class="nc" id="L112">                addFrame.dispose();</span>
-<span class="nc" id="L113">            }</span>
+<span class="nc" id="L109">                controller.setValuesFromFormular(data);</span>
+<span class="nc" id="L110">                addFrame.dispose();</span>
+<span class="nc" id="L111">            }</span>
         };
 
-<span class="nc" id="L116">        addButton.addActionListener(listener);</span>
-<span class="nc" id="L117">        cancelButton.addActionListener(listener);</span>
+<span class="nc" id="L114">        addButton.addActionListener(listener);</span>
+<span class="nc" id="L115">        cancelButton.addActionListener(listener);</span>
 
-<span class="nc" id="L119">        addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</span>
-<span class="nc" id="L120">        addFrame.setMinimumSize(new Dimension(minWidth, minHeight));</span>
-<span class="nc" id="L121">        addFrame.add(ctrlPanel);</span>
-<span class="nc" id="L122">        addFrame.pack();</span>
-<span class="nc" id="L123">        addFrame.setLocationRelativeTo(null);</span>
-<span class="nc" id="L124">        addFrame.setVisible(true);</span>
-<span class="nc" id="L125">    }</span>
+<span class="nc" id="L117">        addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L118">        addFrame.setMinimumSize(new Dimension(minWidth, minHeight));</span>
+<span class="nc" id="L119">        addFrame.add(ctrlPanel);</span>
+<span class="nc" id="L120">        addFrame.pack();</span>
+<span class="nc" id="L121">        addFrame.setLocationRelativeTo(null);</span>
+<span class="nc" id="L122">        addFrame.setVisible(true);</span>
+<span class="nc" id="L123">    }</span>
 
     private void fillStrings(Object[] obj) {
-<span class="nc" id="L128">        descObj = obj;</span>
-<span class="nc" id="L129">    }</span>
+<span class="nc" id="L126">        descObj = obj;</span>
+<span class="nc" id="L127">    }</span>
 
     private void fillObject() {
-<span class="nc bnc" id="L132" title="All 2 branches missed.">        for (int i = 0; i &lt; Utils.Entries.values().length; i++) {</span>
-<span class="nc" id="L133">            descObj[i] = &quot;&quot;;</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">        for (int i = 0; i &lt; Utils.Entries.values().length; i++) {</span>
+<span class="nc" id="L131">            descObj[i] = &quot;&quot;;</span>
         }
-<span class="nc" id="L135">    }</span>
+<span class="nc" id="L133">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -1,10 +1,11 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 jfin,com.core,Start.new Runnable() {...},3,6,0,0,1,4,0,2,0,2
-jfin,com.core,Controller,295,0,22,0,79,0,23,0,12,0
+jfin,com.core,Controller,290,0,22,0,76,0,22,0,11,0
 jfin,com.core,Start,0,14,0,0,0,6,0,2,0,2
-jfin,com.model,Constants,0,350,0,4,0,20,0,4,0,2
+jfin,com.model,Constants,0,354,0,4,0,20,0,4,0,2
 jfin,com.model,Utils.Entries,0,74,0,0,0,1,0,1,0,1
-jfin,com.model,FinanceModel,115,0,4,0,31,0,17,0,15,0
+jfin,com.model,Utils,73,0,0,0,18,0,1,0,1,0
+jfin,com.model,FinanceModel,122,0,4,0,33,0,17,0,15,0
 jfin,com.gui,SelectorPanel.new ActionListener() {...},12,15,0,0,3,1,1,1,1,1
 jfin,com.gui,ControlPanel.new ActionListener() {...},65,0,8,0,15,0,6,0,2,0
 jfin,com.gui,GraphPanel,0,137,0,0,0,33,0,4,0,4
@@ -13,10 +14,10 @@ jfin,com.gui,AddFrame,315,0,6,0,70,0,6,0,3,0
 jfin,com.gui,SumActionPanel,68,0,0,0,16,0,2,0,2,0
 jfin,com.gui,AddFrame.Caller,24,0,0,0,1,0,1,0,1,0
 jfin,com.gui,VHelperPanel,8,12,0,0,4,5,2,1,2,1
-jfin,com.gui,AddFrame.new ActionListener() {...},97,0,2,0,13,0,3,0,2,0
+jfin,com.gui,AddFrame.new ActionListener() {...},94,0,0,0,12,0,2,0,2,0
 jfin,com.gui,SearchPanel.new ActionListener() {...},20,9,0,0,4,1,1,1,1,1
 jfin,com.gui,SearchPanel,0,131,0,0,0,36,0,2,0,2
 jfin,com.gui,SelectorPanel,0,138,0,0,0,17,0,2,0,2
 jfin,com.gui,ControlPanel,95,0,0,0,24,0,2,0,2,0
 jfin,com.connector,SysHandler,0,14,0,2,0,4,0,3,0,2
-jfin,com.connector,DBConnector,823,0,8,0,163,0,13,0,9,0
+jfin,com.connector,DBConnector,798,0,8,0,158,0,13,0,9,0

@@ -30,7 +30,6 @@ public class Controller implements ActionListener {
 <span class="nc" id="L30">    private String searchYear = &quot;&quot;;</span>
 <span class="nc" id="L31">    private String searchMonth = &quot;&quot;;</span>
 <span class="nc" id="L32">    private Object[] valuesToAdd = new Object[com.model.Utils.Entries.values().length];</span>
-<span class="nc" id="L33">    private Object[] originalEntry = new Object[com.model.Utils.Entries.values().length];</span>
 
     /**
     * Contructor for the MVC controller.
@@ -40,21 +39,21 @@ public class Controller implements ActionListener {
     * @param frame frame panel for repaint
     */
     public Controller(FinanceModel modelDB, FinanceModel modelSum, GraphPanel graph, JFrame frame, JTable sum) {
-<span class="nc" id="L43">        super();</span>
-<span class="nc" id="L44">        this.model = modelDB;</span>
-<span class="nc" id="L45">        this.modelOverview = modelSum;</span>
-<span class="nc" id="L46">        this.frame = frame;</span>
-<span class="nc" id="L47">        this.graph = graph;</span>
-<span class="nc" id="L48">        this.summary = sum;</span>
-<span class="nc" id="L49">    }</span>
+<span class="nc" id="L42">        super();</span>
+<span class="nc" id="L43">        this.model = modelDB;</span>
+<span class="nc" id="L44">        this.modelOverview = modelSum;</span>
+<span class="nc" id="L45">        this.frame = frame;</span>
+<span class="nc" id="L46">        this.graph = graph;</span>
+<span class="nc" id="L47">        this.summary = sum;</span>
+<span class="nc" id="L48">    }</span>
 
     /**
      * Search for a specific string.
      * @param filterOption search term
      */
     public void setFilterOption(String filterOption) {
-<span class="nc" id="L56">        this.searchColumn = filterOption;</span>
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L55">        this.searchColumn = filterOption;</span>
+<span class="nc" id="L56">    }</span>
 
     /**
      * Sets the year and motnh option.
@@ -62,116 +61,112 @@ public class Controller implements ActionListener {
      * @param month month
      */
     public void setOverviewDetails(String year, String month) {
-<span class="nc" id="L65">        this.searchYear = year;</span>
-<span class="nc" id="L66">        this.searchMonth = month;</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L64">        this.searchYear = year;</span>
+<span class="nc" id="L65">        this.searchMonth = month;</span>
+<span class="nc" id="L66">    }</span>
 
     /**
      * Sets the filter for searching term.
      * @param searchTermTextField search term
      */
     public void setFilterTextField(JTextField searchTermTextField) {
-<span class="nc" id="L74">        this.searchTermTextField = searchTermTextField;</span>
-<span class="nc" id="L75">    }</span>
+<span class="nc" id="L73">        this.searchTermTextField = searchTermTextField;</span>
+<span class="nc" id="L74">    }</span>
 
     @Override
     public void actionPerformed(ActionEvent e) {
-<span class="nc" id="L79">        String searchTerm = searchTermTextField.getText();</span>
-<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (((JButton) e.getSource()).getActionCommand().equals(&quot;Update&quot;)) {</span>
-<span class="nc" id="L81">            System.out.println(&quot;Info od update&quot;);</span>
-<span class="nc" id="L82">            updateOverview();</span>
+<span class="nc" id="L78">        String searchTerm = searchTermTextField.getText();</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        if (((JButton) e.getSource()).getActionCommand().equals(&quot;Update&quot;)) {</span>
+<span class="nc" id="L80">            System.out.println(&quot;Info od update&quot;);</span>
+<span class="nc" id="L81">            updateOverview();</span>
         }
 
-<span class="nc bnc" id="L85" title="All 2 branches missed.">        if (((JButton) e.getSource()).getActionCommand().equals(&quot;Filter&quot;)) {</span>
-<span class="nc" id="L86">            System.out.println(&quot;Info od filtru&quot;);</span>
-<span class="nc" id="L87">            actionOnFilterButton(searchTerm);</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (((JButton) e.getSource()).getActionCommand().equals(&quot;Filter&quot;)) {</span>
+<span class="nc" id="L85">            System.out.println(&quot;Info od filtru&quot;);</span>
+<span class="nc" id="L86">            actionOnFilterButton(searchTerm);</span>
         }
 
-<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (((JButton) e.getSource()).getActionCommand().equals(&quot;AddEntry&quot;)) {</span>
-<span class="nc" id="L91">            System.out.println(&quot;Add table&quot;);</span>
-<span class="nc" id="L92">            model.addEntryToDB(this.valuesToAdd);</span>
-<span class="nc" id="L93">            updateOverview();</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (((JButton) e.getSource()).getActionCommand().equals(&quot;AddEntry&quot;)) {</span>
+<span class="nc" id="L90">            System.out.println(&quot;Add table&quot;);</span>
+<span class="nc" id="L91">            model.addEntryToDB(this.valuesToAdd);</span>
+<span class="nc" id="L92">            updateOverview();</span>
         }
 
-<span class="nc bnc" id="L96" title="All 2 branches missed.">        if (((JButton) e.getSource()).getActionCommand().equals(&quot;ModifyEntry&quot;)) {</span>
-<span class="nc" id="L97">            System.out.println(&quot;Update table&quot;);</span>
-<span class="nc" id="L98">            model.modifyEntryFromDB(this.valuesToAdd, this.originalEntry);</span>
-<span class="nc" id="L99">            updateOverview();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (((JButton) e.getSource()).getActionCommand().equals(&quot;ModifyEntry&quot;)) {</span>
+<span class="nc" id="L96">            System.out.println(&quot;Update table&quot;);</span>
+<span class="nc" id="L97">            model.modifyEntryFromDB(this.valuesToAdd);</span>
+<span class="nc" id="L98">            updateOverview();</span>
         }
-<span class="nc" id="L101">    }</span>
+<span class="nc" id="L100">    }</span>
 
     /**
      * Filter button handler.
      * @param searchTerm What is you searching for.
      */
     private void actionOnFilterButton(String searchTerm) {
-<span class="nc" id="L108">        Object[][] data = ((FinanceModel) model).getDataFromDB(searchColumn, searchTerm);</span>
+<span class="nc" id="L107">        Object[][] data = ((FinanceModel) model).getDataFromDB(searchColumn, searchTerm);</span>
 
-<span class="nc bnc" id="L110" title="All 4 branches missed.">        if (!(searchTerm != null &amp;&amp; !&quot;&quot;.equals(searchTerm))) {</span>
-<span class="nc" id="L111">            JOptionPane.showMessageDialog(null, &quot;Search term is empty&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
-<span class="nc" id="L112">            return;</span>
+<span class="nc bnc" id="L109" title="All 4 branches missed.">        if (!(searchTerm != null &amp;&amp; !&quot;&quot;.equals(searchTerm))) {</span>
+<span class="nc" id="L110">            JOptionPane.showMessageDialog(null, &quot;Search term is empty&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L111">            return;</span>
         }
 
-<span class="nc" id="L115">        Constants.databaseData = data;</span>
-<span class="nc" id="L116">        int position = Constants.getColumnPosition(searchColumn);</span>
-<span class="nc" id="L117">        Object[][] newData = new Object[Constants.databaseData.length][];</span>
-<span class="nc" id="L118">        int idx = 0;</span>
+<span class="nc" id="L114">        Constants.databaseData = data;</span>
+<span class="nc" id="L115">        int position = Constants.getColumnPosition(searchColumn);</span>
+<span class="nc" id="L116">        Object[][] newData = new Object[Constants.databaseData.length][];</span>
+<span class="nc" id="L117">        int idx = 0;</span>
 
-<span class="nc bnc" id="L120" title="All 2 branches missed.">        for (Object[] o: Constants.databaseData) {</span>
-<span class="nc bnc" id="L121" title="All 2 branches missed.">            if (&quot;*&quot;.equals(searchTerm.trim())) {</span>
-<span class="nc" id="L122">                newData[idx++] = o;</span>
-<span class="nc bnc" id="L123" title="All 2 branches missed.">            } else if ((String.valueOf(o[position]).toUpperCase()).startsWith(searchTerm.toUpperCase().trim())) {</span>
-<span class="nc" id="L124">                newData[idx++] = o;</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        for (Object[] o: Constants.databaseData) {</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">            if (&quot;*&quot;.equals(searchTerm.trim())) {</span>
+<span class="nc" id="L121">                newData[idx++] = o;</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">            } else if ((String.valueOf(o[position]).toUpperCase()).startsWith(searchTerm.toUpperCase().trim())) {</span>
+<span class="nc" id="L123">                newData[idx++] = o;</span>
             }
         }
-<span class="nc" id="L127">        model.setDataVector(newData, Constants.TABLE_HEADER);</span>
-<span class="nc" id="L128">    }</span>
+<span class="nc" id="L126">        model.setDataVector(newData, Constants.TABLE_HEADER);</span>
+<span class="nc" id="L127">    }</span>
 
     public void updateOverview() {
-<span class="nc" id="L131">        Object[][] data = ((FinanceModel) modelOverview).getDataForSpecificDate(searchYear, searchMonth);</span>
+<span class="nc" id="L130">        Object[][] data = ((FinanceModel) modelOverview).getDataForSpecificDate(searchYear, searchMonth);</span>
 
-<span class="nc" id="L133">        graph.clearChart();</span>
-<span class="nc" id="L134">        modelOverview.setDataVector(data, Constants.TABLE_HEADER);</span>
+<span class="nc" id="L132">        graph.clearChart();</span>
+<span class="nc" id="L133">        modelOverview.setDataVector(data, Constants.TABLE_HEADER);</span>
         //modelOverview.setChartValues(++i);
-<span class="nc" id="L136">        graph.updateChart(modelOverview);</span>
-<span class="nc" id="L137">        frame.validate();</span>
-<span class="nc" id="L138">        frame.repaint();</span>
-<span class="nc" id="L139">    }</span>
+<span class="nc" id="L135">        graph.updateChart(modelOverview);</span>
+<span class="nc" id="L136">        frame.validate();</span>
+<span class="nc" id="L137">        frame.repaint();</span>
+<span class="nc" id="L138">    }</span>
 
     public void setValuesFromFormular(Object[] valuesFromForm) {
-<span class="nc" id="L142">        valuesToAdd = valuesFromForm;</span>
-<span class="nc" id="L143">    }</span>
+<span class="nc" id="L141">        valuesToAdd = valuesFromForm;</span>
+<span class="nc" id="L142">    }</span>
 
     public Object[] getEntry() {
-<span class="nc" id="L146">        Vector&lt;Vector&gt; table = modelOverview.getDataVector();</span>
-<span class="nc" id="L147">        int row = summary.getSelectedRow();</span>
+<span class="nc" id="L145">        Vector&lt;Vector&gt; table = modelOverview.getDataVector();</span>
+<span class="nc" id="L146">        int row = summary.getSelectedRow();</span>
+<span class="nc" id="L147">        System.out.println(&quot;Which row: &quot; + row);</span>
 <span class="nc bnc" id="L148" title="All 2 branches missed.">        if (row != -1) {</span>
 <span class="nc" id="L149">            Object[] entry = table.get(row).toArray();</span>
             //model.removeEntryFromDB(entry);
 <span class="nc" id="L151">            System.out.println(entry);</span>
 <span class="nc" id="L152">            return entry;</span>
         }
-<span class="nc" id="L154">        System.out.println(row);</span>
-<span class="nc" id="L155">        Object[] error = new Object[1];</span>
-<span class="nc" id="L156">        error[0] = &quot;-1&quot;;</span>
-<span class="nc" id="L157">        return error;</span>
+<span class="nc" id="L154">        Object[] error = new Object[1];</span>
+<span class="nc" id="L155">        error[0] = &quot;-1&quot;;</span>
+<span class="nc" id="L156">        return error;</span>
     }
 
     public String removeEntryRequest() {
-<span class="nc" id="L161">        Object[] entry = getEntry();</span>
-<span class="nc bnc" id="L162" title="All 2 branches missed.">        if (entry[0].equals(&quot;-1&quot;)) {</span>
-<span class="nc" id="L163">            return &quot;Error empty line&quot;;</span>
+<span class="nc" id="L160">        Object[] entry = getEntry();</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">        if (entry[0].equals(&quot;-1&quot;)) {</span>
+<span class="nc" id="L162">            return &quot;Error empty line&quot;;</span>
         }
-<span class="nc" id="L165">        model.removeEntryFromDB(entry);</span>
-<span class="nc" id="L166">        return &quot;Jeeeej&quot;;</span>
+<span class="nc" id="L164">        model.removeEntryFromDB(entry);</span>
+<span class="nc" id="L165">        return &quot;Jeeeej&quot;;</span>
     }
 
     public void setCallerIDforAddFrame(Caller caller) {
-<span class="nc" id="L170">        System.out.println(caller.ordinal());</span>
-<span class="nc" id="L171">    }</span>
-
-    public void setOriginalEntry(Object[] origEntry) {
-<span class="nc" id="L174">        originalEntry = origEntry;</span>
-<span class="nc" id="L175">    }</span>
+<span class="nc" id="L169">        System.out.println(caller.ordinal());</span>
+<span class="nc" id="L170">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
