@@ -8,14 +8,14 @@ source:
   - src/**
 
 gui:
-  - /gui/**
+  - src/main/java/com/gui/**
 
 
 controller:
-  - /core/**
+  - src/main/java/com/core/**
 
 database':
-  - /connector/**
+  - src/main/java/com/connector/**
 
 model:
-  - /model/**
+  - src/main/java/com/model/**
