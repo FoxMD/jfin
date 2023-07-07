@@ -165,6 +165,10 @@ public class Controller implements ActionListener {
         return "Jeeeej";
     }
 
+    /**
+     * Set the ID for mod od add function.
+     * @param caller MODIFY/ADD.
+     */
     public void setCallerIDforAddFrame(Caller caller) {
         System.out.println(caller.ordinal());
     }
