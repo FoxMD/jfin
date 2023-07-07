@@ -11,5 +11,5 @@ public final class Utils {
 
     }
 
-    public enum Entries { YEAR, MONTH, TYPE, VALUE, CURRENCY, DESC }
+    public enum Entries { YEAR, MONTH, TYPE, VALUE, CURRENCY, DESC, ID }
 }

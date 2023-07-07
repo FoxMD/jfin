@@ -1,23 +1,23 @@
-#Fri Jul 07 14:29:32 CEST 2023
+#Fri Jul 07 14:35:06 CEST 2023
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\model\\Constants.java=1688496806819
 configuration*?=6AE0AD1B71AD12B4A3A6DF59F50012EA5C75227
-E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\View.java=1688544638395
+E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\View.java=1688733292992
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\connector\\SysHandler.java=1688496806818
 E\:\\Programming\\Java\\JFin\\jfin\\src\\test\\java\\com\\connector\\ConnectorTest.java=1688496806820
 E\:\\Programming\\Java\\JFin\\jfin\\src\\test\\java\\com\\gui\\AddTest.java=1688496806820
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\SearchPanel.java=1686684345040
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\SelectorPanel.java=1686684345041
-E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\core\\Controller.java=1688731795638
+E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\core\\Controller.java=1688733292991
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\GraphPanel.java=1688480453646
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\VHelperPanel.java=1686684345041
-E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\connector\\DBConnector.java=1688732925580
-E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\SumActionPanel.java=1688497621040
+E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\connector\\DBConnector.java=1688733292990
+E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\SumActionPanel.java=1688733292992
 module-resource*?\:checkstyle/suppressions.xml=1F42F972F7D0D003D0922A1142D605D389D054F1
-E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\AddFrame.java=1688731713542
+E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\AddFrame.java=1688733292991
 E\:\\Programming\\Java\\JFin\\jfin\\src\\test\\java\\com\\core\\AppTest.java=1688496806820
-E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\model\\FinanceModel.java=1688728624835
-E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\ControlPanel.java=1688731171905
+E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\model\\FinanceModel.java=1688733292993
+E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\gui\\ControlPanel.java=1688733292991
 E\:\\Programming\\Java\\JFin\\jfin\\src\\test\\java\\com\\model\\FinanceModelTest.java=1688496806821
 E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\core\\Start.java=1688484313960
-E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\model\\Utils.java=1688496806819
+E\:\\Programming\\Java\\JFin\\jfin\\src\\main\\java\\com\\model\\Utils.java=1688733110132
 E\:\\Programming\\Java\\JFin\\jfin\\src\\test\\java\\com\\model\\ConstantsTest.java=1688496806820
