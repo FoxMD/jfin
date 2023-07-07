@@ -25,23 +25,45 @@ public class AddFrame {
     private final int vGap = 3;
     private final int hGap = 3;
 
+    private Object[] descObj;
+
+    public enum Caller { ADD, MODIFY }
+
     /**
      * Constructor for the popup frame.
      * @param controller
      */
-    public AddFrame(Controller controller) {
+    public AddFrame(Controller controller, Caller call) {
         JButton cancelButton = new JButton("Cancel");
         JButton addButton = new JButton("Add");
         addButton.setName("AddEntry");
-        addButton.setActionCommand("AddEntry");
         addButton.addActionListener(controller);
+        cancelButton.setActionCommand("CancelAction");
 
-        JTextField jYear = new JTextField();
-        JTextField jMonth = new JTextField();
-        JTextField jType = new JTextField();
+        descObj = new Object[Utils.Entries.values().length];
+        controller.setCallerIDforAddFrame(call);
+
+        if (call == Caller.MODIFY) {
+            addButton.setText("Modify");
+            descObj = controller.getEntry();
+            fillStrings(descObj);
+            addButton.setActionCommand("ModifyEntry");
+        } else {
+            fillObject();
+            addButton.setActionCommand("AddEntry");
+        }
+
+        JTextField jYear = new JTextField((String) descObj[Utils.Entries.YEAR.ordinal()]);
+        JTextField jMonth = new JTextField((String) descObj[Utils.Entries.MONTH.ordinal()]);
+        JTextField jType = new JTextField((String) descObj[Utils.Entries.TYPE.ordinal()]);
         JTextField jValue = new JTextField();
-        JTextField jCurrency = new JTextField();
-        JTextField jDescription = new JTextField();
+        if (call == Caller.MODIFY) {
+            jValue.setText(Float.toString((Float) descObj[Utils.Entries.VALUE.ordinal()]));
+        } else {
+            jValue.setText((String) descObj[Utils.Entries.VALUE.ordinal()]);
+        }
+        JTextField jCurrency = new JTextField((String) descObj[Utils.Entries.CURRENCY.ordinal()]);
+        JTextField jDescription = new JTextField((String) descObj[Utils.Entries.DESC.ordinal()]);
 
         JLabel labelYear = new JLabel("Year: ");
         JLabel labelMonth = new JLabel("Month: ");
@@ -67,12 +89,17 @@ public class AddFrame {
         ctrlPanel.add(addButton);
         ctrlPanel.add(cancelButton);
 
+        JFrame addFrame = new JFrame("Add entry");
+
         /**
          * Action listener for getting info to the controller.
          */
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (((JButton) e.getSource()).getActionCommand().equals("ModifyEntry")) {
+                    controller.setOriginalEntry(descObj);
+                }
                 Object[] data = new Object[Utils.Entries.values().length];
                 data[Utils.Entries.YEAR.ordinal()] = jYear.getText();
                 data[Utils.Entries.MONTH.ordinal()] = jMonth.getText();
@@ -82,17 +109,28 @@ public class AddFrame {
                 data[Utils.Entries.DESC.ordinal()] = jDescription.getText();
 
                 controller.setValuesFromFormular(data);
+                addFrame.dispose();
             }
         };
 
         addButton.addActionListener(listener);
+        cancelButton.addActionListener(listener);
 
-        JFrame addFrame = new JFrame("Add entry");
         addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addFrame.setMinimumSize(new Dimension(minWidth, minHeight));
         addFrame.add(ctrlPanel);
         addFrame.pack();
         addFrame.setLocationRelativeTo(null);
         addFrame.setVisible(true);
+    }
+
+    private void fillStrings(Object[] obj) {
+        descObj = obj;
+    }
+
+    private void fillObject() {
+        for (int i = 0; i < Utils.Entries.values().length; i++) {
+            descObj[i] = "";
+        }
     }
 }

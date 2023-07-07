@@ -1,8 +1,12 @@
 package com.gui;
 
 import com.core.Controller;
+import com.gui.AddFrame.Caller;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -42,14 +46,21 @@ public class ControlPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (((JButton) e.getSource()).getActionCommand().equals("AddEntry")) {
-                    new AddFrame(controller);
+                    new AddFrame(controller, Caller.ADD);
                 }
                 if (((JButton) e.getSource()).getActionCommand().equals("Remove")) {
                     System.out.println("From remove");
-                    System.out.println(controller.getActiveEntry());
+                    int dialogButton = JOptionPane.YES_NO_OPTION;
+                    int dialogResult = JOptionPane.showConfirmDialog(null,
+                            "Would You Like to remove the entry?", "Warning", dialogButton);
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        System.out.println(controller.removeEntryRequest());
+                        controller.updateOverview();
+                    }
                 }
                 if (((JButton) e.getSource()).getActionCommand().equals("Update")) {
                     System.out.println("From update");
+                    new AddFrame(controller, Caller.MODIFY);
                 }
             }
         };

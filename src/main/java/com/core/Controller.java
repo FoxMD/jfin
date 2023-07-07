@@ -1,6 +1,7 @@
 package com.core;
 
 import com.gui.GraphPanel;
+import com.gui.AddFrame.Caller;
 import com.model.Constants;
 import com.model.FinanceModel;
 
@@ -28,7 +29,8 @@ public class Controller implements ActionListener {
     private String searchColumn = "Month";
     private String searchYear = "";
     private String searchMonth = "";
-    private Object[] valuesToAdd = new Object[6];
+    private Object[] valuesToAdd = new Object[com.model.Utils.Entries.values().length];
+    private Object[] originalEntry = new Object[com.model.Utils.Entries.values().length];
 
     /**
     * Contructor for the MVC controller.
@@ -77,14 +79,7 @@ public class Controller implements ActionListener {
         String searchTerm = searchTermTextField.getText();
         if (((JButton) e.getSource()).getActionCommand().equals("Update")) {
             System.out.println("Info od update");
-            Object[][] data = ((FinanceModel) modelOverview).getDataForSpecificDate(searchYear, searchMonth);
-
-            graph.clearChart();
-            modelOverview.setDataVector(data, Constants.TABLE_HEADER);
-            //modelOverview.setChartValues(++i);
-            graph.updateChart(modelOverview);
-            frame.validate();
-            frame.repaint();
+            updateOverview();
         }
 
         if (((JButton) e.getSource()).getActionCommand().equals("Filter")) {
@@ -93,8 +88,15 @@ public class Controller implements ActionListener {
         }
 
         if (((JButton) e.getSource()).getActionCommand().equals("AddEntry")) {
-            System.out.println("Update table");
+            System.out.println("Add table");
             model.addEntryToDB(this.valuesToAdd);
+            updateOverview();
+        }
+
+        if (((JButton) e.getSource()).getActionCommand().equals("ModifyEntry")) {
+            System.out.println("Update table");
+            model.modifyEntryFromDB(this.valuesToAdd, this.originalEntry);
+            updateOverview();
         }
     }
 
@@ -125,19 +127,50 @@ public class Controller implements ActionListener {
         model.setDataVector(newData, Constants.TABLE_HEADER);
     }
 
+    public void updateOverview() {
+        Object[][] data = ((FinanceModel) modelOverview).getDataForSpecificDate(searchYear, searchMonth);
+
+        graph.clearChart();
+        modelOverview.setDataVector(data, Constants.TABLE_HEADER);
+        //modelOverview.setChartValues(++i);
+        graph.updateChart(modelOverview);
+        frame.validate();
+        frame.repaint();
+    }
+
     public void setValuesFromFormular(Object[] valuesFromForm) {
         valuesToAdd = valuesFromForm;
     }
 
-    public String getActiveEntry() {
+    public Object[] getEntry() {
         Vector<Vector> table = modelOverview.getDataVector();
         int row = summary.getSelectedRow();
         if (row != -1) {
             Object[] entry = table.get(row).toArray();
-            model.removeEntryFromDB(entry);
+            //model.removeEntryFromDB(entry);
             System.out.println(entry);
+            return entry;
         }
         System.out.println(row);
-        return "jeej";
+        Object[] error = new Object[1];
+        error[0] = "-1";
+        return error;
+    }
+
+    public String removeEntryRequest() {
+        Object[] entry = getEntry();
+        if (entry[0].equals("-1")) {
+            return "Error empty line";
+        }
+        model.removeEntryFromDB(entry);
+        return "Jeeeej";
+    }
+
+    public void setCallerIDforAddFrame(Caller caller) {
+        System.out.println(caller.ordinal());
+    }
+
+    public void setOriginalEntry(Object[] origEntry) {
+        originalEntry = origEntry;
     }
 }
