@@ -10,8 +10,9 @@ source:
 gui:
   - /gui/**
 
+
 controller:
-  - /java/core/**
+  - /core/**
 
 database':
   - /connector/**
