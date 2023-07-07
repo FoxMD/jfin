@@ -51,8 +51,9 @@ public class ControlPanel {
                 if (((JButton) e.getSource()).getActionCommand().equals("Remove")) {
                     System.out.println("From remove");
                     int dialogButton = JOptionPane.YES_NO_OPTION;
-                    int dialogResult = JOptionPane.showConfirmDialog (null, "Would You Like to remove the entry?","Warning",dialogButton);
-                    if(dialogResult == JOptionPane.YES_OPTION) {
+                    int dialogResult = JOptionPane.showConfirmDialog(null,
+                            "Would You Like to remove the entry?", "Warning", dialogButton);
+                    if (dialogResult == JOptionPane.YES_OPTION) {
                         System.out.println(controller.removeEntryRequest());
                         controller.updateOverview();
                     }

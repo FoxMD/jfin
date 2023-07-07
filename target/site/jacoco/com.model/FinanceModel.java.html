@@ -132,5 +132,9 @@ public class FinanceModel extends DefaultTableModel {
     public void removeEntryFromDB(Object[] entry) {
 <span class="nc" id="L133">        database.removeEntryFromDB(entry);</span>
 <span class="nc" id="L134">    }</span>
+
+    public void modifyEntryFromDB(Object[] entry, Object[] original) {
+<span class="nc" id="L137">        database.modifyEntryFromDB(entry, original);</span>
+<span class="nc" id="L138">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

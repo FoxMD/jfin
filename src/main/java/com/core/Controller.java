@@ -29,8 +29,8 @@ public class Controller implements ActionListener {
     private String searchColumn = "Month";
     private String searchYear = "";
     private String searchMonth = "";
-    private Object[] valuesToAdd = new Object[6];
-    private Object[] originalEntry = new Object[6];
+    private Object[] valuesToAdd = new Object[com.model.Utils.Entries.values().length];
+    private Object[] originalEntry = new Object[com.model.Utils.Entries.values().length];
 
     /**
     * Contructor for the MVC controller.
@@ -159,8 +159,7 @@ public class Controller implements ActionListener {
 
     public String removeEntryRequest() {
         Object[] entry = getEntry();
-        if(entry[0] == "-1")
-        {
+        if (entry[0].equals("-1")) {
             return "Error empty line";
         }
         model.removeEntryFromDB(entry);

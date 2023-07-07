@@ -21,6 +21,9 @@ public class DBConnector {
     private static final String PASSWORD = SysHandler.getVariable("PASSWORD_DB_KEY");
     private String query = "SELECT * FROM test WHERE";
 
+    private final int sqlOffset = 1;
+    private final int sqlOffset2 = 7; // will be deprecated
+
     /**
      * Constructor for the class.
      */
@@ -44,14 +47,18 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO test VALUES (?,?,?,?,?,?)");
         ) {
-            pstmt.setString(Utils.Entries.YEAR.ordinal() + 1, (String) entry[Utils.Entries.YEAR.ordinal()]);
-            pstmt.setString(Utils.Entries.MONTH.ordinal() + 1, (String) entry[Utils.Entries.MONTH.ordinal()]);
-            pstmt.setString(Utils.Entries.TYPE.ordinal() + 1, (String) entry[Utils.Entries.TYPE.ordinal()]);
-            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + 1,
-                        Float.parseFloat((String) entry[Utils.Entries.VALUE.ordinal()])
-            );
-            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + 1, (String) entry[Utils.Entries.CURRENCY.ordinal()]);
-            pstmt.setString(Utils.Entries.DESC.ordinal() + 1, (String) entry[Utils.Entries.DESC.ordinal()]);
+            pstmt.setString(Utils.Entries.YEAR.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.YEAR.ordinal()]);
+            pstmt.setString(Utils.Entries.MONTH.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.MONTH.ordinal()]);
+            pstmt.setString(Utils.Entries.TYPE.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.TYPE.ordinal()]);
+            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + sqlOffset,
+                Float.parseFloat((String) entry[Utils.Entries.VALUE.ordinal()]));
+            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.CURRENCY.ordinal()]);
+            pstmt.setString(Utils.Entries.DESC.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.DESC.ordinal()]);
             pstmt.executeUpdate(); // "rows" save the affected rows
 
             //rs.close();
@@ -182,12 +189,18 @@ public class DBConnector {
                 "DELETE FROM test WHERE year=? AND month=? AND type=? AND value=? AND currency=? AND description=?"
             );
         ) {
-            pstmt.setString(Utils.Entries.YEAR.ordinal() + 1, (String) entry[Utils.Entries.YEAR.ordinal()]);
-            pstmt.setString(Utils.Entries.MONTH.ordinal() + 1, (String) entry[Utils.Entries.MONTH.ordinal()]);
-            pstmt.setString(Utils.Entries.TYPE.ordinal() + 1, (String) entry[Utils.Entries.TYPE.ordinal()]);
-            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + 1, (Float) entry[Utils.Entries.VALUE.ordinal()]);
-            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + 1, (String) entry[Utils.Entries.CURRENCY.ordinal()]);
-            pstmt.setString(Utils.Entries.DESC.ordinal() + 1, (String) entry[Utils.Entries.DESC.ordinal()]);
+            pstmt.setString(Utils.Entries.YEAR.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.YEAR.ordinal()]);
+            pstmt.setString(Utils.Entries.MONTH.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.MONTH.ordinal()]);
+            pstmt.setString(Utils.Entries.TYPE.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.TYPE.ordinal()]);
+            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + sqlOffset,
+                (Float) entry[Utils.Entries.VALUE.ordinal()]);
+            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.CURRENCY.ordinal()]);
+            pstmt.setString(Utils.Entries.DESC.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.DESC.ordinal()]);
             pstmt.executeUpdate(); // "rows" save the affected rows
 
             //rs.close();
@@ -205,22 +218,36 @@ public class DBConnector {
         (
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             PreparedStatement pstmt = conn.prepareStatement(
-                "UPDATE test SET year=?, month=?, type=?, value=?, currency=?, description=? WHERE year=? AND month=? AND type=? AND value=? AND currency=? AND description=?"
+                "UPDATE test SET year=?, month=?, type=?, value=?, currency=?, description=?"
+                +
+                "WHERE year=? AND month=? AND type=? AND value=? AND currency=? AND description=?"
             );
         ) {
-            pstmt.setString(Utils.Entries.YEAR.ordinal() + 1, (String) entry[Utils.Entries.YEAR.ordinal()]);
-            pstmt.setString(Utils.Entries.MONTH.ordinal() + 1, (String) entry[Utils.Entries.MONTH.ordinal()]);
-            pstmt.setString(Utils.Entries.TYPE.ordinal() + 1, (String) entry[Utils.Entries.TYPE.ordinal()]);
-            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + 1, Float.parseFloat((String) entry[Utils.Entries.VALUE.ordinal()]));
-            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + 1, (String) entry[Utils.Entries.CURRENCY.ordinal()]);
-            pstmt.setString(Utils.Entries.DESC.ordinal() + 1, (String) entry[Utils.Entries.DESC.ordinal()]);
+            pstmt.setString(Utils.Entries.YEAR.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.YEAR.ordinal()]);
+            pstmt.setString(Utils.Entries.MONTH.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.MONTH.ordinal()]);
+            pstmt.setString(Utils.Entries.TYPE.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.TYPE.ordinal()]);
+            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + sqlOffset,
+                Float.parseFloat((String) entry[Utils.Entries.VALUE.ordinal()]));
+            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.CURRENCY.ordinal()]);
+            pstmt.setString(Utils.Entries.DESC.ordinal() + sqlOffset,
+                (String) entry[Utils.Entries.DESC.ordinal()]);
 
-            pstmt.setString(Utils.Entries.YEAR.ordinal() + 7, (String) origin[Utils.Entries.YEAR.ordinal()]);
-            pstmt.setString(Utils.Entries.MONTH.ordinal() + 7, (String) origin[Utils.Entries.MONTH.ordinal()]);
-            pstmt.setString(Utils.Entries.TYPE.ordinal() + 7, (String) origin[Utils.Entries.TYPE.ordinal()]);
-            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + 7, (Float) origin[Utils.Entries.VALUE.ordinal()]);
-            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + 7, (String) origin[Utils.Entries.CURRENCY.ordinal()]);
-            pstmt.setString(Utils.Entries.DESC.ordinal() + 7, (String) origin[Utils.Entries.DESC.ordinal()]);
+            pstmt.setString(Utils.Entries.YEAR.ordinal() + sqlOffset2,
+                (String) origin[Utils.Entries.YEAR.ordinal()]);
+            pstmt.setString(Utils.Entries.MONTH.ordinal() + sqlOffset2,
+                (String) origin[Utils.Entries.MONTH.ordinal()]);
+            pstmt.setString(Utils.Entries.TYPE.ordinal() + sqlOffset2,
+                (String) origin[Utils.Entries.TYPE.ordinal()]);
+            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + sqlOffset2,
+                (Float) origin[Utils.Entries.VALUE.ordinal()]);
+            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + sqlOffset2,
+                (String) origin[Utils.Entries.CURRENCY.ordinal()]);
+            pstmt.setString(Utils.Entries.DESC.ordinal() + sqlOffset2,
+                (String) origin[Utils.Entries.DESC.ordinal()]);
 
             pstmt.executeUpdate(); // "rows" save the affected rows
 
@@ -233,7 +260,6 @@ public class DBConnector {
         }
         return 0;
     }
-
 
     /**
      * Method for testing a connection.

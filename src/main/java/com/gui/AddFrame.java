@@ -27,7 +27,7 @@ public class AddFrame {
 
     private Object[] descObj;
 
-    public enum Caller {ADD, MODIFY};
+    public enum Caller { ADD, MODIFY }
 
     /**
      * Constructor for the popup frame.
@@ -43,7 +43,7 @@ public class AddFrame {
         descObj = new Object[Utils.Entries.values().length];
         controller.setCallerIDforAddFrame(call);
 
-        if(call == Caller.MODIFY) {
+        if (call == Caller.MODIFY) {
             addButton.setText("Modify");
             descObj = controller.getEntry();
             fillStrings(descObj);
@@ -110,7 +110,7 @@ public class AddFrame {
 
                 controller.setValuesFromFormular(data);
                 addFrame.dispose();
-            };
+            }
         };
 
         addButton.addActionListener(listener);
