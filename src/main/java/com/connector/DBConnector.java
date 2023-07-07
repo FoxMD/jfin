@@ -190,7 +190,7 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             PreparedStatement pstmt = conn.prepareStatement(
                 "DELETE FROM testid"
-                + "WHERE year=? AND month=? AND type=? AND value=? AND currency=? AND description=? AND uid=?"
+                + " WHERE year=? AND month=? AND type=? AND value=? AND currency=? AND description=? AND uid=?"
             );
         ) {
             pstmt.setString(Utils.Entries.YEAR.ordinal() + sqlOffset,
