@@ -8,13 +8,13 @@ source:
   - src/**
 
 gui:
-  - **/gui/**
+  - /gui/**
 
 controller:
-  - **/java/core/**
+  - /java/core/**
 
 database':
-  - **/connector/**
+  - /connector/**
 
 model:
-  - **/model/**
+  - /model/**
