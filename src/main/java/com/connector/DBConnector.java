@@ -200,6 +200,41 @@ public class DBConnector {
         return 0;
     }
 
+    public int modifyEntryFromDB(Object[] entry, Object[] origin) {
+        try
+        (
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            PreparedStatement pstmt = conn.prepareStatement(
+                "UPDATE test SET year=?, month=?, type=?, value=?, currency=?, description=? WHERE year=? AND month=? AND type=? AND value=? AND currency=? AND description=?"
+            );
+        ) {
+            pstmt.setString(Utils.Entries.YEAR.ordinal() + 1, (String) entry[Utils.Entries.YEAR.ordinal()]);
+            pstmt.setString(Utils.Entries.MONTH.ordinal() + 1, (String) entry[Utils.Entries.MONTH.ordinal()]);
+            pstmt.setString(Utils.Entries.TYPE.ordinal() + 1, (String) entry[Utils.Entries.TYPE.ordinal()]);
+            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + 1, Float.parseFloat((String) entry[Utils.Entries.VALUE.ordinal()]));
+            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + 1, (String) entry[Utils.Entries.CURRENCY.ordinal()]);
+            pstmt.setString(Utils.Entries.DESC.ordinal() + 1, (String) entry[Utils.Entries.DESC.ordinal()]);
+
+            pstmt.setString(Utils.Entries.YEAR.ordinal() + 7, (String) origin[Utils.Entries.YEAR.ordinal()]);
+            pstmt.setString(Utils.Entries.MONTH.ordinal() + 7, (String) origin[Utils.Entries.MONTH.ordinal()]);
+            pstmt.setString(Utils.Entries.TYPE.ordinal() + 7, (String) origin[Utils.Entries.TYPE.ordinal()]);
+            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + 7, (Float) origin[Utils.Entries.VALUE.ordinal()]);
+            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + 7, (String) origin[Utils.Entries.CURRENCY.ordinal()]);
+            pstmt.setString(Utils.Entries.DESC.ordinal() + 7, (String) origin[Utils.Entries.DESC.ordinal()]);
+
+            pstmt.executeUpdate(); // "rows" save the affected rows
+
+            //rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 0;
+    }
+
+
     /**
      * Method for testing a connection.
      * @return returns true 0 if everythink is OK

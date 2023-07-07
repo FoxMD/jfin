@@ -132,4 +132,8 @@ public class FinanceModel extends DefaultTableModel {
     public void removeEntryFromDB(Object[] entry) {
         database.removeEntryFromDB(entry);
     }
+
+    public void modifyEntryFromDB(Object[] entry, Object[] original) {
+        database.modifyEntryFromDB(entry, original);
+    }
 }
