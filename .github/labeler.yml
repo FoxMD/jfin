@@ -4,9 +4,6 @@ repo:
 test:
   - test/**
 
-source:
-  - src/**
-
 gui:
   - src/main/java/gui/**
 
