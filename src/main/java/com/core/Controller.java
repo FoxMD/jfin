@@ -30,7 +30,6 @@ public class Controller implements ActionListener {
     private String searchYear = "";
     private String searchMonth = "";
     private Object[] valuesToAdd = new Object[com.model.Utils.Entries.values().length];
-    private Object[] originalEntry = new Object[com.model.Utils.Entries.values().length];
 
     /**
     * Contructor for the MVC controller.
@@ -95,7 +94,7 @@ public class Controller implements ActionListener {
 
         if (((JButton) e.getSource()).getActionCommand().equals("ModifyEntry")) {
             System.out.println("Update table");
-            model.modifyEntryFromDB(this.valuesToAdd, this.originalEntry);
+            model.modifyEntryFromDB(this.valuesToAdd);
             updateOverview();
         }
     }
@@ -145,13 +144,13 @@ public class Controller implements ActionListener {
     public Object[] getEntry() {
         Vector<Vector> table = modelOverview.getDataVector();
         int row = summary.getSelectedRow();
+        System.out.println("Which row: " + row);
         if (row != -1) {
             Object[] entry = table.get(row).toArray();
             //model.removeEntryFromDB(entry);
             System.out.println(entry);
             return entry;
         }
-        System.out.println(row);
         Object[] error = new Object[1];
         error[0] = "-1";
         return error;
@@ -168,9 +167,5 @@ public class Controller implements ActionListener {
 
     public void setCallerIDforAddFrame(Caller caller) {
         System.out.println(caller.ordinal());
-    }
-
-    public void setOriginalEntry(Object[] origEntry) {
-        originalEntry = origEntry;
     }
 }

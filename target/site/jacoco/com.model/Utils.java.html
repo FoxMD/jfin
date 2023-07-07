@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Utils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jfin</a> &gt; <a href="index.source.html" class="el_package">com.model</a> &gt; <span class="el_source">Utils.java</span></div><h1>Utils.java</h1><pre class="source lang-java linenums">package com.model;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * Utility class with some sizes.
  */
 public final class Utils {
+    private static final long MILITIME = 1000L;
+
     /**
      * Private class.
      */
@@ -11,6 +17,32 @@ public final class Utils {
 
     }
 
-<span class="fc" id="L14">    public enum Entries { YEAR, MONTH, TYPE, VALUE, CURRENCY, DESC, ID }</span>
+<span class="fc" id="L20">    public enum Entries { YEAR, MONTH, TYPE, VALUE, CURRENCY, DESC, ID }</span>
+
+    public static String getUniqueID(Object[] data) {
+        try {
+<span class="nc" id="L24">            long unixTime = System.currentTimeMillis() / MILITIME;</span>
+<span class="nc" id="L25">            String dateString = Long.toString(unixTime);</span>
+<span class="nc" id="L26">            String myData = (String) data[Utils.Entries.YEAR.ordinal()]</span>
+<span class="nc" id="L27">                + (String) data[Utils.Entries.MONTH.ordinal()]</span>
+<span class="nc" id="L28">                + (String) data[Utils.Entries.TYPE.ordinal()]</span>
+<span class="nc" id="L29">                + (String) data[Utils.Entries.VALUE.ordinal()]</span>
+<span class="nc" id="L30">                + (String) data[Utils.Entries.CURRENCY.ordinal()]</span>
+<span class="nc" id="L31">                + (String) data[Utils.Entries.DESC.ordinal()]</span>
+<span class="nc" id="L32">                + dateString;</span>
+
+<span class="nc" id="L34">            byte[] bytesOfMessage = myData.getBytes(&quot;UTF-8&quot;);</span>
+
+<span class="nc" id="L36">            MessageDigest md = MessageDigest.getInstance(&quot;MD5&quot;);</span>
+<span class="nc" id="L37">            byte[] theMD5digest = md.digest(bytesOfMessage);</span>
+
+<span class="nc" id="L39">            return theMD5digest.toString();</span>
+<span class="nc" id="L40">        } catch (UnsupportedEncodingException e) {</span>
+<span class="nc" id="L41">            e.printStackTrace();</span>
+<span class="nc" id="L42">        } catch (NoSuchAlgorithmException e) {</span>
+<span class="nc" id="L43">            e.printStackTrace();</span>
+        }
+<span class="nc" id="L45">        return &quot;-1&quot;;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

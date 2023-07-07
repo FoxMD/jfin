@@ -97,9 +97,6 @@ public class AddFrame {
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (((JButton) e.getSource()).getActionCommand().equals("ModifyEntry")) {
-                    controller.setOriginalEntry(descObj);
-                }
                 Object[] data = new Object[Utils.Entries.values().length];
                 data[Utils.Entries.YEAR.ordinal()] = jYear.getText();
                 data[Utils.Entries.MONTH.ordinal()] = jMonth.getText();
@@ -107,6 +104,7 @@ public class AddFrame {
                 data[Utils.Entries.VALUE.ordinal()] = jValue.getText();
                 data[Utils.Entries.CURRENCY.ordinal()] = jCurrency.getText();
                 data[Utils.Entries.DESC.ordinal()] = jDescription.getText();
+                data[Utils.Entries.ID.ordinal()] = descObj[Utils.Entries.ID.ordinal()];
 
                 controller.setValuesFromFormular(data);
                 addFrame.dispose();
