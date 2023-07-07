@@ -5,13 +5,14 @@ test:
   - test/**
 
 gui:
-  - src/main/java/gui/**
+  - **/gui/**
 
 controller:
-  - src/main/java/core/**
+  - **/java/core/**
 
 database':
-  - src/main/java/connector/**
+  - **/connector/**
 
 model:
-  - src/main/java/model/**
+  - **/model/**
+
