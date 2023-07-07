@@ -184,6 +184,11 @@ public class DBConnector {
         return retData;
     }
 
+    /**
+     * Removes an entry from the database.
+     * @param entry Object with entry to remove.
+     * @return
+     */
     public int removeEntryFromDB(Object[] entry) {
         try
         (
