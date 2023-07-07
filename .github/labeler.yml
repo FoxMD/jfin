@@ -4,15 +4,18 @@ repo:
 test:
   - test/**
 
+source:
+  - src/**
+
 gui:
-  - **/gui/**
+  - /gui/**
+
 
 controller:
-  - /java/core/**
+  - /core/**
 
 database':
   - /connector/**
 
 model:
   - /model/**
-

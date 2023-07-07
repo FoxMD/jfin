@@ -19,6 +19,11 @@ public final class Utils {
 
     public enum Entries { YEAR, MONTH, TYPE, VALUE, CURRENCY, DESC, ID }
 
+    /**
+     * Creates a unique ID for DB entries.
+     * @param data Data for the DB.
+     * @return Unique ID.
+     */
     public static String getUniqueID(Object[] data) {
         try {
             long unixTime = System.currentTimeMillis() / MILITIME;

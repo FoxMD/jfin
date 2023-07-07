@@ -187,7 +187,7 @@ public class DBConnector {
     /**
      * Removes an entry from the database.
      * @param entry Object with entry to remove.
-     * @return
+     * @return Status.
      */
     public int removeEntryFromDB(Object[] entry) {
         try
@@ -224,6 +224,11 @@ public class DBConnector {
         return 0;
     }
 
+    /**
+     * Modify an entry based on unique ID.
+     * @param entry Entry you want to modify.
+     * @return Status.
+     */
     public int modifyEntryFromDB(Object[] entry) {
         try
         (
