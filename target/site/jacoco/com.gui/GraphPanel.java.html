@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GraphPanel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jfin</a> &gt; <a href="index.source.html" class="el_package">com.gui</a> &gt; <span class="el_source">GraphPanel.java</span></div><h1>GraphPanel.java</h1><pre class="source lang-java linenums">package com.gui;
 
 import com.model.FinanceModel;
+
+import java.util.Map;
+
 import javax.swing.JPanel;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.Styler.ChartTheme;
@@ -10,18 +13,19 @@ import org.knowm.xchart.PieChartBuilder;
 /**
  * Graph with overview.
  */
-<span class="fc" id="L13">public class GraphPanel extends JPanel {</span>
-<span class="fc" id="L14">    private final int graphWidth = 800;</span>
-<span class="fc" id="L15">    private final int graphHeight = 600;</span>
-<span class="fc" id="L16">    private final float contentSize = 0.7f;</span>
-<span class="fc" id="L17">    private final int angleOfRotation = 90;</span>
+<span class="nc" id="L16">public class GraphPanel extends JPanel {</span>
+<span class="nc" id="L17">    private final int graphWidth = 800;</span>
+<span class="nc" id="L18">    private final int graphHeight = 600;</span>
+<span class="nc" id="L19">    private final float contentSize = 0.7f;</span>
+<span class="nc" id="L20">    private final int angleOfRotation = 90;</span>
+    private Map&lt;String, Float&gt; values;
 
-<span class="fc" id="L19">    private PieChart chart = new PieChartBuilder()</span>
-<span class="fc" id="L20">                        .width(graphWidth)</span>
-<span class="fc" id="L21">                        .height(graphHeight)</span>
-<span class="fc" id="L22">                        .title(&quot;My Pie Chart&quot;)</span>
-<span class="fc" id="L23">                        .theme(ChartTheme.GGPlot2)</span>
-<span class="fc" id="L24">                        .build();</span>
+<span class="nc" id="L23">    private PieChart chart = new PieChartBuilder()</span>
+<span class="nc" id="L24">                        .width(graphWidth)</span>
+<span class="nc" id="L25">                        .height(graphHeight)</span>
+<span class="nc" id="L26">                        .title(&quot;My Pie Chart&quot;)</span>
+<span class="nc" id="L27">                        .theme(ChartTheme.GGPlot2)</span>
+<span class="nc" id="L28">                        .build();</span>
     private FinanceModel modelOverview;
 
     /**
@@ -30,13 +34,13 @@ import org.knowm.xchart.PieChartBuilder;
      * @return JPanel
      */
     public JPanel graphPanelComposer(FinanceModel modelOverview) {
-<span class="fc" id="L33">        this.modelOverview = modelOverview;</span>
-<span class="fc" id="L34">        chart.getStyler().setLegendVisible(false);</span>
-<span class="fc" id="L35">        chart.getStyler().setPlotContentSize(contentSize);</span>
-<span class="fc" id="L36">        chart.getStyler().setStartAngleInDegrees(angleOfRotation);</span>
+<span class="nc" id="L37">        this.modelOverview = modelOverview;</span>
+<span class="nc" id="L38">        chart.getStyler().setLegendVisible(false);</span>
+<span class="nc" id="L39">        chart.getStyler().setPlotContentSize(contentSize);</span>
+<span class="nc" id="L40">        chart.getStyler().setStartAngleInDegrees(angleOfRotation);</span>
 
-<span class="fc" id="L38">        JPanel panel = new XChartPanel&lt;PieChart&gt;(chart);</span>
-<span class="fc" id="L39">        return panel;</span>
+<span class="nc" id="L42">        JPanel panel = new XChartPanel&lt;PieChart&gt;(chart);</span>
+<span class="nc" id="L43">        return panel;</span>
     }
 
     /**
@@ -44,27 +48,30 @@ import org.knowm.xchart.PieChartBuilder;
      * @param dataModel Data
      */
     public void updateChart(FinanceModel dataModel) {
-<span class="fc" id="L47">        final int someValue1 = 4;</span>
-<span class="fc" id="L48">        final int someValue2 = 34;</span>
-<span class="fc" id="L49">        final int someValue3 = 22;</span>
-<span class="fc" id="L50">        final int someValue4 = 29;</span>
-
-<span class="fc" id="L52">        chart.addSeries(&quot;Prague&quot;, this.modelOverview.getTest());</span>
-<span class="fc" id="L53">        chart.addSeries(&quot;Dresden&quot;, someValue1);</span>
-<span class="fc" id="L54">        chart.addSeries(&quot;Munich&quot;, someValue2);</span>
-<span class="fc" id="L55">        chart.addSeries(&quot;Hamburg&quot;, someValue3);</span>
-<span class="fc" id="L56">        chart.addSeries(&quot;Berlin&quot;, someValue4);</span>
-<span class="fc" id="L57">    }</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        for (Map.Entry&lt;String, Float&gt; entry : this.values.entrySet()) {</span>
+<span class="nc" id="L52">            chart.addSeries(entry.getKey(), entry.getValue());</span>
+        }
+<span class="nc" id="L54">    }</span>
 
     /**
      * Clear chart before updating.
      */
     public void clearChart() {
-<span class="fc" id="L63">        chart.removeSeries(&quot;Prague&quot;);</span>
-<span class="fc" id="L64">        chart.removeSeries(&quot;Dresden&quot;);</span>
-<span class="fc" id="L65">        chart.removeSeries(&quot;Munich&quot;);</span>
-<span class="fc" id="L66">        chart.removeSeries(&quot;Hamburg&quot;);</span>
-<span class="fc" id="L67">        chart.removeSeries(&quot;Berlin&quot;);</span>
-<span class="fc" id="L68">    }</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (this.values == null) {</span>
+<span class="nc" id="L61">            return;</span>
+        }
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        for (String key : this.values.keySet()) {</span>
+<span class="nc" id="L64">            chart.removeSeries(key);</span>
+        }
+<span class="nc" id="L66">        this.values.clear();</span>
+<span class="nc" id="L67">    }</span>
+
+    public void setValues(Map&lt;String, Float&gt; values) {
+<span class="nc" id="L70">        this.values = values;</span>
+<span class="nc" id="L71">    }</span>
+
+    public Map&lt;String, Float&gt; getValues() {
+<span class="nc" id="L74">        return this.values;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

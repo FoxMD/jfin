@@ -1,6 +1,10 @@
 package com.model;
 
 import com.connector.DBConnector;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -8,11 +12,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FinanceModel extends DefaultTableModel {
     private DBConnector database;
-    private int data;
+    private Map<String, Float> data;
 
     private float income;
     private float expenses;
     private float difference;
+
+    private float transferRate = 23.88f;
 
     private final int testValue = 13;
 
@@ -25,8 +31,11 @@ public class FinanceModel extends DefaultTableModel {
         DBConnector database = new DBConnector();
         if (database.testConnection() != -1) {
             this.database = database;
-            this.data = testValue;
+            //this.data = testValue;
         }
+        data = new HashMap<String, Float>();
+        this.expenses = 0.0f;
+        this.income = 0.0f;
     }
 
     /**
@@ -60,15 +69,45 @@ public class FinanceModel extends DefaultTableModel {
      * Sets the dataset for the chart overview.
      * @param data input data
      */
-    public void setChartValues(int data) {
-        this.data += data;
+    public void setNewDataValues(Object[][] data) {
+        this.expenses = 0.0f;
+        this.income = 0.0f;
+
+        for (Object[] o : data) {
+            String sCurrency = (String) o[Utils.Entries.CURRENCY.ordinal()];
+            if ("CZK".equals(sCurrency)) {
+                o[Utils.Entries.VALUE.ordinal()] = (float) o[Utils.Entries.VALUE.ordinal()] / transferRate;
+            }
+
+            String sType = (String) o[Utils.Entries.TYPE.ordinal()];
+            if ("Income".equals(sType)) {
+                setIncome((Float) o[Utils.Entries.VALUE.ordinal()]);
+                setChartValues("Savings", getDifferenceForChart());
+            } else {
+                setExpenses((Float) o[Utils.Entries.VALUE.ordinal()]);
+                setChartValues((String) o[Utils.Entries.TYPE.ordinal()],
+                                (Float) o[Utils.Entries.VALUE.ordinal()]);
+            }
+        }
+    }
+
+    private void setChartValues(String key, Float value) {
+        addToChartData(key, value);
+    }
+
+    private void addToChartData(String key, Float value) {
+        if (this.data.get(key) == null) {
+            this.data.put(key, value);
+        } else {
+            this.data.merge(key, value, Float::sum);
+        }
     }
 
     /**
      * Returns the private data for the chart.
      * @return chart values.
      */
-    public int getChartValues() {
+    public Map<String, Float> getChartValues() {
         return this.data;
     }
 
@@ -85,7 +124,7 @@ public class FinanceModel extends DefaultTableModel {
      * @param income complete income;
      */
     public void setIncome(float income) {
-        this.income = income;
+        this.income += income;
     }
 
     /**
@@ -101,7 +140,7 @@ public class FinanceModel extends DefaultTableModel {
      * @param expenses Sum of expenses.
      */
     public void setExpenses(float expenses) {
-        this.expenses = expenses;
+        this.expenses += expenses;
     }
 
     /**
@@ -113,12 +152,17 @@ public class FinanceModel extends DefaultTableModel {
         return this.difference;
     }
 
+    public float getDifferenceForChart() {
+        this.difference = this.income - this.expenses;
+        return this.difference > 0.0f ? this.difference : 0.0f;
+    }
+
     /**
      * Test function.
      * @return some data
      */
-    public float getTest() {
-        return data;
+    public Map<String, Float> getTest() {
+        return this.data;
     }
 
     public void addEntryToDB(String year, String month, String type, float value, String currency, String description) {

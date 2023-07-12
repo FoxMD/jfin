@@ -1,6 +1,9 @@
 package com.gui;
 
 import com.model.FinanceModel;
+
+import java.util.Map;
+
 import javax.swing.JPanel;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.Styler.ChartTheme;
@@ -15,6 +18,7 @@ public class GraphPanel extends JPanel {
     private final int graphHeight = 600;
     private final float contentSize = 0.7f;
     private final int angleOfRotation = 90;
+    private Map<String, Float> values;
 
     private PieChart chart = new PieChartBuilder()
                         .width(graphWidth)
@@ -44,26 +48,29 @@ public class GraphPanel extends JPanel {
      * @param dataModel Data
      */
     public void updateChart(FinanceModel dataModel) {
-        final int someValue1 = 4;
-        final int someValue2 = 34;
-        final int someValue3 = 22;
-        final int someValue4 = 29;
-
-        chart.addSeries("Prague", this.modelOverview.getTest());
-        chart.addSeries("Dresden", someValue1);
-        chart.addSeries("Munich", someValue2);
-        chart.addSeries("Hamburg", someValue3);
-        chart.addSeries("Berlin", someValue4);
+        for (Map.Entry<String, Float> entry : this.values.entrySet()) {
+            chart.addSeries(entry.getKey(), entry.getValue());
+        }
     }
 
     /**
      * Clear chart before updating.
      */
     public void clearChart() {
-        chart.removeSeries("Prague");
-        chart.removeSeries("Dresden");
-        chart.removeSeries("Munich");
-        chart.removeSeries("Hamburg");
-        chart.removeSeries("Berlin");
+        if (this.values == null) {
+            return;
+        }
+        for (String key : this.values.keySet()) {
+            chart.removeSeries(key);
+        }
+        this.values.clear();
+    }
+
+    public void setValues(Map<String, Float> values) {
+        this.values = values;
+    }
+
+    public Map<String, Float> getValues() {
+        return this.values;
     }
 }

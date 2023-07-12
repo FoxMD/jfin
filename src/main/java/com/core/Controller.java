@@ -131,7 +131,9 @@ public class Controller implements ActionListener {
 
         graph.clearChart();
         modelOverview.setDataVector(data, Constants.TABLE_HEADER);
-        //modelOverview.setChartValues(++i);
+        modelOverview.setNewDataValues(data);
+
+        graph.setValues(modelOverview.getChartValues());
         graph.updateChart(modelOverview);
         frame.validate();
         frame.repaint();
