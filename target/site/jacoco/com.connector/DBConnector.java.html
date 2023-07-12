@@ -184,75 +184,85 @@ public class DBConnector {
 <span class="nc" id="L184">        return retData;</span>
     }
 
+    /**
+     * Removes an entry from the database.
+     * @param entry Object with entry to remove.
+     * @return Status.
+     */
     public int removeEntryFromDB(Object[] entry) {
-<span class="nc" id="L188">        try</span>
+<span class="nc" id="L193">        try</span>
         (
-<span class="nc" id="L190">            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);</span>
-<span class="nc" id="L191">            PreparedStatement pstmt = conn.prepareStatement(</span>
-<span class="nc" id="L192">                &quot;DELETE FROM testid&quot;</span>
-                + &quot;WHERE year=? AND month=? AND type=? AND value=? AND currency=? AND description=? AND uid=?&quot;
+<span class="nc" id="L195">            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);</span>
+<span class="nc" id="L196">            PreparedStatement pstmt = conn.prepareStatement(</span>
+<span class="nc" id="L197">                &quot;DELETE FROM testid&quot;</span>
+                + &quot; WHERE year=? AND month=? AND type=? AND value=? AND currency=? AND description=? AND uid=?&quot;
             );
         ) {
-<span class="nc" id="L196">            pstmt.setString(Utils.Entries.YEAR.ordinal() + sqlOffset,</span>
-<span class="nc" id="L197">                (String) entry[Utils.Entries.YEAR.ordinal()]);</span>
-<span class="nc" id="L198">            pstmt.setString(Utils.Entries.MONTH.ordinal() + sqlOffset,</span>
-<span class="nc" id="L199">                (String) entry[Utils.Entries.MONTH.ordinal()]);</span>
-<span class="nc" id="L200">            pstmt.setString(Utils.Entries.TYPE.ordinal() + sqlOffset,</span>
-<span class="nc" id="L201">                (String) entry[Utils.Entries.TYPE.ordinal()]);</span>
-<span class="nc" id="L202">            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + sqlOffset,</span>
-<span class="nc" id="L203">                (Float) entry[Utils.Entries.VALUE.ordinal()]);</span>
-<span class="nc" id="L204">            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + sqlOffset,</span>
-<span class="nc" id="L205">                (String) entry[Utils.Entries.CURRENCY.ordinal()]);</span>
-<span class="nc" id="L206">            pstmt.setString(Utils.Entries.DESC.ordinal() + sqlOffset,</span>
-<span class="nc" id="L207">                (String) entry[Utils.Entries.DESC.ordinal()]);</span>
-<span class="nc" id="L208">            pstmt.setString(Utils.Entries.ID.ordinal() + sqlOffset,</span>
-<span class="nc" id="L209">                (String) entry[Utils.Entries.ID.ordinal()]);</span>
-<span class="nc" id="L210">            pstmt.executeUpdate(); // &quot;rows&quot; save the affected rows</span>
+<span class="nc" id="L201">            pstmt.setString(Utils.Entries.YEAR.ordinal() + sqlOffset,</span>
+<span class="nc" id="L202">                (String) entry[Utils.Entries.YEAR.ordinal()]);</span>
+<span class="nc" id="L203">            pstmt.setString(Utils.Entries.MONTH.ordinal() + sqlOffset,</span>
+<span class="nc" id="L204">                (String) entry[Utils.Entries.MONTH.ordinal()]);</span>
+<span class="nc" id="L205">            pstmt.setString(Utils.Entries.TYPE.ordinal() + sqlOffset,</span>
+<span class="nc" id="L206">                (String) entry[Utils.Entries.TYPE.ordinal()]);</span>
+<span class="nc" id="L207">            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + sqlOffset,</span>
+<span class="nc" id="L208">                (Float) entry[Utils.Entries.VALUE.ordinal()]);</span>
+<span class="nc" id="L209">            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + sqlOffset,</span>
+<span class="nc" id="L210">                (String) entry[Utils.Entries.CURRENCY.ordinal()]);</span>
+<span class="nc" id="L211">            pstmt.setString(Utils.Entries.DESC.ordinal() + sqlOffset,</span>
+<span class="nc" id="L212">                (String) entry[Utils.Entries.DESC.ordinal()]);</span>
+<span class="nc" id="L213">            pstmt.setString(Utils.Entries.ID.ordinal() + sqlOffset,</span>
+<span class="nc" id="L214">                (String) entry[Utils.Entries.ID.ordinal()]);</span>
+<span class="nc" id="L215">            pstmt.executeUpdate(); // &quot;rows&quot; save the affected rows</span>
 
             //rs.close();
-<span class="nc" id="L213">            pstmt.close();</span>
-<span class="nc" id="L214">            conn.close();</span>
-<span class="nc" id="L215">        } catch (SQLException e) {</span>
-<span class="nc" id="L216">            e.printStackTrace();</span>
-<span class="nc" id="L217">            return -1;</span>
+<span class="nc" id="L218">            pstmt.close();</span>
+<span class="nc" id="L219">            conn.close();</span>
+<span class="nc" id="L220">        } catch (SQLException e) {</span>
+<span class="nc" id="L221">            e.printStackTrace();</span>
+<span class="nc" id="L222">            return -1;</span>
         }
-<span class="nc" id="L219">        return 0;</span>
+<span class="nc" id="L224">        return 0;</span>
     }
 
+    /**
+     * Modify an entry based on unique ID.
+     * @param entry Entry you want to modify.
+     * @return Status.
+     */
     public int modifyEntryFromDB(Object[] entry) {
-<span class="nc" id="L223">        try</span>
+<span class="nc" id="L233">        try</span>
         (
-<span class="nc" id="L225">            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);</span>
-<span class="nc" id="L226">            PreparedStatement pstmt = conn.prepareStatement(</span>
-<span class="nc" id="L227">                &quot;UPDATE testid SET year=?, month=?, type=?, value=?, currency=?, description=?&quot; + &quot;WHERE uid=?&quot;</span>
+<span class="nc" id="L235">            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);</span>
+<span class="nc" id="L236">            PreparedStatement pstmt = conn.prepareStatement(</span>
+<span class="nc" id="L237">                &quot;UPDATE testid SET year=?, month=?, type=?, value=?, currency=?, description=?&quot; + &quot;WHERE uid=?&quot;</span>
             );
         ) {
-<span class="nc" id="L230">            pstmt.setString(Utils.Entries.YEAR.ordinal() + sqlOffset,</span>
-<span class="nc" id="L231">                (String) entry[Utils.Entries.YEAR.ordinal()]);</span>
-<span class="nc" id="L232">            pstmt.setString(Utils.Entries.MONTH.ordinal() + sqlOffset,</span>
-<span class="nc" id="L233">                (String) entry[Utils.Entries.MONTH.ordinal()]);</span>
-<span class="nc" id="L234">            pstmt.setString(Utils.Entries.TYPE.ordinal() + sqlOffset,</span>
-<span class="nc" id="L235">                (String) entry[Utils.Entries.TYPE.ordinal()]);</span>
-<span class="nc" id="L236">            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + sqlOffset,</span>
-<span class="nc" id="L237">                Float.parseFloat((String) entry[Utils.Entries.VALUE.ordinal()]));</span>
-<span class="nc" id="L238">            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + sqlOffset,</span>
-<span class="nc" id="L239">                (String) entry[Utils.Entries.CURRENCY.ordinal()]);</span>
-<span class="nc" id="L240">            pstmt.setString(Utils.Entries.DESC.ordinal() + sqlOffset,</span>
-<span class="nc" id="L241">                (String) entry[Utils.Entries.DESC.ordinal()]);</span>
+<span class="nc" id="L240">            pstmt.setString(Utils.Entries.YEAR.ordinal() + sqlOffset,</span>
+<span class="nc" id="L241">                (String) entry[Utils.Entries.YEAR.ordinal()]);</span>
+<span class="nc" id="L242">            pstmt.setString(Utils.Entries.MONTH.ordinal() + sqlOffset,</span>
+<span class="nc" id="L243">                (String) entry[Utils.Entries.MONTH.ordinal()]);</span>
+<span class="nc" id="L244">            pstmt.setString(Utils.Entries.TYPE.ordinal() + sqlOffset,</span>
+<span class="nc" id="L245">                (String) entry[Utils.Entries.TYPE.ordinal()]);</span>
+<span class="nc" id="L246">            pstmt.setFloat(Utils.Entries.VALUE.ordinal() + sqlOffset,</span>
+<span class="nc" id="L247">                Float.parseFloat((String) entry[Utils.Entries.VALUE.ordinal()]));</span>
+<span class="nc" id="L248">            pstmt.setString(Utils.Entries.CURRENCY.ordinal() + sqlOffset,</span>
+<span class="nc" id="L249">                (String) entry[Utils.Entries.CURRENCY.ordinal()]);</span>
+<span class="nc" id="L250">            pstmt.setString(Utils.Entries.DESC.ordinal() + sqlOffset,</span>
+<span class="nc" id="L251">                (String) entry[Utils.Entries.DESC.ordinal()]);</span>
 
-<span class="nc" id="L243">            pstmt.setString(Utils.Entries.ID.ordinal() + sqlOffset,</span>
-<span class="nc" id="L244">                (String) entry[Utils.Entries.ID.ordinal()]);</span>
+<span class="nc" id="L253">            pstmt.setString(Utils.Entries.ID.ordinal() + sqlOffset,</span>
+<span class="nc" id="L254">                (String) entry[Utils.Entries.ID.ordinal()]);</span>
 
-<span class="nc" id="L246">            pstmt.executeUpdate(); // &quot;rows&quot; save the affected rows</span>
+<span class="nc" id="L256">            pstmt.executeUpdate(); // &quot;rows&quot; save the affected rows</span>
 
             //rs.close();
-<span class="nc" id="L249">            pstmt.close();</span>
-<span class="nc" id="L250">            conn.close();</span>
-<span class="nc" id="L251">        } catch (SQLException e) {</span>
-<span class="nc" id="L252">            e.printStackTrace();</span>
-<span class="nc" id="L253">            return -1;</span>
+<span class="nc" id="L259">            pstmt.close();</span>
+<span class="nc" id="L260">            conn.close();</span>
+<span class="nc" id="L261">        } catch (SQLException e) {</span>
+<span class="nc" id="L262">            e.printStackTrace();</span>
+<span class="nc" id="L263">            return -1;</span>
         }
-<span class="nc" id="L255">        return 0;</span>
+<span class="nc" id="L265">        return 0;</span>
     }
 
     /**
@@ -260,27 +270,27 @@ public class DBConnector {
      * @return returns true 0 if everythink is OK
      */
     public int testConnection() {
-<span class="nc" id="L263">        try</span>
+<span class="nc" id="L273">        try</span>
         (
-<span class="nc" id="L265">            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);</span>
-<span class="nc" id="L266">            Statement stmt = conn.createStatement();</span>
-<span class="nc" id="L267">            ResultSet rs = stmt.executeQuery(BASE_QUERY);</span>
+<span class="nc" id="L275">            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);</span>
+<span class="nc" id="L276">            Statement stmt = conn.createStatement();</span>
+<span class="nc" id="L277">            ResultSet rs = stmt.executeQuery(BASE_QUERY);</span>
         ) {
-<span class="nc bnc" id="L269" title="All 2 branches missed.">            while (rs.next()) {</span>
-<span class="nc" id="L270">                System.out.print(&quot;Month: &quot; + rs.getString(&quot;month&quot;));</span>
-<span class="nc" id="L271">                System.out.print(&quot;, Type: &quot; + rs.getString(&quot;type&quot;));</span>
-<span class="nc" id="L272">                System.out.print(&quot;, Value: &quot; + rs.getFloat(&quot;value&quot;));</span>
-<span class="nc" id="L273">                System.out.println(&quot;, Currency: &quot; + rs.getString(&quot;currency&quot;));</span>
+<span class="nc bnc" id="L279" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L280">                System.out.print(&quot;Month: &quot; + rs.getString(&quot;month&quot;));</span>
+<span class="nc" id="L281">                System.out.print(&quot;, Type: &quot; + rs.getString(&quot;type&quot;));</span>
+<span class="nc" id="L282">                System.out.print(&quot;, Value: &quot; + rs.getFloat(&quot;value&quot;));</span>
+<span class="nc" id="L283">                System.out.println(&quot;, Currency: &quot; + rs.getString(&quot;currency&quot;));</span>
 
                 //rs.close();
                 //stmt.close();
                 //conn.close();
             }
-<span class="nc" id="L279">        } catch (SQLException e) {</span>
-<span class="nc" id="L280">            e.printStackTrace();</span>
-<span class="nc" id="L281">            return -1;</span>
+<span class="nc" id="L289">        } catch (SQLException e) {</span>
+<span class="nc" id="L290">            e.printStackTrace();</span>
+<span class="nc" id="L291">            return -1;</span>
         }
-<span class="nc" id="L283">        return 0;</span>
+<span class="nc" id="L293">        return 0;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

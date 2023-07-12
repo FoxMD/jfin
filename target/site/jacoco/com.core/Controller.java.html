@@ -131,42 +131,52 @@ public class Controller implements ActionListener {
 
 <span class="nc" id="L132">        graph.clearChart();</span>
 <span class="nc" id="L133">        modelOverview.setDataVector(data, Constants.TABLE_HEADER);</span>
-        //modelOverview.setChartValues(++i);
-<span class="nc" id="L135">        graph.updateChart(modelOverview);</span>
-<span class="nc" id="L136">        frame.validate();</span>
-<span class="nc" id="L137">        frame.repaint();</span>
-<span class="nc" id="L138">    }</span>
+<span class="nc" id="L134">        modelOverview.setNewDataValues(data);</span>
+
+<span class="nc" id="L136">        graph.setValues(modelOverview.getChartValues());</span>
+<span class="nc" id="L137">        graph.updateChart(modelOverview);</span>
+<span class="nc" id="L138">        frame.validate();</span>
+<span class="nc" id="L139">        frame.repaint();</span>
+<span class="nc" id="L140">    }</span>
 
     public void setValuesFromFormular(Object[] valuesFromForm) {
-<span class="nc" id="L141">        valuesToAdd = valuesFromForm;</span>
-<span class="nc" id="L142">    }</span>
+<span class="nc" id="L143">        valuesToAdd = valuesFromForm;</span>
+<span class="nc" id="L144">    }</span>
 
     public Object[] getEntry() {
-<span class="nc" id="L145">        Vector&lt;Vector&gt; table = modelOverview.getDataVector();</span>
-<span class="nc" id="L146">        int row = summary.getSelectedRow();</span>
-<span class="nc" id="L147">        System.out.println(&quot;Which row: &quot; + row);</span>
-<span class="nc bnc" id="L148" title="All 2 branches missed.">        if (row != -1) {</span>
-<span class="nc" id="L149">            Object[] entry = table.get(row).toArray();</span>
+<span class="nc" id="L147">        Vector&lt;Vector&gt; table = modelOverview.getDataVector();</span>
+<span class="nc" id="L148">        int row = summary.getSelectedRow();</span>
+<span class="nc" id="L149">        System.out.println(&quot;Which row: &quot; + row);</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        if (row != -1) {</span>
+<span class="nc" id="L151">            Object[] entry = table.get(row).toArray();</span>
             //model.removeEntryFromDB(entry);
-<span class="nc" id="L151">            System.out.println(entry);</span>
-<span class="nc" id="L152">            return entry;</span>
+<span class="nc" id="L153">            System.out.println(entry);</span>
+<span class="nc" id="L154">            return entry;</span>
         }
-<span class="nc" id="L154">        Object[] error = new Object[1];</span>
-<span class="nc" id="L155">        error[0] = &quot;-1&quot;;</span>
-<span class="nc" id="L156">        return error;</span>
+<span class="nc" id="L156">        Object[] error = new Object[1];</span>
+<span class="nc" id="L157">        error[0] = &quot;-1&quot;;</span>
+<span class="nc" id="L158">        return error;</span>
     }
 
+    /**
+     * Remove an entry from DB.
+     * @return Status.
+     */
     public String removeEntryRequest() {
-<span class="nc" id="L160">        Object[] entry = getEntry();</span>
-<span class="nc bnc" id="L161" title="All 2 branches missed.">        if (entry[0].equals(&quot;-1&quot;)) {</span>
-<span class="nc" id="L162">            return &quot;Error empty line&quot;;</span>
+<span class="nc" id="L166">        Object[] entry = getEntry();</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">        if (entry[0].equals(&quot;-1&quot;)) {</span>
+<span class="nc" id="L168">            return &quot;Error empty line&quot;;</span>
         }
-<span class="nc" id="L164">        model.removeEntryFromDB(entry);</span>
-<span class="nc" id="L165">        return &quot;Jeeeej&quot;;</span>
+<span class="nc" id="L170">        model.removeEntryFromDB(entry);</span>
+<span class="nc" id="L171">        return &quot;Jeeeej&quot;;</span>
     }
 
+    /**
+     * Set the ID for mod od add function.
+     * @param caller MODIFY/ADD.
+     */
     public void setCallerIDforAddFrame(Caller caller) {
-<span class="nc" id="L169">        System.out.println(caller.ordinal());</span>
-<span class="nc" id="L170">    }</span>
+<span class="nc" id="L179">        System.out.println(caller.ordinal());</span>
+<span class="nc" id="L180">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

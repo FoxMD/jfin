@@ -131,7 +131,9 @@ public class Controller implements ActionListener {
 
         graph.clearChart();
         modelOverview.setDataVector(data, Constants.TABLE_HEADER);
-        //modelOverview.setChartValues(++i);
+        modelOverview.setNewDataValues(data);
+
+        graph.setValues(modelOverview.getChartValues());
         graph.updateChart(modelOverview);
         frame.validate();
         frame.repaint();
@@ -156,6 +158,10 @@ public class Controller implements ActionListener {
         return error;
     }
 
+    /**
+     * Remove an entry from DB.
+     * @return Status.
+     */
     public String removeEntryRequest() {
         Object[] entry = getEntry();
         if (entry[0].equals("-1")) {
