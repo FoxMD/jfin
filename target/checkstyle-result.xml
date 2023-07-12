@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="10.12.1">
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\model\FinanceModel.java">
+<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\gui\GraphPanel.java">
+</file>
+<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\gui\View.java">
 </file>
 </checkstyle>

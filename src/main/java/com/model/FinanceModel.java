@@ -20,8 +20,6 @@ public class FinanceModel extends DefaultTableModel {
 
     private float transferRate = 23.88f;
 
-    private final int testValue = 13;
-
     /**
      * Constructor for the financial model.
      */

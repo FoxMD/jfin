@@ -63,12 +63,12 @@ public class View {
         // Set the database panel
         JScrollPane tableScrollPanel = new JScrollPane(table);
         tableScrollPanel = stylingDatabasePanel(tableScrollPanel,
-                    "Database - Test feedback", databaseHeight);
+        "Database - Test feedback", databaseHeight);
 
         // Set the summary pannel
         JScrollPane tableSummaryScrollPanel = new JScrollPane(summary);
         tableSummaryScrollPanel = stylingDatabasePanel(tableSummaryScrollPanel,
-                    "Summary - Test feedback", overviewHeight);
+        "Summary - Test feedback", overviewHeight);
 
         // Set the sum action panel
         SumActionPanel saPanel = new SumActionPanel();
@@ -84,20 +84,20 @@ public class View {
                     searchPanel, tableScrollPanel);
         splitVerticalPanelDatabase.setEnabled(false);
 
-        JSplitPane splitHorizontalPanelSummary = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-                    splitVerticalPanelSummary, graphPanel);
-        splitHorizontalPanelSummary.setEnabled(false);
-
-        JSplitPane splitHorizontalPanelDatabase = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-                    splitVerticalPanelDatabase, sumActPanel);
+        JSplitPane splitHorizontalPanelDatabase = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
+                    splitVerticalPanelSummary, splitVerticalPanelDatabase);
         splitHorizontalPanelDatabase.setEnabled(false);
 
-        JSplitPane splitVerticalFramePanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-                    splitHorizontalPanelSummary, splitHorizontalPanelDatabase);
-        splitVerticalFramePanel.setEnabled(false);
+        JSplitPane splitHorizontalPanelSummary = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
+                    sumActPanel, graphPanel);
+        splitHorizontalPanelSummary.setEnabled(false);
+
+        JSplitPane mainWindowSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+                    splitHorizontalPanelDatabase, splitHorizontalPanelSummary);
+        mainWindowSplit.setEnabled(false);
 
         JSplitPane splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-                    ctrlPanel, splitVerticalFramePanel);
+                    ctrlPanel, mainWindowSplit);
         splitPanel.setDividerLocation(dividerLocation);
         splitPanel.setEnabled(false);
 

@@ -2,36 +2,37 @@
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
  * Action panel for sumarisation.
  */
-<span class="nc" id="L11">public class SumActionPanel {</span>
-<span class="nc" id="L12">    private final int minWidth = 500;</span>
-<span class="nc" id="L13">    private final int minHeight = 120;</span>
-<span class="nc" id="L14">    private final int rows = 8;</span>
-<span class="nc" id="L15">    private final int colmns = 1;</span>
-<span class="nc" id="L16">    private final int vGap = 10;</span>
-<span class="nc" id="L17">    private final int hGap = 10;</span>
+<span class="nc" id="L12">public class SumActionPanel {</span>
+<span class="nc" id="L13">    private final int minWidth = 400;</span>
+<span class="nc" id="L14">    private final int minHeight = 120;</span>
+<span class="nc" id="L15">    private final int rows = 4;</span>
+<span class="nc" id="L16">    private final int colmns = 1;</span>
+<span class="nc" id="L17">    private final int vGap = 10;</span>
+<span class="nc" id="L18">    private final int hGap = 10;</span>
 
     /**
      * Composer for sum panel.
      * @return JPanel
      */
     public JPanel sumActionPanelComposer() {
-<span class="nc" id="L24">        JButton searchButton = new JButton(&quot;Nope&quot;);</span>
-<span class="nc" id="L25">        JButton addButton = new JButton(&quot;Nada&quot;);</span>
-<span class="nc" id="L26">        JButton removeButton = new JButton(&quot;Niet&quot;);</span>
+<span class="nc" id="L25">        JButton searchButton = new JButton(&quot;Nope&quot;);</span>
+<span class="nc" id="L26">        JButton addButton = new JButton(&quot;Nada&quot;);</span>
+<span class="nc" id="L27">        JButton removeButton = new JButton(&quot;Niet&quot;);</span>
 
-<span class="nc" id="L28">        JPanel ctrlPanel = new JPanel(new GridLayout(rows, colmns, hGap, vGap));</span>
-<span class="nc" id="L29">        ctrlPanel.setMinimumSize(new Dimension(minHeight, minWidth));</span>
-<span class="nc" id="L30">        ctrlPanel.add(searchButton);</span>
-<span class="nc" id="L31">        ctrlPanel.add(addButton);</span>
-<span class="nc" id="L32">        ctrlPanel.add(removeButton);</span>
+<span class="nc" id="L29">        JPanel ctrlPanel = new JPanel(new GridLayout(rows, colmns, hGap, vGap));</span>
+<span class="nc" id="L30">        ctrlPanel.setMinimumSize(new Dimension(minHeight, minWidth));</span>
+<span class="nc" id="L31">        ctrlPanel.add(searchButton);</span>
+<span class="nc" id="L32">        ctrlPanel.add(addButton);</span>
+<span class="nc" id="L33">        ctrlPanel.add(removeButton);</span>
 
-<span class="nc" id="L34">        return ctrlPanel;</span>
+<span class="nc" id="L35">        return ctrlPanel;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

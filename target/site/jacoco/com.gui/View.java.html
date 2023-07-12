@@ -63,12 +63,12 @@ public class View {
         // Set the database panel
 <span class="nc" id="L64">        JScrollPane tableScrollPanel = new JScrollPane(table);</span>
 <span class="nc" id="L65">        tableScrollPanel = stylingDatabasePanel(tableScrollPanel,</span>
-<span class="nc" id="L66">                    &quot;Database - Test feedback&quot;, databaseHeight);</span>
+<span class="nc" id="L66">        &quot;Database - Test feedback&quot;, databaseHeight);</span>
 
         // Set the summary pannel
 <span class="nc" id="L69">        JScrollPane tableSummaryScrollPanel = new JScrollPane(summary);</span>
 <span class="nc" id="L70">        tableSummaryScrollPanel = stylingDatabasePanel(tableSummaryScrollPanel,</span>
-<span class="nc" id="L71">                    &quot;Summary - Test feedback&quot;, overviewHeight);</span>
+<span class="nc" id="L71">        &quot;Summary - Test feedback&quot;, overviewHeight);</span>
 
         // Set the sum action panel
 <span class="nc" id="L74">        SumActionPanel saPanel = new SumActionPanel();</span>
@@ -84,20 +84,20 @@ public class View {
 <span class="nc" id="L84">                    searchPanel, tableScrollPanel);</span>
 <span class="nc" id="L85">        splitVerticalPanelDatabase.setEnabled(false);</span>
 
-<span class="nc" id="L87">        JSplitPane splitHorizontalPanelSummary = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,</span>
-<span class="nc" id="L88">                    splitVerticalPanelSummary, graphPanel);</span>
-<span class="nc" id="L89">        splitHorizontalPanelSummary.setEnabled(false);</span>
+<span class="nc" id="L87">        JSplitPane splitHorizontalPanelDatabase = new JSplitPane(JSplitPane.VERTICAL_SPLIT,</span>
+<span class="nc" id="L88">                    splitVerticalPanelSummary, splitVerticalPanelDatabase);</span>
+<span class="nc" id="L89">        splitHorizontalPanelDatabase.setEnabled(false);</span>
 
-<span class="nc" id="L91">        JSplitPane splitHorizontalPanelDatabase = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,</span>
-<span class="nc" id="L92">                    splitVerticalPanelDatabase, sumActPanel);</span>
-<span class="nc" id="L93">        splitHorizontalPanelDatabase.setEnabled(false);</span>
+<span class="nc" id="L91">        JSplitPane splitHorizontalPanelSummary = new JSplitPane(JSplitPane.VERTICAL_SPLIT,</span>
+<span class="nc" id="L92">                    graphPanel, sumActPanel);</span>
+<span class="nc" id="L93">        splitHorizontalPanelSummary.setEnabled(false);</span>
 
-<span class="nc" id="L95">        JSplitPane splitVerticalFramePanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT,</span>
-<span class="nc" id="L96">                    splitHorizontalPanelSummary, splitHorizontalPanelDatabase);</span>
-<span class="nc" id="L97">        splitVerticalFramePanel.setEnabled(false);</span>
+<span class="nc" id="L95">        JSplitPane mainWindowSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,</span>
+<span class="nc" id="L96">                    splitHorizontalPanelDatabase, splitHorizontalPanelSummary);</span>
+<span class="nc" id="L97">        mainWindowSplit.setEnabled(false);</span>
 
 <span class="nc" id="L99">        JSplitPane splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,</span>
-<span class="nc" id="L100">                    ctrlPanel, splitVerticalFramePanel);</span>
+<span class="nc" id="L100">                    ctrlPanel, mainWindowSplit);</span>
 <span class="nc" id="L101">        splitPanel.setDividerLocation(dividerLocation);</span>
 <span class="nc" id="L102">        splitPanel.setEnabled(false);</span>
 

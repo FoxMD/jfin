@@ -2,9 +2,13 @@
 
 import com.model.FinanceModel;
 
+import java.awt.Dimension;
 import java.util.Map;
 
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.Styler.ChartTheme;
 import org.knowm.xchart.PieChart;
@@ -13,20 +17,27 @@ import org.knowm.xchart.PieChartBuilder;
 /**
  * Graph with overview.
  */
-<span class="nc" id="L16">public class GraphPanel extends JPanel {</span>
-<span class="nc" id="L17">    private final int graphWidth = 800;</span>
-<span class="nc" id="L18">    private final int graphHeight = 600;</span>
-<span class="nc" id="L19">    private final float contentSize = 0.7f;</span>
-<span class="nc" id="L20">    private final int angleOfRotation = 90;</span>
+<span class="nc" id="L20">public class GraphPanel extends JPanel {</span>
+<span class="nc" id="L21">    private final int graphWidth = 400;</span>
+<span class="nc" id="L22">    private final int graphHeight = 300;</span>
+<span class="nc" id="L23">    private final float contentSize = 0.7f;</span>
+<span class="nc" id="L24">    private final int angleOfRotation = 90;</span>
+
+<span class="nc" id="L26">    private final int panelWidth = 400;</span>
+<span class="nc" id="L27">    private final int panelHeight = 600;</span>
+
     private Map&lt;String, Float&gt; values;
 
-<span class="nc" id="L23">    private PieChart chart = new PieChartBuilder()</span>
-<span class="nc" id="L24">                        .width(graphWidth)</span>
-<span class="nc" id="L25">                        .height(graphHeight)</span>
-<span class="nc" id="L26">                        .title(&quot;My Pie Chart&quot;)</span>
-<span class="nc" id="L27">                        .theme(ChartTheme.GGPlot2)</span>
-<span class="nc" id="L28">                        .build();</span>
+<span class="nc" id="L31">    private PieChart chart = new PieChartBuilder()</span>
+<span class="nc" id="L32">                        .width(graphWidth)</span>
+<span class="nc" id="L33">                        .height(graphHeight)</span>
+<span class="nc" id="L34">                        .title(&quot;My Pie Chart&quot;)</span>
+<span class="nc" id="L35">                        .theme(ChartTheme.GGPlot2)</span>
+<span class="nc" id="L36">                        .build();</span>
     private FinanceModel modelOverview;
+<span class="nc" id="L38">    private final String[] columnNames = {&quot;Article&quot;, &quot;Cost&quot;};</span>
+    private JTable textTest;
+<span class="nc" id="L40">    private DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);</span>
 
     /**
      * Compose the graph.
@@ -34,13 +45,22 @@ import org.knowm.xchart.PieChartBuilder;
      * @return JPanel
      */
     public JPanel graphPanelComposer(FinanceModel modelOverview) {
-<span class="nc" id="L37">        this.modelOverview = modelOverview;</span>
-<span class="nc" id="L38">        chart.getStyler().setLegendVisible(false);</span>
-<span class="nc" id="L39">        chart.getStyler().setPlotContentSize(contentSize);</span>
-<span class="nc" id="L40">        chart.getStyler().setStartAngleInDegrees(angleOfRotation);</span>
+<span class="nc" id="L48">        this.modelOverview = modelOverview;</span>
 
-<span class="nc" id="L42">        JPanel panel = new XChartPanel&lt;PieChart&gt;(chart);</span>
-<span class="nc" id="L43">        return panel;</span>
+<span class="nc" id="L50">        chart.getStyler().setLegendVisible(false);</span>
+<span class="nc" id="L51">        chart.getStyler().setPlotContentSize(contentSize);</span>
+<span class="nc" id="L52">        chart.getStyler().setStartAngleInDegrees(angleOfRotation);</span>
+
+<span class="nc" id="L54">        JPanel sup = new JPanel();</span>
+<span class="nc" id="L55">        JPanel panel = new XChartPanel&lt;PieChart&gt;(chart);</span>
+<span class="nc" id="L56">        textTest = new JTable(tableModel);</span>
+
+<span class="nc" id="L58">        sup.add(panel);</span>
+<span class="nc" id="L59">        sup.add(textTest);</span>
+
+<span class="nc" id="L61">        sup.setMinimumSize(new Dimension(panelWidth, panelHeight));</span>
+
+<span class="nc" id="L63">        return sup;</span>
     }
 
     /**
@@ -48,30 +68,39 @@ import org.knowm.xchart.PieChartBuilder;
      * @param dataModel Data
      */
     public void updateChart(FinanceModel dataModel) {
-<span class="nc bnc" id="L51" title="All 2 branches missed.">        for (Map.Entry&lt;String, Float&gt; entry : this.values.entrySet()) {</span>
-<span class="nc" id="L52">            chart.addSeries(entry.getKey(), entry.getValue());</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        for (Map.Entry&lt;String, Float&gt; entry : this.values.entrySet()) {</span>
+<span class="nc" id="L72">            chart.addSeries(entry.getKey(), entry.getValue());</span>
         }
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L74">        updateTable();</span>
+<span class="nc" id="L75">    }</span>
 
     /**
      * Clear chart before updating.
      */
     public void clearChart() {
-<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (this.values == null) {</span>
-<span class="nc" id="L61">            return;</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (this.values == null) {</span>
+<span class="nc" id="L82">            return;</span>
         }
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        for (String key : this.values.keySet()) {</span>
-<span class="nc" id="L64">            chart.removeSeries(key);</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        for (String key : this.values.keySet()) {</span>
+<span class="nc" id="L85">            chart.removeSeries(key);</span>
         }
-<span class="nc" id="L66">        this.values.clear();</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L87">        this.values.clear();</span>
+<span class="nc" id="L88">    }</span>
 
     public void setValues(Map&lt;String, Float&gt; values) {
-<span class="nc" id="L70">        this.values = values;</span>
-<span class="nc" id="L71">    }</span>
+<span class="nc" id="L91">        this.values = values;</span>
+<span class="nc" id="L92">    }</span>
 
     public Map&lt;String, Float&gt; getValues() {
-<span class="nc" id="L74">        return this.values;</span>
+<span class="nc" id="L95">        return this.values;</span>
     }
+
+    public void updateTable() {
+<span class="nc" id="L99">        tableModel.setRowCount(0);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        for (Map.Entry&lt;String, Float&gt; entry : modelOverview.getTest().entrySet()) {</span>
+<span class="nc" id="L101">            Object[] objs = {entry.getKey(), entry.getValue()};</span>
+<span class="nc" id="L102">            tableModel.addRow(objs);</span>
+        }
+<span class="nc" id="L104">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
