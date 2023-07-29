@@ -1,17 +1,18 @@
 package com.gui;
 
+//import com.connector.DBConnector;
 //import com.core.Controller;
-import com.model.FinanceModel;
+//import com.model.FinanceModel;
 
-import javax.swing.JFrame;
+//import javax.swing.JFrame;
 
 //mport org.junit.jupiter.api.Test;
 
-public class AddTest {
+public class AddTest {/*
     FinanceModel modelDB = new FinanceModel();
     FinanceModel modelSum = new FinanceModel();
     GraphPanel graph = new GraphPanel();
-    JFrame frame = new JFrame();
+    JFrame frame = new JFrame();*/
     /*
     @Test
     public void addFrameTest() {

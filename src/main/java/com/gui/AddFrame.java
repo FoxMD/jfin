@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -46,6 +47,10 @@ public class AddFrame {
         if (call == Caller.MODIFY) {
             addButton.setText("Modify");
             descObj = controller.getEntry();
+            if (descObj[0].equals("-1")) {
+                JOptionPane.showMessageDialog(null, "No entry selected", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             fillStrings(descObj);
             addButton.setActionCommand("ModifyEntry");
         } else {
@@ -64,7 +69,6 @@ public class AddFrame {
         }
         JTextField jCurrency = new JTextField((String) descObj[Utils.Entries.CURRENCY.ordinal()]);
         JTextField jDescription = new JTextField((String) descObj[Utils.Entries.DESC.ordinal()]);
-
         JLabel labelYear = new JLabel("Year: ");
         JLabel labelMonth = new JLabel("Month: ");
         JLabel labelType = new JLabel("Type: ");
@@ -90,7 +94,6 @@ public class AddFrame {
         ctrlPanel.add(cancelButton);
 
         JFrame addFrame = new JFrame("Add entry");
-
         /**
          * Action listener for getting info to the controller.
          */

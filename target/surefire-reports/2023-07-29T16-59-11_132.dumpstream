@@ -1,4 +1,4 @@
-# Created at 2023-07-04T17:53:29.789
+# Created at 2023-07-29T16:59:11.366
 Boot Manifest-JAR contains absolute paths in classpath 'e:\Programming\Java\JFin\jfin\target\test-classes'
 Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
 

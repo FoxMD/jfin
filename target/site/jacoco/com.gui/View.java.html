@@ -16,107 +16,113 @@ import javax.swing.border.TitledBorder;
  */
 public class View {
     private static final int SCROLL_PANEL_WIDTH = 800;
-<span class="fc" id="L19">    private final int dividerLocation = 150;</span>
-<span class="fc" id="L20">    private final int minWidth = 1200;</span>
-<span class="fc" id="L21">    private final int prefWidth = 1400;</span>
-<span class="fc" id="L22">    private final int minHeight = 600;</span>
-<span class="fc" id="L23">    private final int prefHeight = 800;</span>
-<span class="fc" id="L24">    private final int helperBarHeight = 35;</span>
-<span class="fc" id="L25">    private final int overviewHeight = 400;</span>
-<span class="fc" id="L26">    private final int databaseHeight = 200;</span>
+<span class="nc" id="L19">    private final int dividerLocation = 150;</span>
+<span class="nc" id="L20">    private final int minWidth = 1200;</span>
+<span class="nc" id="L21">    private final int prefWidth = 1400;</span>
+<span class="nc" id="L22">    private final int minHeight = 600;</span>
+<span class="nc" id="L23">    private final int prefHeight = 800;</span>
+<span class="nc" id="L24">    private final int helperBarHeight = 35;</span>
+<span class="nc" id="L25">    private final int overviewHeight = 400;</span>
+<span class="nc" id="L26">    private final int databaseHeight = 200;</span>
+
+    private Controller controller;
+    private FinanceModel modelDB;
+    private FinanceModel modelSum;
 
     /**
      * Constructor for the MVC.
      */
-<span class="fc" id="L31">    public View() {</span>
+<span class="nc" id="L35">    public View(FinanceModel modelDB, FinanceModel modelSum, Controller controller) {</span>
+        // Register DB and tools
+<span class="nc" id="L37">        this.controller = controller;</span>
+<span class="nc" id="L38">        this.modelDB = modelDB;</span>
+<span class="nc" id="L39">        this.modelSum = modelSum;</span>
+
         // Create views swing UI components
-<span class="nc" id="L33">        JTable table = new JTable();</span>
-<span class="nc" id="L34">        JTable summary = new JTable();</span>
-<span class="nc" id="L35">        JFrame frame = new JFrame(&quot;Finance&quot;);</span>
+<span class="nc" id="L42">        JTable table = new JTable();</span>
+<span class="nc" id="L43">        JTable summary = new JTable();</span>
+<span class="nc" id="L44">        JFrame frame = new JFrame(&quot;Finance&quot;);</span>
 
-        // Create table model
-<span class="nc" id="L38">        FinanceModel modelDB = new FinanceModel();</span>
-<span class="nc" id="L39">        table.setModel(modelDB);</span>
-
-<span class="nc" id="L41">        FinanceModel modelSum = new FinanceModel();</span>
-<span class="nc" id="L42">        summary.setModel(modelSum);</span>
+        // Asign table model
+<span class="nc" id="L47">        table.setModel(this.modelDB);</span>
+<span class="nc" id="L48">        summary.setModel(this.modelSum);</span>
 
         // Set the graph pannel
-<span class="nc" id="L45">        GraphPanel gPanel = new GraphPanel();</span>
-<span class="nc" id="L46">        JPanel graphPanel = gPanel.graphPanelComposer(modelSum);</span>
+<span class="nc" id="L51">        GraphPanel gPanel = new GraphPanel();</span>
+<span class="nc" id="L52">        JPanel graphPanel = gPanel.graphPanelComposer(modelSum);</span>
 
-        // Create controller
-<span class="nc" id="L49">        Controller controller = new Controller(modelDB, modelSum, gPanel, frame, summary);</span>
+        // Asign windows to controller
+<span class="nc" id="L55">        this.controller.registerWindows(gPanel, frame, summary);</span>
 
         // Set the view layout - Control Panel, Buttons
-<span class="nc" id="L52">        ControlPanel cPanel = new ControlPanel();</span>
-<span class="nc" id="L53">        JPanel ctrlPanel = cPanel.controlPanelComposer(controller);</span>
+<span class="nc" id="L58">        ControlPanel cPanel = new ControlPanel();</span>
+<span class="nc" id="L59">        JPanel ctrlPanel = cPanel.controlPanelComposer(controller);</span>
 
         // Set the search pannel
-<span class="nc" id="L56">        SearchPanel sPanel = new SearchPanel(helperBarHeight);</span>
-<span class="nc" id="L57">        JPanel searchPanel = sPanel.searchPanelComposer(controller);</span>
+<span class="nc" id="L62">        SearchPanel sPanel = new SearchPanel(helperBarHeight);</span>
+<span class="nc" id="L63">        JPanel searchPanel = sPanel.searchPanelComposer(controller);</span>
 
         // Set the selector pannel
-<span class="nc" id="L60">        SelectorPanel slPanel = new SelectorPanel(helperBarHeight);</span>
-<span class="nc" id="L61">        JPanel selectorPanel = slPanel.selectorPanelComposer(controller);</span>
+<span class="nc" id="L66">        SelectorPanel slPanel = new SelectorPanel(helperBarHeight);</span>
+<span class="nc" id="L67">        JPanel selectorPanel = slPanel.selectorPanelComposer(controller);</span>
 
         // Set the database panel
-<span class="nc" id="L64">        JScrollPane tableScrollPanel = new JScrollPane(table);</span>
-<span class="nc" id="L65">        tableScrollPanel = stylingDatabasePanel(tableScrollPanel,</span>
-<span class="nc" id="L66">        &quot;Database - Test feedback&quot;, databaseHeight);</span>
+<span class="nc" id="L70">        JScrollPane tableScrollPanel = new JScrollPane(table);</span>
+<span class="nc" id="L71">        tableScrollPanel = stylingDatabasePanel(tableScrollPanel,</span>
+        &quot;Database - Test feedback&quot;, databaseHeight);
 
         // Set the summary pannel
-<span class="nc" id="L69">        JScrollPane tableSummaryScrollPanel = new JScrollPane(summary);</span>
-<span class="nc" id="L70">        tableSummaryScrollPanel = stylingDatabasePanel(tableSummaryScrollPanel,</span>
-<span class="nc" id="L71">        &quot;Summary - Test feedback&quot;, overviewHeight);</span>
+<span class="nc" id="L75">        JScrollPane tableSummaryScrollPanel = new JScrollPane(summary);</span>
+<span class="nc" id="L76">        tableSummaryScrollPanel = stylingDatabasePanel(tableSummaryScrollPanel,</span>
+        &quot;Summary - Test feedback&quot;, overviewHeight);
 
         // Set the sum action panel
-<span class="nc" id="L74">        SumActionPanel saPanel = new SumActionPanel();</span>
-<span class="nc" id="L75">        JPanel sumActPanel = saPanel.sumActionPanelComposer();</span>
+<span class="nc" id="L80">        SumActionPanel saPanel = new SumActionPanel();</span>
+<span class="nc" id="L81">        JPanel sumActPanel = saPanel.sumActionPanelComposer();</span>
 
         // Split Layouts
         // Set the filter summary panel
-<span class="nc" id="L79">        JSplitPane splitVerticalPanelSummary = new JSplitPane(JSplitPane.VERTICAL_SPLIT,</span>
-<span class="nc" id="L80">                    selectorPanel, tableSummaryScrollPanel);</span>
-<span class="nc" id="L81">        splitVerticalPanelSummary.setEnabled(false);</span>
+<span class="nc" id="L85">        JSplitPane splitVerticalPanelSummary = new JSplitPane(JSplitPane.VERTICAL_SPLIT,</span>
+                    selectorPanel, tableSummaryScrollPanel);
+<span class="nc" id="L87">        splitVerticalPanelSummary.setEnabled(false);</span>
 
-<span class="nc" id="L83">        JSplitPane splitVerticalPanelDatabase = new JSplitPane(JSplitPane.VERTICAL_SPLIT,</span>
-<span class="nc" id="L84">                    searchPanel, tableScrollPanel);</span>
-<span class="nc" id="L85">        splitVerticalPanelDatabase.setEnabled(false);</span>
+<span class="nc" id="L89">        JSplitPane splitVerticalPanelDatabase = new JSplitPane(JSplitPane.VERTICAL_SPLIT,</span>
+                    searchPanel, tableScrollPanel);
+<span class="nc" id="L91">        splitVerticalPanelDatabase.setEnabled(false);</span>
 
-<span class="nc" id="L87">        JSplitPane splitHorizontalPanelDatabase = new JSplitPane(JSplitPane.VERTICAL_SPLIT,</span>
-<span class="nc" id="L88">                    splitVerticalPanelSummary, splitVerticalPanelDatabase);</span>
-<span class="nc" id="L89">        splitHorizontalPanelDatabase.setEnabled(false);</span>
+<span class="nc" id="L93">        JSplitPane splitHorizontalPanelDatabase = new JSplitPane(JSplitPane.VERTICAL_SPLIT,</span>
+                    splitVerticalPanelSummary, splitVerticalPanelDatabase);
+<span class="nc" id="L95">        splitHorizontalPanelDatabase.setEnabled(false);</span>
 
-<span class="nc" id="L91">        JSplitPane splitHorizontalPanelSummary = new JSplitPane(JSplitPane.VERTICAL_SPLIT,</span>
-<span class="nc" id="L92">                    graphPanel, sumActPanel);</span>
-<span class="nc" id="L93">        splitHorizontalPanelSummary.setEnabled(false);</span>
+<span class="nc" id="L97">        JSplitPane splitHorizontalPanelSummary = new JSplitPane(JSplitPane.VERTICAL_SPLIT,</span>
+                    sumActPanel, graphPanel);
+<span class="nc" id="L99">        splitHorizontalPanelSummary.setEnabled(false);</span>
 
-<span class="nc" id="L95">        JSplitPane mainWindowSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,</span>
-<span class="nc" id="L96">                    splitHorizontalPanelDatabase, splitHorizontalPanelSummary);</span>
-<span class="nc" id="L97">        mainWindowSplit.setEnabled(false);</span>
+<span class="nc" id="L101">        JSplitPane mainWindowSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,</span>
+                    splitHorizontalPanelDatabase, splitHorizontalPanelSummary);
+<span class="nc" id="L103">        mainWindowSplit.setEnabled(false);</span>
 
-<span class="nc" id="L99">        JSplitPane splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,</span>
-<span class="nc" id="L100">                    ctrlPanel, mainWindowSplit);</span>
-<span class="nc" id="L101">        splitPanel.setDividerLocation(dividerLocation);</span>
-<span class="nc" id="L102">        splitPanel.setEnabled(false);</span>
+<span class="nc" id="L105">        JSplitPane splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,</span>
+                    ctrlPanel, mainWindowSplit);
+<span class="nc" id="L107">        splitPanel.setDividerLocation(dividerLocation);</span>
+<span class="nc" id="L108">        splitPanel.setEnabled(false);</span>
 
         // Display it all in a scrolling window and make the window appear
-<span class="nc" id="L105">        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
-<span class="nc" id="L106">        frame.setMinimumSize(new Dimension(minWidth, minHeight));</span>
-<span class="nc" id="L107">        frame.setPreferredSize(new Dimension(prefWidth, prefHeight));</span>
-<span class="nc" id="L108">        frame.add(splitPanel);</span>
-<span class="nc" id="L109">        frame.pack();</span>
-<span class="nc" id="L110">        frame.setLocationRelativeTo(null);</span>
-<span class="nc" id="L111">        frame.setVisible(true);</span>
-<span class="nc" id="L112">    }</span>
+<span class="nc" id="L111">        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L112">        frame.setMinimumSize(new Dimension(minWidth, minHeight));</span>
+<span class="nc" id="L113">        frame.setPreferredSize(new Dimension(prefWidth, prefHeight));</span>
+<span class="nc" id="L114">        frame.add(splitPanel);</span>
+<span class="nc" id="L115">        frame.pack();</span>
+<span class="nc" id="L116">        frame.setLocationRelativeTo(null);</span>
+<span class="nc" id="L117">        frame.setVisible(true);</span>
+<span class="nc" id="L118">    }</span>
 
     private static JScrollPane stylingDatabasePanel(JScrollPane tableScrollPanel, String title, int height) {
-<span class="nc" id="L115">        tableScrollPanel.setMinimumSize(new Dimension(SCROLL_PANEL_WIDTH, height));</span>
-<span class="nc" id="L116">        tableScrollPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), title,</span>
-<span class="nc" id="L117">                TitledBorder.CENTER, TitledBorder.TOP));</span>
+<span class="nc" id="L121">        tableScrollPanel.setMinimumSize(new Dimension(SCROLL_PANEL_WIDTH, height));</span>
+<span class="nc" id="L122">        tableScrollPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), title,</span>
+                TitledBorder.CENTER, TitledBorder.TOP));
 
-<span class="nc" id="L119">        return tableScrollPanel;</span>
+<span class="nc" id="L125">        return tableScrollPanel;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -25,28 +25,34 @@ public class View {
     private final int overviewHeight = 400;
     private final int databaseHeight = 200;
 
+    private Controller controller;
+    private FinanceModel modelDB;
+    private FinanceModel modelSum;
+
     /**
      * Constructor for the MVC.
      */
-    public View() {
+    public View(FinanceModel modelDB, FinanceModel modelSum, Controller controller) {
+        // Register DB and tools
+        this.controller = controller;
+        this.modelDB = modelDB;
+        this.modelSum = modelSum;
+
         // Create views swing UI components
         JTable table = new JTable();
         JTable summary = new JTable();
         JFrame frame = new JFrame("Finance");
 
-        // Create table model
-        FinanceModel modelDB = new FinanceModel();
-        table.setModel(modelDB);
-
-        FinanceModel modelSum = new FinanceModel();
-        summary.setModel(modelSum);
+        // Asign table model
+        table.setModel(this.modelDB);
+        summary.setModel(this.modelSum);
 
         // Set the graph pannel
         GraphPanel gPanel = new GraphPanel();
         JPanel graphPanel = gPanel.graphPanelComposer(modelSum);
 
-        // Create controller
-        Controller controller = new Controller(modelDB, modelSum, gPanel, frame, summary);
+        // Asign windows to controller
+        this.controller.registerWindows(gPanel, frame, summary);
 
         // Set the view layout - Control Panel, Buttons
         ControlPanel cPanel = new ControlPanel();

@@ -38,10 +38,13 @@ public class Controller implements ActionListener {
     * @param graph graph panel for refresh
     * @param frame frame panel for repaint
     */
-    public Controller(FinanceModel modelDB, FinanceModel modelSum, GraphPanel graph, JFrame frame, JTable sum) {
+    public Controller(FinanceModel modelDB, FinanceModel modelSum) {
         super();
         this.model = modelDB;
         this.modelOverview = modelSum;
+    }
+
+    public void registerWindows(GraphPanel graph, JFrame frame, JTable sum) {
         this.frame = frame;
         this.graph = graph;
         this.summary = sum;

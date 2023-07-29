@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -18,118 +19,120 @@ import java.awt.event.ActionEvent;
  * Popup frame for adding a value to DB.
  */
 public class AddFrame {
-<span class="nc" id="L21">    private final int minWidth = 400;</span>
-<span class="nc" id="L22">    private final int minHeight = 120;</span>
-<span class="nc" id="L23">    private final int rows = 7;</span>
-<span class="nc" id="L24">    private final int colmns = 2;</span>
-<span class="nc" id="L25">    private final int vGap = 3;</span>
-<span class="nc" id="L26">    private final int hGap = 3;</span>
+<span class="nc" id="L22">    private final int minWidth = 400;</span>
+<span class="nc" id="L23">    private final int minHeight = 120;</span>
+<span class="nc" id="L24">    private final int rows = 7;</span>
+<span class="nc" id="L25">    private final int colmns = 2;</span>
+<span class="nc" id="L26">    private final int vGap = 3;</span>
+<span class="nc" id="L27">    private final int hGap = 3;</span>
 
     private Object[] descObj;
 
-<span class="nc" id="L30">    public enum Caller { ADD, MODIFY }</span>
+<span class="nc" id="L31">    public enum Caller { ADD, MODIFY }</span>
 
     /**
      * Constructor for the popup frame.
      * @param controller
      */
-<span class="nc" id="L36">    public AddFrame(Controller controller, Caller call) {</span>
-<span class="nc" id="L37">        JButton cancelButton = new JButton(&quot;Cancel&quot;);</span>
-<span class="nc" id="L38">        JButton addButton = new JButton(&quot;Add&quot;);</span>
-<span class="nc" id="L39">        addButton.setName(&quot;AddEntry&quot;);</span>
-<span class="nc" id="L40">        addButton.addActionListener(controller);</span>
-<span class="nc" id="L41">        cancelButton.setActionCommand(&quot;CancelAction&quot;);</span>
+<span class="nc" id="L37">    public AddFrame(Controller controller, Caller call) {</span>
+<span class="nc" id="L38">        JButton cancelButton = new JButton(&quot;Cancel&quot;);</span>
+<span class="nc" id="L39">        JButton addButton = new JButton(&quot;Add&quot;);</span>
+<span class="nc" id="L40">        addButton.setName(&quot;AddEntry&quot;);</span>
+<span class="nc" id="L41">        addButton.addActionListener(controller);</span>
+<span class="nc" id="L42">        cancelButton.setActionCommand(&quot;CancelAction&quot;);</span>
 
-<span class="nc" id="L43">        descObj = new Object[Utils.Entries.values().length];</span>
-<span class="nc" id="L44">        controller.setCallerIDforAddFrame(call);</span>
+<span class="nc" id="L44">        descObj = new Object[Utils.Entries.values().length];</span>
+<span class="nc" id="L45">        controller.setCallerIDforAddFrame(call);</span>
 
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (call == Caller.MODIFY) {</span>
-<span class="nc" id="L47">            addButton.setText(&quot;Modify&quot;);</span>
-<span class="nc" id="L48">            descObj = controller.getEntry();</span>
-<span class="nc" id="L49">            fillStrings(descObj);</span>
-<span class="nc" id="L50">            addButton.setActionCommand(&quot;ModifyEntry&quot;);</span>
-<span class="nc" id="L51">        } else {</span>
-<span class="nc" id="L52">            fillObject();</span>
-<span class="nc" id="L53">            addButton.setActionCommand(&quot;AddEntry&quot;);</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (call == Caller.MODIFY) {</span>
+<span class="nc" id="L48">            addButton.setText(&quot;Modify&quot;);</span>
+<span class="nc" id="L49">            descObj = controller.getEntry();</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            if (descObj[0].equals(&quot;-1&quot;)) {</span>
+<span class="nc" id="L51">                JOptionPane.showMessageDialog(null, &quot;No entry selected&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L52">                return;</span>
+            }
+<span class="nc" id="L54">            fillStrings(descObj);</span>
+<span class="nc" id="L55">            addButton.setActionCommand(&quot;ModifyEntry&quot;);</span>
+        } else {
+<span class="nc" id="L57">            fillObject();</span>
+<span class="nc" id="L58">            addButton.setActionCommand(&quot;AddEntry&quot;);</span>
         }
 
-<span class="nc" id="L56">        JTextField jYear = new JTextField((String) descObj[Utils.Entries.YEAR.ordinal()]);</span>
-<span class="nc" id="L57">        JTextField jMonth = new JTextField((String) descObj[Utils.Entries.MONTH.ordinal()]);</span>
-<span class="nc" id="L58">        JTextField jType = new JTextField((String) descObj[Utils.Entries.TYPE.ordinal()]);</span>
-<span class="nc" id="L59">        JTextField jValue = new JTextField();</span>
-<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (call == Caller.MODIFY) {</span>
-<span class="nc" id="L61">            jValue.setText(Float.toString((Float) descObj[Utils.Entries.VALUE.ordinal()]));</span>
-<span class="nc" id="L62">        } else {</span>
-<span class="nc" id="L63">            jValue.setText((String) descObj[Utils.Entries.VALUE.ordinal()]);</span>
+<span class="nc" id="L61">        JTextField jYear = new JTextField((String) descObj[Utils.Entries.YEAR.ordinal()]);</span>
+<span class="nc" id="L62">        JTextField jMonth = new JTextField((String) descObj[Utils.Entries.MONTH.ordinal()]);</span>
+<span class="nc" id="L63">        JTextField jType = new JTextField((String) descObj[Utils.Entries.TYPE.ordinal()]);</span>
+<span class="nc" id="L64">        JTextField jValue = new JTextField();</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (call == Caller.MODIFY) {</span>
+<span class="nc" id="L66">            jValue.setText(Float.toString((Float) descObj[Utils.Entries.VALUE.ordinal()]));</span>
+        } else {
+<span class="nc" id="L68">            jValue.setText((String) descObj[Utils.Entries.VALUE.ordinal()]);</span>
         }
-<span class="nc" id="L65">        JTextField jCurrency = new JTextField((String) descObj[Utils.Entries.CURRENCY.ordinal()]);</span>
-<span class="nc" id="L66">        JTextField jDescription = new JTextField((String) descObj[Utils.Entries.DESC.ordinal()]);</span>
+<span class="nc" id="L70">        JTextField jCurrency = new JTextField((String) descObj[Utils.Entries.CURRENCY.ordinal()]);</span>
+<span class="nc" id="L71">        JTextField jDescription = new JTextField((String) descObj[Utils.Entries.DESC.ordinal()]);</span>
+<span class="nc" id="L72">        JLabel labelYear = new JLabel(&quot;Year: &quot;);</span>
+<span class="nc" id="L73">        JLabel labelMonth = new JLabel(&quot;Month: &quot;);</span>
+<span class="nc" id="L74">        JLabel labelType = new JLabel(&quot;Type: &quot;);</span>
+<span class="nc" id="L75">        JLabel labelValue = new JLabel(&quot;Value: &quot;);</span>
+<span class="nc" id="L76">        JLabel labelCurrency = new JLabel(&quot;Currency: &quot;);</span>
+<span class="nc" id="L77">        JLabel labelDescription = new JLabel(&quot;Description: &quot;);</span>
 
-<span class="nc" id="L68">        JLabel labelYear = new JLabel(&quot;Year: &quot;);</span>
-<span class="nc" id="L69">        JLabel labelMonth = new JLabel(&quot;Month: &quot;);</span>
-<span class="nc" id="L70">        JLabel labelType = new JLabel(&quot;Type: &quot;);</span>
-<span class="nc" id="L71">        JLabel labelValue = new JLabel(&quot;Value: &quot;);</span>
-<span class="nc" id="L72">        JLabel labelCurrency = new JLabel(&quot;Currency: &quot;);</span>
-<span class="nc" id="L73">        JLabel labelDescription = new JLabel(&quot;Description: &quot;);</span>
+<span class="nc" id="L79">        JPanel ctrlPanel = new JPanel(new GridLayout(rows, colmns, hGap, vGap));</span>
+<span class="nc" id="L80">        ctrlPanel.setMinimumSize(new Dimension(minHeight, minWidth));</span>
+<span class="nc" id="L81">        ctrlPanel.add(labelYear);</span>
+<span class="nc" id="L82">        ctrlPanel.add(jYear);</span>
+<span class="nc" id="L83">        ctrlPanel.add(labelMonth);</span>
+<span class="nc" id="L84">        ctrlPanel.add(jMonth);</span>
+<span class="nc" id="L85">        ctrlPanel.add(labelType);</span>
+<span class="nc" id="L86">        ctrlPanel.add(jType);</span>
+<span class="nc" id="L87">        ctrlPanel.add(labelValue);</span>
+<span class="nc" id="L88">        ctrlPanel.add(jValue);</span>
+<span class="nc" id="L89">        ctrlPanel.add(labelCurrency);</span>
+<span class="nc" id="L90">        ctrlPanel.add(jCurrency);</span>
+<span class="nc" id="L91">        ctrlPanel.add(labelDescription);</span>
+<span class="nc" id="L92">        ctrlPanel.add(jDescription);</span>
+<span class="nc" id="L93">        ctrlPanel.add(addButton);</span>
+<span class="nc" id="L94">        ctrlPanel.add(cancelButton);</span>
 
-<span class="nc" id="L75">        JPanel ctrlPanel = new JPanel(new GridLayout(rows, colmns, hGap, vGap));</span>
-<span class="nc" id="L76">        ctrlPanel.setMinimumSize(new Dimension(minHeight, minWidth));</span>
-<span class="nc" id="L77">        ctrlPanel.add(labelYear);</span>
-<span class="nc" id="L78">        ctrlPanel.add(jYear);</span>
-<span class="nc" id="L79">        ctrlPanel.add(labelMonth);</span>
-<span class="nc" id="L80">        ctrlPanel.add(jMonth);</span>
-<span class="nc" id="L81">        ctrlPanel.add(labelType);</span>
-<span class="nc" id="L82">        ctrlPanel.add(jType);</span>
-<span class="nc" id="L83">        ctrlPanel.add(labelValue);</span>
-<span class="nc" id="L84">        ctrlPanel.add(jValue);</span>
-<span class="nc" id="L85">        ctrlPanel.add(labelCurrency);</span>
-<span class="nc" id="L86">        ctrlPanel.add(jCurrency);</span>
-<span class="nc" id="L87">        ctrlPanel.add(labelDescription);</span>
-<span class="nc" id="L88">        ctrlPanel.add(jDescription);</span>
-<span class="nc" id="L89">        ctrlPanel.add(addButton);</span>
-<span class="nc" id="L90">        ctrlPanel.add(cancelButton);</span>
-
-<span class="nc" id="L92">        JFrame addFrame = new JFrame(&quot;Add entry&quot;);</span>
-
+<span class="nc" id="L96">        JFrame addFrame = new JFrame(&quot;Add entry&quot;);</span>
         /**
          * Action listener for getting info to the controller.
          */
-<span class="nc" id="L97">        ActionListener listener = new ActionListener() {</span>
+<span class="nc" id="L100">        ActionListener listener = new ActionListener() {</span>
             @Override
             public void actionPerformed(ActionEvent e) {
-<span class="nc" id="L100">                Object[] data = new Object[Utils.Entries.values().length];</span>
-<span class="nc" id="L101">                data[Utils.Entries.YEAR.ordinal()] = jYear.getText();</span>
-<span class="nc" id="L102">                data[Utils.Entries.MONTH.ordinal()] = jMonth.getText();</span>
-<span class="nc" id="L103">                data[Utils.Entries.TYPE.ordinal()] = jType.getText();</span>
-<span class="nc" id="L104">                data[Utils.Entries.VALUE.ordinal()] = jValue.getText();</span>
-<span class="nc" id="L105">                data[Utils.Entries.CURRENCY.ordinal()] = jCurrency.getText();</span>
-<span class="nc" id="L106">                data[Utils.Entries.DESC.ordinal()] = jDescription.getText();</span>
-<span class="nc" id="L107">                data[Utils.Entries.ID.ordinal()] = descObj[Utils.Entries.ID.ordinal()];</span>
+<span class="nc" id="L103">                Object[] data = new Object[Utils.Entries.values().length];</span>
+<span class="nc" id="L104">                data[Utils.Entries.YEAR.ordinal()] = jYear.getText();</span>
+<span class="nc" id="L105">                data[Utils.Entries.MONTH.ordinal()] = jMonth.getText();</span>
+<span class="nc" id="L106">                data[Utils.Entries.TYPE.ordinal()] = jType.getText();</span>
+<span class="nc" id="L107">                data[Utils.Entries.VALUE.ordinal()] = jValue.getText();</span>
+<span class="nc" id="L108">                data[Utils.Entries.CURRENCY.ordinal()] = jCurrency.getText();</span>
+<span class="nc" id="L109">                data[Utils.Entries.DESC.ordinal()] = jDescription.getText();</span>
+<span class="nc" id="L110">                data[Utils.Entries.ID.ordinal()] = descObj[Utils.Entries.ID.ordinal()];</span>
 
-<span class="nc" id="L109">                controller.setValuesFromFormular(data);</span>
-<span class="nc" id="L110">                addFrame.dispose();</span>
-<span class="nc" id="L111">            }</span>
+<span class="nc" id="L112">                controller.setValuesFromFormular(data);</span>
+<span class="nc" id="L113">                addFrame.dispose();</span>
+<span class="nc" id="L114">            }</span>
         };
 
-<span class="nc" id="L114">        addButton.addActionListener(listener);</span>
-<span class="nc" id="L115">        cancelButton.addActionListener(listener);</span>
+<span class="nc" id="L117">        addButton.addActionListener(listener);</span>
+<span class="nc" id="L118">        cancelButton.addActionListener(listener);</span>
 
-<span class="nc" id="L117">        addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</span>
-<span class="nc" id="L118">        addFrame.setMinimumSize(new Dimension(minWidth, minHeight));</span>
-<span class="nc" id="L119">        addFrame.add(ctrlPanel);</span>
-<span class="nc" id="L120">        addFrame.pack();</span>
-<span class="nc" id="L121">        addFrame.setLocationRelativeTo(null);</span>
-<span class="nc" id="L122">        addFrame.setVisible(true);</span>
-<span class="nc" id="L123">    }</span>
+<span class="nc" id="L120">        addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L121">        addFrame.setMinimumSize(new Dimension(minWidth, minHeight));</span>
+<span class="nc" id="L122">        addFrame.add(ctrlPanel);</span>
+<span class="nc" id="L123">        addFrame.pack();</span>
+<span class="nc" id="L124">        addFrame.setLocationRelativeTo(null);</span>
+<span class="nc" id="L125">        addFrame.setVisible(true);</span>
+<span class="nc" id="L126">    }</span>
 
     private void fillStrings(Object[] obj) {
-<span class="nc" id="L126">        descObj = obj;</span>
-<span class="nc" id="L127">    }</span>
+<span class="nc" id="L129">        descObj = obj;</span>
+<span class="nc" id="L130">    }</span>
 
     private void fillObject() {
-<span class="nc bnc" id="L130" title="All 2 branches missed.">        for (int i = 0; i &lt; Utils.Entries.values().length; i++) {</span>
-<span class="nc" id="L131">            descObj[i] = &quot;&quot;;</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">        for (int i = 0; i &lt; Utils.Entries.values().length; i++) {</span>
+<span class="nc" id="L134">            descObj[i] = &quot;&quot;;</span>
         }
-<span class="nc" id="L133">    }</span>
+<span class="nc" id="L136">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

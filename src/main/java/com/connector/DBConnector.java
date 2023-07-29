@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
 /**
  * Connector for database server, handles work with mysql.
  */
-public class DBConnector {
+public final class DBConnector {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/dummy";
     private static final String BASE_QUERY = "SELECT * FROM testid";
     private static final String USER = SysHandler.getVariable("USER_DB_KEY");
@@ -26,8 +26,29 @@ public class DBConnector {
     /**
      * Constructor for the class.
      */
-    public DBConnector() {
-        System.out.println("Connecting to database with: " + USER + ", PW: " + PASSWORD);
+    //public DBConnector() {
+    //    System.out.println("Connecting to database with: " + USER + ", PW: " + PASSWORD);
+    //}
+
+    private static volatile DBConnector instance;
+
+    private DBConnector() {
+        // later set credentials
+    }
+
+    // later add credentials as arg
+    public static DBConnector getInstance() {
+        DBConnector result = instance;
+        if (result == null) {
+            synchronized (DBConnector.class) {
+                result = instance;
+                if (result == null) {
+                    instance = new DBConnector();
+                    result = instance;
+                }
+            }
+        }
+        return result;
     }
 
     /**
