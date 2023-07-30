@@ -15,35 +15,29 @@ import java.sql.PreparedStatement;
  * Connector for database server, handles work with mysql.
  */
 public final class DBConnector {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/dummy";
+    private String dbUrl;
+    private String user;
+    private String password;
     private static final String BASE_QUERY = "SELECT * FROM testid";
-    private static final String USER = SysHandler.getVariable("USER_DB_KEY");
-    private static final String PASSWORD = SysHandler.getVariable("PASSWORD_DB_KEY");
     private String query = "SELECT * FROM testid WHERE";
 
     private final int sqlOffset = 1;
-
-    /**
-     * Constructor for the class.
-     */
-    //public DBConnector() {
-    //    System.out.println("Connecting to database with: " + USER + ", PW: " + PASSWORD);
-    //}
-
     private static volatile DBConnector instance;
 
-    private DBConnector() {
-        // later set credentials
+    private DBConnector(Credentials cred) {
+        this.dbUrl = cred.url;
+        this.user = cred.user;
+        this.password = cred.password;
     }
 
     // later add credentials as arg
-    public static DBConnector getInstance() {
+    public static DBConnector getInstance(Credentials cred) {
         DBConnector result = instance;
         if (result == null) {
             synchronized (DBConnector.class) {
                 result = instance;
                 if (result == null) {
-                    instance = new DBConnector();
+                    instance = new DBConnector(cred);
                     result = instance;
                 }
             }
@@ -64,7 +58,7 @@ public final class DBConnector {
     public int writeQuery(Object[] entry) {
         try
         (
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Connection conn = DriverManager.getConnection(dbUrl, user, password);
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO testid VALUES (?,?,?,?,?,?,?)");
         ) {
             pstmt.setString(Utils.Entries.YEAR.ordinal() + sqlOffset,
@@ -111,7 +105,7 @@ public final class DBConnector {
         System.out.println(request);
         try
         (
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Connection conn = DriverManager.getConnection(dbUrl, user, password);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(request);
         ) {
@@ -156,7 +150,7 @@ public final class DBConnector {
         System.out.println(request);
         try
         (
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Connection conn = DriverManager.getConnection(dbUrl, user, password);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(request);
         ) {
@@ -213,7 +207,7 @@ public final class DBConnector {
     public int removeEntryFromDB(Object[] entry) {
         try
         (
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Connection conn = DriverManager.getConnection(dbUrl, user, password);
             PreparedStatement pstmt = conn.prepareStatement(
                 "DELETE FROM testid"
                 + " WHERE year=? AND month=? AND type=? AND value=? AND currency=? AND description=? AND uid=?"
@@ -253,7 +247,7 @@ public final class DBConnector {
     public int modifyEntryFromDB(Object[] entry) {
         try
         (
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Connection conn = DriverManager.getConnection(dbUrl, user, password);
             PreparedStatement pstmt = conn.prepareStatement(
                 "UPDATE testid SET year=?, month=?, type=?, value=?, currency=?, description=?" + "WHERE uid=?"
             );
@@ -293,7 +287,7 @@ public final class DBConnector {
     public int testConnection() {
         try
         (
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Connection conn = DriverManager.getConnection(dbUrl, user, password);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(BASE_QUERY);
         ) {

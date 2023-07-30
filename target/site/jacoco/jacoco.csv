@@ -1,7 +1,7 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 jfin,com.core,Start.new Runnable() {...},6,3,0,0,5,1,1,1,1,1
 jfin,com.core,Controller,302,0,22,0,79,0,23,0,12,0
-jfin,com.core,Start,28,13,2,0,6,5,1,2,0,2
+jfin,com.core,Start,28,18,2,0,6,6,1,2,0,2
 jfin,com.model,Constants,0,357,0,4,0,19,0,4,0,2
 jfin,com.model,Utils.Entries,0,45,0,0,0,1,0,1,0,1
 jfin,com.model,Utils,73,0,0,0,18,0,1,0,1,0
@@ -20,4 +20,5 @@ jfin,com.gui,SearchPanel,131,0,0,0,36,0,2,0,2,0
 jfin,com.gui,SelectorPanel,138,0,0,0,16,0,2,0,2,0
 jfin,com.gui,ControlPanel,95,0,0,0,24,0,2,0,2,0
 jfin,com.connector,SysHandler,0,14,0,2,0,4,0,3,0,2
-jfin,com.connector,DBConnector,763,39,10,2,148,15,13,3,7,3
+jfin,com.connector,DBConnector,781,47,10,2,148,16,13,2,7,2
+jfin,com.connector,Credentials,0,14,0,0,0,4,0,1,0,1

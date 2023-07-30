@@ -2,6 +2,7 @@
 
 import javax.swing.SwingUtilities;
 
+import com.connector.Credentials;
 import com.connector.DBConnector;
 import com.gui.View;
 import com.model.FinanceModel;
@@ -22,32 +23,33 @@ public final class Start {
      * @param args args
      */
     public static void main(String[] args) {
-<span class="fc" id="L25">        System.out.println(&quot;Program started&quot;);</span>
-<span class="fc" id="L26">        SwingUtilities.invokeLater(new Runnable() {</span>
+<span class="fc" id="L26">        System.out.println(&quot;Program started&quot;);</span>
+<span class="fc" id="L27">        SwingUtilities.invokeLater(new Runnable() {</span>
             public void run() {
                 try {
-<span class="nc" id="L29">                    createDependenciesAndShowGUI();</span>
-<span class="nc" id="L30">                } catch (Exception e) {</span>
-<span class="nc" id="L31">                    e.printStackTrace();</span>
-<span class="nc" id="L32">                }</span>
-<span class="nc" id="L33">            }</span>
+<span class="nc" id="L30">                    createDependenciesAndShowGUI();</span>
+<span class="nc" id="L31">                } catch (Exception e) {</span>
+<span class="nc" id="L32">                    e.printStackTrace();</span>
+<span class="nc" id="L33">                }</span>
+<span class="nc" id="L34">            }</span>
         });
-<span class="fc" id="L35">    }</span>
+<span class="fc" id="L36">    }</span>
 
     /**
      * Create UI and start the app.
      * @throws Exception For not starting
      */
     public static void createDependenciesAndShowGUI() throws Exception {
-<span class="fc" id="L42">        System.out.println(&quot;Create GUI&quot;);</span>
-<span class="fc" id="L43">        DBConnector database = DBConnector.getInstance();</span>
-<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (database.testConnection() != -1) {</span>
-<span class="nc" id="L45">            FinanceModel modelDB = new FinanceModel(database);</span>
-<span class="nc" id="L46">            FinanceModel modelSum = new FinanceModel(database);</span>
-<span class="nc" id="L47">            Controller controller = new Controller(modelDB, modelSum);</span>
+<span class="fc" id="L43">        System.out.println(&quot;Create GUI&quot;);</span>
+<span class="fc" id="L44">        Credentials loginData = new Credentials();</span>
+<span class="fc" id="L45">        DBConnector database = DBConnector.getInstance(loginData);</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (database.testConnection() != -1) {</span>
+<span class="nc" id="L47">            FinanceModel modelDB = new FinanceModel(database);</span>
+<span class="nc" id="L48">            FinanceModel modelSum = new FinanceModel(database);</span>
+<span class="nc" id="L49">            Controller controller = new Controller(modelDB, modelSum);</span>
 
-<span class="nc" id="L49">            new View(modelDB, modelSum, controller);</span>
+<span class="nc" id="L51">            new View(modelDB, modelSum, controller);</span>
         }
-<span class="nc" id="L51">    }</span>
+<span class="nc" id="L53">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -2,6 +2,7 @@ package com.core;
 
 import javax.swing.SwingUtilities;
 
+import com.connector.Credentials;
 import com.connector.DBConnector;
 import com.gui.View;
 import com.model.FinanceModel;
@@ -40,7 +41,8 @@ public final class Start {
      */
     public static void createDependenciesAndShowGUI() throws Exception {
         System.out.println("Create GUI");
-        DBConnector database = DBConnector.getInstance();
+        Credentials loginData = new Credentials();
+        DBConnector database = DBConnector.getInstance(loginData);
         if (database.testConnection() != -1) {
             FinanceModel modelDB = new FinanceModel(database);
             FinanceModel modelSum = new FinanceModel(database);

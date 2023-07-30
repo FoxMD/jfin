@@ -3,4 +3,5 @@ Credentials.java
 Credentials.class
 application-dev.properties
 .vscode/
+target/*
 settings.json
