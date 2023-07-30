@@ -18,8 +18,8 @@ public class SelectorPanel extends VHelperPanel {
      * @param height height
      */
     SelectorPanel(int height) {
-<span class="fc" id="L21">        super(height);</span>
-<span class="fc" id="L22">    }</span>
+<span class="nc" id="L21">        super(height);</span>
+<span class="nc" id="L22">    }</span>
 
     /**
      * Composer of the JPanel.
@@ -27,26 +27,26 @@ public class SelectorPanel extends VHelperPanel {
      * @return JPanel type.
      */
     public JPanel selectorPanelComposer(Controller controller) {
-<span class="fc" id="L30">        String[] choicesMonth = {&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;,</span>
-<span class="fc" id="L31">                                 &quot;May&quot;, &quot;June&quot;, &quot;July&quot;, &quot;August&quot;, &quot;September&quot;, &quot;October&quot;, &quot;November&quot;, &quot;December&quot;};</span>
+<span class="nc" id="L30">        String[] choicesMonth = {&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;,</span>
+                                 &quot;May&quot;, &quot;June&quot;, &quot;July&quot;, &quot;August&quot;, &quot;September&quot;, &quot;October&quot;, &quot;November&quot;, &quot;December&quot;};
 
-<span class="fc" id="L33">        String[] choicesYear = {&quot;2019&quot;, &quot;2020&quot;, &quot;2021&quot;, &quot;2022&quot;, &quot;2023&quot;, &quot;2024&quot;};</span>
+<span class="nc" id="L33">        String[] choicesYear = {&quot;2019&quot;, &quot;2020&quot;, &quot;2021&quot;, &quot;2022&quot;, &quot;2023&quot;, &quot;2024&quot;};</span>
 
-<span class="fc" id="L35">        final JComboBox&lt;String&gt; cbMonth = new JComboBox&lt;String&gt;(choicesMonth);</span>
-<span class="fc" id="L36">        final JComboBox&lt;String&gt; cbYear = new JComboBox&lt;String&gt;(choicesYear);</span>
+<span class="nc" id="L35">        final JComboBox&lt;String&gt; cbMonth = new JComboBox&lt;String&gt;(choicesMonth);</span>
+<span class="nc" id="L36">        final JComboBox&lt;String&gt; cbYear = new JComboBox&lt;String&gt;(choicesYear);</span>
 
-<span class="fc" id="L38">        JButton updateButton = new JButton(&quot;Update&quot;);</span>
+<span class="nc" id="L38">        JButton updateButton = new JButton(&quot;Update&quot;);</span>
 
-<span class="fc" id="L40">        JPanel selectorPanel = new JPanel();</span>
-<span class="fc" id="L41">        selectorPanel.setMinimumSize(new Dimension(width, height));</span>
-<span class="fc" id="L42">        selectorPanel.add(cbMonth);</span>
-<span class="fc" id="L43">        selectorPanel.add(cbYear);</span>
-<span class="fc" id="L44">        selectorPanel.add(updateButton);</span>
+<span class="nc" id="L40">        JPanel selectorPanel = new JPanel();</span>
+<span class="nc" id="L41">        selectorPanel.setMinimumSize(new Dimension(width, height));</span>
+<span class="nc" id="L42">        selectorPanel.add(cbMonth);</span>
+<span class="nc" id="L43">        selectorPanel.add(cbYear);</span>
+<span class="nc" id="L44">        selectorPanel.add(updateButton);</span>
 
         /**
          * Action listener for getting info from controller.
          */
-<span class="fc" id="L49">        ActionListener listener = new ActionListener() {</span>
+<span class="nc" id="L49">        ActionListener listener = new ActionListener() {</span>
             @Override
             public void actionPerformed(ActionEvent e) {
 <span class="nc" id="L52">                controller.setOverviewDetails(cbYear.getSelectedItem().toString(),</span>
@@ -54,10 +54,10 @@ public class SelectorPanel extends VHelperPanel {
 <span class="nc" id="L54">            }</span>
         };
 
-<span class="fc" id="L57">        updateButton.addActionListener(controller);</span>
-<span class="fc" id="L58">        updateButton.addActionListener(listener);</span>
+<span class="nc" id="L57">        updateButton.addActionListener(controller);</span>
+<span class="nc" id="L58">        updateButton.addActionListener(listener);</span>
 
-<span class="fc" id="L60">        return selectorPanel;</span>
+<span class="nc" id="L60">        return selectorPanel;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

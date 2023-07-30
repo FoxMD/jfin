@@ -15,15 +15,15 @@ import java.awt.event.KeyEvent;
  * Vertical helper panel.
  */
 public class SearchPanel extends VHelperPanel {
-<span class="fc" id="L18">    private final int columns = 26;</span>
+<span class="nc" id="L18">    private final int columns = 26;</span>
 
     /**
      * Contructor with variable height.
      * @param height height
      */
     SearchPanel(int height) {
-<span class="fc" id="L25">        super(height);</span>
-<span class="fc" id="L26">    }</span>
+<span class="nc" id="L25">        super(height);</span>
+<span class="nc" id="L26">    }</span>
 
     /**
      * Composer for the panel.
@@ -31,41 +31,41 @@ public class SearchPanel extends VHelperPanel {
      * @return JPanel
      */
     public JPanel searchPanelComposer(Controller controller) {
-<span class="fc" id="L34">        JPanel searchPanel = new JPanel();</span>
-<span class="fc" id="L35">        searchPanel.setMinimumSize(new Dimension(width, height));</span>
+<span class="nc" id="L34">        JPanel searchPanel = new JPanel();</span>
+<span class="nc" id="L35">        searchPanel.setMinimumSize(new Dimension(width, height));</span>
 
-<span class="fc" id="L37">        JButton filterButton = new JButton(&quot;Filter&quot;);</span>
-<span class="fc" id="L38">        JTextField searchTermTextField = new JTextField(columns);</span>
+<span class="nc" id="L37">        JButton filterButton = new JButton(&quot;Filter&quot;);</span>
+<span class="nc" id="L38">        JTextField searchTermTextField = new JTextField(columns);</span>
 
-<span class="fc" id="L40">        JRadioButton monthButton = new JRadioButton(&quot;Month&quot;);</span>
-<span class="fc" id="L41">        monthButton.setMnemonic(KeyEvent.VK_M);</span>
-<span class="fc" id="L42">        monthButton.setActionCommand(&quot;Month&quot;);</span>
-<span class="fc" id="L43">        monthButton.setSelected(true);</span>
-<span class="fc" id="L44">        monthButton.setName(&quot;Month&quot;);</span>
+<span class="nc" id="L40">        JRadioButton monthButton = new JRadioButton(&quot;Month&quot;);</span>
+<span class="nc" id="L41">        monthButton.setMnemonic(KeyEvent.VK_M);</span>
+<span class="nc" id="L42">        monthButton.setActionCommand(&quot;Month&quot;);</span>
+<span class="nc" id="L43">        monthButton.setSelected(true);</span>
+<span class="nc" id="L44">        monthButton.setName(&quot;Month&quot;);</span>
 
-<span class="fc" id="L46">        JRadioButton yearButton = new JRadioButton(&quot;Year&quot;);</span>
-<span class="fc" id="L47">        yearButton.setMnemonic(KeyEvent.VK_Y);</span>
-<span class="fc" id="L48">        yearButton.setActionCommand(&quot;Year&quot;);</span>
-<span class="fc" id="L49">        yearButton.setName(&quot;Year&quot;);</span>
+<span class="nc" id="L46">        JRadioButton yearButton = new JRadioButton(&quot;Year&quot;);</span>
+<span class="nc" id="L47">        yearButton.setMnemonic(KeyEvent.VK_Y);</span>
+<span class="nc" id="L48">        yearButton.setActionCommand(&quot;Year&quot;);</span>
+<span class="nc" id="L49">        yearButton.setName(&quot;Year&quot;);</span>
 
-<span class="fc" id="L51">        JRadioButton typeButton = new JRadioButton(&quot;Type&quot;);</span>
-<span class="fc" id="L52">        typeButton.setMnemonic(KeyEvent.VK_T);</span>
-<span class="fc" id="L53">        typeButton.setActionCommand(&quot;Type&quot;);</span>
-<span class="fc" id="L54">        typeButton.setName(&quot;Type&quot;);</span>
+<span class="nc" id="L51">        JRadioButton typeButton = new JRadioButton(&quot;Type&quot;);</span>
+<span class="nc" id="L52">        typeButton.setMnemonic(KeyEvent.VK_T);</span>
+<span class="nc" id="L53">        typeButton.setActionCommand(&quot;Type&quot;);</span>
+<span class="nc" id="L54">        typeButton.setName(&quot;Type&quot;);</span>
 
-<span class="fc" id="L56">        ButtonGroup group = new ButtonGroup();</span>
-<span class="fc" id="L57">        group.add(monthButton);</span>
-<span class="fc" id="L58">        group.add(yearButton);</span>
-<span class="fc" id="L59">        group.add(typeButton);</span>
+<span class="nc" id="L56">        ButtonGroup group = new ButtonGroup();</span>
+<span class="nc" id="L57">        group.add(monthButton);</span>
+<span class="nc" id="L58">        group.add(yearButton);</span>
+<span class="nc" id="L59">        group.add(typeButton);</span>
 
-<span class="fc" id="L61">        searchPanel.add(monthButton);</span>
-<span class="fc" id="L62">        searchPanel.add(yearButton);</span>
-<span class="fc" id="L63">        searchPanel.add(typeButton);</span>
+<span class="nc" id="L61">        searchPanel.add(monthButton);</span>
+<span class="nc" id="L62">        searchPanel.add(yearButton);</span>
+<span class="nc" id="L63">        searchPanel.add(typeButton);</span>
 
-<span class="fc" id="L65">        searchPanel.add(searchTermTextField);</span>
-<span class="fc" id="L66">        searchPanel.add(filterButton);</span>
+<span class="nc" id="L65">        searchPanel.add(searchTermTextField);</span>
+<span class="nc" id="L66">        searchPanel.add(filterButton);</span>
 
-<span class="fc" id="L68">        ActionListener listener = new ActionListener() {</span>
+<span class="nc" id="L68">        ActionListener listener = new ActionListener() {</span>
             @Override
             public void actionPerformed(ActionEvent e) {
 <span class="nc" id="L71">                JRadioButton btn = (JRadioButton) e.getSource();</span>
@@ -74,14 +74,14 @@ public class SearchPanel extends VHelperPanel {
 <span class="nc" id="L74">            }</span>
         };
 
-<span class="fc" id="L77">        filterButton.addActionListener(controller);</span>
-<span class="fc" id="L78">        monthButton.addActionListener(listener);</span>
-<span class="fc" id="L79">        yearButton.addActionListener(listener);</span>
-<span class="fc" id="L80">        typeButton.addActionListener(listener);</span>
+<span class="nc" id="L77">        filterButton.addActionListener(controller);</span>
+<span class="nc" id="L78">        monthButton.addActionListener(listener);</span>
+<span class="nc" id="L79">        yearButton.addActionListener(listener);</span>
+<span class="nc" id="L80">        typeButton.addActionListener(listener);</span>
 
-<span class="fc" id="L82">        controller.setFilterTextField(searchTermTextField);</span>
+<span class="nc" id="L82">        controller.setFilterTextField(searchTermTextField);</span>
 
-<span class="fc" id="L84">        return searchPanel;</span>
+<span class="nc" id="L84">        return searchPanel;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

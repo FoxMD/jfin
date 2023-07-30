@@ -53,14 +53,15 @@ import org.knowm.xchart.PieChartBuilder;
 
 <span class="nc" id="L54">        JPanel sup = new JPanel();</span>
 <span class="nc" id="L55">        JPanel panel = new XChartPanel&lt;PieChart&gt;(chart);</span>
-<span class="nc" id="L56">        textTest = new JTable(tableModel);</span>
 
-<span class="nc" id="L58">        sup.add(panel);</span>
-<span class="nc" id="L59">        sup.add(textTest);</span>
+<span class="nc" id="L57">        textTest = new JTable(tableModel);</span>
+<span class="nc" id="L58">        textTest.setPreferredSize(new Dimension(panelWidth, panelHeight));</span>
+<span class="nc" id="L59">        sup.add(panel);</span>
+<span class="nc" id="L60">        sup.add(textTest);</span>
 
-<span class="nc" id="L61">        sup.setMinimumSize(new Dimension(panelWidth, panelHeight));</span>
+<span class="nc" id="L62">        sup.setPreferredSize(new Dimension(panelWidth, panelHeight));</span>
 
-<span class="nc" id="L63">        return sup;</span>
+<span class="nc" id="L64">        return sup;</span>
     }
 
     /**
@@ -68,39 +69,39 @@ import org.knowm.xchart.PieChartBuilder;
      * @param dataModel Data
      */
     public void updateChart(FinanceModel dataModel) {
-<span class="nc bnc" id="L71" title="All 2 branches missed.">        for (Map.Entry&lt;String, Float&gt; entry : this.values.entrySet()) {</span>
-<span class="nc" id="L72">            chart.addSeries(entry.getKey(), entry.getValue());</span>
-        }
-<span class="nc" id="L74">        updateTable();</span>
-<span class="nc" id="L75">    }</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        for (Map.Entry&lt;String, Float&gt; entry : this.values.entrySet()) {</span>
+<span class="nc" id="L73">            chart.addSeries(entry.getKey(), entry.getValue());</span>
+<span class="nc" id="L74">        }</span>
+<span class="nc" id="L75">        updateTable();</span>
+<span class="nc" id="L76">    }</span>
 
     /**
      * Clear chart before updating.
      */
     public void clearChart() {
-<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (this.values == null) {</span>
-<span class="nc" id="L82">            return;</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (this.values == null) {</span>
+<span class="nc" id="L83">            return;</span>
         }
-<span class="nc bnc" id="L84" title="All 2 branches missed.">        for (String key : this.values.keySet()) {</span>
-<span class="nc" id="L85">            chart.removeSeries(key);</span>
-        }
-<span class="nc" id="L87">        this.values.clear();</span>
-<span class="nc" id="L88">    }</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        for (String key : this.values.keySet()) {</span>
+<span class="nc" id="L86">            chart.removeSeries(key);</span>
+<span class="nc" id="L87">        }</span>
+<span class="nc" id="L88">        this.values.clear();</span>
+<span class="nc" id="L89">    }</span>
 
     public void setValues(Map&lt;String, Float&gt; values) {
-<span class="nc" id="L91">        this.values = values;</span>
-<span class="nc" id="L92">    }</span>
+<span class="nc" id="L92">        this.values = values;</span>
+<span class="nc" id="L93">    }</span>
 
     public Map&lt;String, Float&gt; getValues() {
-<span class="nc" id="L95">        return this.values;</span>
+<span class="nc" id="L96">        return this.values;</span>
     }
 
     public void updateTable() {
-<span class="nc" id="L99">        tableModel.setRowCount(0);</span>
-<span class="nc bnc" id="L100" title="All 2 branches missed.">        for (Map.Entry&lt;String, Float&gt; entry : modelOverview.getTest().entrySet()) {</span>
-<span class="nc" id="L101">            Object[] objs = {entry.getKey(), entry.getValue()};</span>
-<span class="nc" id="L102">            tableModel.addRow(objs);</span>
-        }
-<span class="nc" id="L104">    }</span>
+<span class="nc" id="L100">        tableModel.setRowCount(0);</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        for (Map.Entry&lt;String, Float&gt; entry : modelOverview.getTest().entrySet()) {</span>
+<span class="nc" id="L102">            Object[] objs = {entry.getKey(), entry.getValue()};</span>
+<span class="nc" id="L103">            tableModel.addRow(objs);</span>
+<span class="nc" id="L104">        }</span>
+<span class="nc" id="L105">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

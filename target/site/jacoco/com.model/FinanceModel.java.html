@@ -23,18 +23,14 @@ public class FinanceModel extends DefaultTableModel {
     /**
      * Constructor for the financial model.
      */
-    public FinanceModel() {
+    public FinanceModel(DBConnector database) {
 <span class="nc" id="L27">        super(Constants.databaseData, Constants.TABLE_HEADER);</span>
 
-<span class="nc" id="L29">        DBConnector database = new DBConnector();</span>
-<span class="nc bnc" id="L30" title="All 2 branches missed.">        if (database.testConnection() != -1) {</span>
-<span class="nc" id="L31">            this.database = database;</span>
-            //this.data = testValue;
-        }
-<span class="nc" id="L34">        data = new HashMap&lt;String, Float&gt;();</span>
-<span class="nc" id="L35">        this.expenses = 0.0f;</span>
-<span class="nc" id="L36">        this.income = 0.0f;</span>
-<span class="nc" id="L37">    }</span>
+<span class="nc" id="L29">        this.database = database;</span>
+<span class="nc" id="L30">        data = new HashMap&lt;String, Float&gt;();</span>
+<span class="nc" id="L31">        this.expenses = 0.0f;</span>
+<span class="nc" id="L32">        this.income = 0.0f;</span>
+<span class="nc" id="L33">    }</span>
 
     /**
      * Return data from a database.
@@ -43,7 +39,7 @@ public class FinanceModel extends DefaultTableModel {
      * @return return your request
      */
     public Object[][] getDataFromDB(String searchColumn, String searchTerm) {
-<span class="nc" id="L46">        return database.getQuery(searchColumn, searchTerm);</span>
+<span class="nc" id="L42">        return database.getQuery(searchColumn, searchTerm);</span>
     }
 
     /**
@@ -54,13 +50,13 @@ public class FinanceModel extends DefaultTableModel {
      */
     public Object[][] getDataForSpecificDate(String year, String month) {
         Object[][] overview;
-<span class="nc" id="L57">        overview = database.getQueryForYearAndMonth(year, month);</span>
+<span class="nc" id="L53">        overview = database.getQueryForYearAndMonth(year, month);</span>
 
-<span class="nc bnc" id="L59" title="All 2 branches missed.">        for (Object[] o: overview) {</span>
-<span class="nc" id="L60">            System.out.println(o[2]);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        for (Object[] o: overview) {</span>
+<span class="nc" id="L56">            System.out.println(o[2]);</span>
         }
 
-<span class="nc" id="L63">        return overview;</span>
+<span class="nc" id="L59">        return overview;</span>
     }
 
     /**
@@ -68,45 +64,45 @@ public class FinanceModel extends DefaultTableModel {
      * @param data input data
      */
     public void setNewDataValues(Object[][] data) {
-<span class="nc" id="L71">        this.expenses = 0.0f;</span>
-<span class="nc" id="L72">        this.income = 0.0f;</span>
+<span class="nc" id="L67">        this.expenses = 0.0f;</span>
+<span class="nc" id="L68">        this.income = 0.0f;</span>
 
-<span class="nc bnc" id="L74" title="All 2 branches missed.">        for (Object[] o : data) {</span>
-<span class="nc" id="L75">            String sCurrency = (String) o[Utils.Entries.CURRENCY.ordinal()];</span>
-<span class="nc bnc" id="L76" title="All 2 branches missed.">            if (&quot;CZK&quot;.equals(sCurrency)) {</span>
-<span class="nc" id="L77">                o[Utils.Entries.VALUE.ordinal()] = (float) o[Utils.Entries.VALUE.ordinal()] / transferRate;</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        for (Object[] o : data) {</span>
+<span class="nc" id="L71">            String sCurrency = (String) o[Utils.Entries.CURRENCY.ordinal()];</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">            if (&quot;CZK&quot;.equals(sCurrency)) {</span>
+<span class="nc" id="L73">                o[Utils.Entries.VALUE.ordinal()] = (float) o[Utils.Entries.VALUE.ordinal()] / transferRate;</span>
             }
 
-<span class="nc" id="L80">            String sType = (String) o[Utils.Entries.TYPE.ordinal()];</span>
-<span class="nc bnc" id="L81" title="All 2 branches missed.">            if (&quot;Income&quot;.equals(sType)) {</span>
-<span class="nc" id="L82">                setIncome((Float) o[Utils.Entries.VALUE.ordinal()]);</span>
-<span class="nc" id="L83">                setChartValues(&quot;Savings&quot;, getDifferenceForChart());</span>
-<span class="nc" id="L84">            } else {</span>
-<span class="nc" id="L85">                setExpenses((Float) o[Utils.Entries.VALUE.ordinal()]);</span>
-<span class="nc" id="L86">                setChartValues((String) o[Utils.Entries.TYPE.ordinal()],</span>
-<span class="nc" id="L87">                                (Float) o[Utils.Entries.VALUE.ordinal()]);</span>
+<span class="nc" id="L76">            String sType = (String) o[Utils.Entries.TYPE.ordinal()];</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">            if (&quot;Income&quot;.equals(sType)) {</span>
+<span class="nc" id="L78">                setIncome((Float) o[Utils.Entries.VALUE.ordinal()]);</span>
+<span class="nc" id="L79">                setChartValues(&quot;Savings&quot;, getDifferenceForChart());</span>
+            } else {
+<span class="nc" id="L81">                setExpenses((Float) o[Utils.Entries.VALUE.ordinal()]);</span>
+<span class="nc" id="L82">                setChartValues((String) o[Utils.Entries.TYPE.ordinal()],</span>
+<span class="nc" id="L83">                                (Float) o[Utils.Entries.VALUE.ordinal()]);</span>
             }
         }
-<span class="nc" id="L90">    }</span>
+<span class="nc" id="L86">    }</span>
 
     private void setChartValues(String key, Float value) {
-<span class="nc" id="L93">        addToChartData(key, value);</span>
-<span class="nc" id="L94">    }</span>
+<span class="nc" id="L89">        addToChartData(key, value);</span>
+<span class="nc" id="L90">    }</span>
 
     private void addToChartData(String key, Float value) {
-<span class="nc bnc" id="L97" title="All 2 branches missed.">        if (this.data.get(key) == null) {</span>
-<span class="nc" id="L98">            this.data.put(key, value);</span>
-<span class="nc" id="L99">        } else {</span>
-<span class="nc" id="L100">            this.data.merge(key, value, Float::sum);</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (this.data.get(key) == null) {</span>
+<span class="nc" id="L94">            this.data.put(key, value);</span>
+        } else {
+<span class="nc" id="L96">            this.data.merge(key, value, Float::sum);</span>
         }
-<span class="nc" id="L102">    }</span>
+<span class="nc" id="L98">    }</span>
 
     /**
      * Returns the private data for the chart.
      * @return chart values.
      */
     public Map&lt;String, Float&gt; getChartValues() {
-<span class="nc" id="L109">        return this.data;</span>
+<span class="nc" id="L105">        return this.data;</span>
     }
 
     /**
@@ -114,7 +110,7 @@ public class FinanceModel extends DefaultTableModel {
      * @return income
      */
     public float getIncome() {
-<span class="nc" id="L117">        return this.income;</span>
+<span class="nc" id="L113">        return this.income;</span>
     }
 
     /**
@@ -122,15 +118,15 @@ public class FinanceModel extends DefaultTableModel {
      * @param income complete income;
      */
     public void setIncome(float income) {
-<span class="nc" id="L125">        this.income += income;</span>
-<span class="nc" id="L126">    }</span>
+<span class="nc" id="L121">        this.income += income;</span>
+<span class="nc" id="L122">    }</span>
 
     /**
      * Returns all the expenses.
      * @return expenses
      */
     public float getExpenses() {
-<span class="nc" id="L133">        return this.expenses;</span>
+<span class="nc" id="L129">        return this.expenses;</span>
     }
 
     /**
@@ -138,21 +134,21 @@ public class FinanceModel extends DefaultTableModel {
      * @param expenses Sum of expenses.
      */
     public void setExpenses(float expenses) {
-<span class="nc" id="L141">        this.expenses += expenses;</span>
-<span class="nc" id="L142">    }</span>
+<span class="nc" id="L137">        this.expenses += expenses;</span>
+<span class="nc" id="L138">    }</span>
 
     /**
      * Returns the difference between income and expenses.
      * @return difference
      */
     public float getDifference() {
-<span class="nc" id="L149">        this.difference = this.income - this.expenses;</span>
-<span class="nc" id="L150">        return this.difference;</span>
+<span class="nc" id="L145">        this.difference = this.income - this.expenses;</span>
+<span class="nc" id="L146">        return this.difference;</span>
     }
 
     public float getDifferenceForChart() {
-<span class="nc" id="L154">        this.difference = this.income - this.expenses;</span>
-<span class="nc bnc" id="L155" title="All 2 branches missed.">        return this.difference &gt; 0.0f ? this.difference : 0.0f;</span>
+<span class="nc" id="L150">        this.difference = this.income - this.expenses;</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">        return this.difference &gt; 0.0f ? this.difference : 0.0f;</span>
     }
 
     /**
@@ -160,25 +156,25 @@ public class FinanceModel extends DefaultTableModel {
      * @return some data
      */
     public Map&lt;String, Float&gt; getTest() {
-<span class="nc" id="L163">        return this.data;</span>
+<span class="nc" id="L159">        return this.data;</span>
     }
 
     public void addEntryToDB(String year, String month, String type, float value, String currency, String description) {
         //database.writeQuery(year, month, type, value, currency, description);
-<span class="nc" id="L168">    }</span>
+<span class="nc" id="L164">    }</span>
 
     public void addEntryToDB(Object[] entry) {
-<span class="nc" id="L171">        String uniqueID = com.model.Utils.getUniqueID(entry);</span>
-<span class="nc" id="L172">        entry[com.model.Utils.Entries.ID.ordinal()] = uniqueID;</span>
-<span class="nc" id="L173">        database.writeQuery(entry);</span>
-<span class="nc" id="L174">    }</span>
+<span class="nc" id="L167">        String uniqueID = com.model.Utils.getUniqueID(entry);</span>
+<span class="nc" id="L168">        entry[com.model.Utils.Entries.ID.ordinal()] = uniqueID;</span>
+<span class="nc" id="L169">        database.writeQuery(entry);</span>
+<span class="nc" id="L170">    }</span>
 
     public void removeEntryFromDB(Object[] entry) {
-<span class="nc" id="L177">        database.removeEntryFromDB(entry);</span>
-<span class="nc" id="L178">    }</span>
+<span class="nc" id="L173">        database.removeEntryFromDB(entry);</span>
+<span class="nc" id="L174">    }</span>
 
     public void modifyEntryFromDB(Object[] entry) {
-<span class="nc" id="L181">        database.modifyEntryFromDB(entry);</span>
-<span class="nc" id="L182">    }</span>
+<span class="nc" id="L177">        database.modifyEntryFromDB(entry);</span>
+<span class="nc" id="L178">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

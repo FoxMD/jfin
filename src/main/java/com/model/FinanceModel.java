@@ -23,14 +23,10 @@ public class FinanceModel extends DefaultTableModel {
     /**
      * Constructor for the financial model.
      */
-    public FinanceModel() {
+    public FinanceModel(DBConnector database) {
         super(Constants.databaseData, Constants.TABLE_HEADER);
 
-        DBConnector database = new DBConnector();
-        if (database.testConnection() != -1) {
-            this.database = database;
-            //this.data = testValue;
-        }
+        this.database = database;
         data = new HashMap<String, Float>();
         this.expenses = 0.0f;
         this.income = 0.0f;

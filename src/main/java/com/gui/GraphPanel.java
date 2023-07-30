@@ -55,7 +55,7 @@ public class GraphPanel extends JPanel {
         JPanel panel = new XChartPanel<PieChart>(chart);
 
         textTest = new JTable(tableModel);
-        textTest.setPreferredSize(new Dimension(panelWidth, 200));
+        textTest.setPreferredSize(new Dimension(panelWidth, panelHeight));
         sup.add(panel);
         sup.add(textTest);
 

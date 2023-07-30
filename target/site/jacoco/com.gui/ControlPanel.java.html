@@ -52,7 +52,7 @@ import java.awt.event.ActionEvent;
 <span class="nc" id="L52">                    System.out.println(&quot;From remove&quot;);</span>
 <span class="nc" id="L53">                    int dialogButton = JOptionPane.YES_NO_OPTION;</span>
 <span class="nc" id="L54">                    int dialogResult = JOptionPane.showConfirmDialog(null,</span>
-<span class="nc" id="L55">                            &quot;Would You Like to remove the entry?&quot;, &quot;Warning&quot;, dialogButton);</span>
+                            &quot;Would You Like to remove the entry?&quot;, &quot;Warning&quot;, dialogButton);
 <span class="nc bnc" id="L56" title="All 2 branches missed.">                    if (dialogResult == JOptionPane.YES_OPTION) {</span>
 <span class="nc" id="L57">                        System.out.println(controller.removeEntryRequest());</span>
 <span class="nc" id="L58">                        controller.updateOverview();</span>
