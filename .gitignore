@@ -1,6 +1,8 @@
 /src/main/java/secret/*
 application-dev.properties
 .vscode/
-target/*
+/target/*
+/target/**
+target/classes/*
 settings.json
 *.html
