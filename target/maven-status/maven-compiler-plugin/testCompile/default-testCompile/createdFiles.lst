@@ -1,0 +1,5 @@
+com\core\AppTest.class
+com\gui\AddTest.class
+com\connector\ConnectorTest.class
+com\model\FinanceModelTest.class
+com\model\ConstantsTest.class
