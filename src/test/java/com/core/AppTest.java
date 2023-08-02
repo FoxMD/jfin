@@ -3,7 +3,6 @@ package com.core;
 import org.junit.jupiter.api.Test;
 
 import com.connector.IDatabase;
-import com.connector.IDatabase.QTYPE;
 
 /*
 import com.gui.GraphPanel;
@@ -19,8 +18,6 @@ import javax.swing.JTextField;
  * Unit test for simple App.
  */
 class AppTest {
-    private final int size = 6;
-
     private class MockDB implements IDatabase {
         final int sizeOfEntry = 6;
 

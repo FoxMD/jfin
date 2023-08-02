@@ -105,7 +105,6 @@ public class FinanceModelTest {
         final float e3 = 50.50f;
         final float e4 = 66.5f;
         final float i1 = 2500f;
-        final float f1 = 23.88f;
 
         final Object[][] data = {
             {"2021", "January", "CAR", e1, "EUR", " "},
@@ -117,13 +116,13 @@ public class FinanceModelTest {
         testModel.setNewDataValues(data);
 
         assertEquals(i1, testModel.getIncome());
-        assertEquals(e1 + e4 + (e2 + e3) / f1, testModel.getExpenses());
-        assertEquals(i1 - (e1 + e4 + (e2 + e3) / f1), testModel.getDifference());
-        assertEquals(i1 - (e1 + e4 + (e2 + e3) / f1), testModel.getDifferenceForChart());
+        assertEquals(e1 + e4 + (e2 + e3) / com.model.Utils.CHANGE_RATE, testModel.getExpenses());
+        assertEquals(i1 - (e1 + e4 + (e2 + e3) / com.model.Utils.CHANGE_RATE), testModel.getDifference());
+        assertEquals(i1 - (e1 + e4 + (e2 + e3) / com.model.Utils.CHANGE_RATE), testModel.getDifferenceForChart());
 
         Map<String, Float> objectReturned = testModel.getChartValues();
         assertEquals(objectReturned.get("CAR"), e1);
-        assertEquals(objectReturned.get("FUN"), e2 / f1 + e3 / f1);
+        assertEquals(objectReturned.get("FUN"), e2 / com.model.Utils.CHANGE_RATE + e3 / com.model.Utils.CHANGE_RATE);
         assertEquals(objectReturned.get("Income"), null);
         assertEquals(objectReturned.get("GROCERY"), e4);
     }
@@ -137,7 +136,6 @@ public class FinanceModelTest {
         final float e2 = 80.50f;
         final float e3 = 50.50f;
         final float e4 = 66.5f;
-        final float f1 = 23.88f;
         final float i2 = 12.0f;
 
         final Object[][] data = {
@@ -150,9 +148,9 @@ public class FinanceModelTest {
         testModel.setNewDataValues(data);
 
         assertEquals(i2, testModel.getIncome());
-        assertEquals(e1 + e4 + (e2 + e3) / f1, testModel.getExpenses());
+        assertEquals(e1 + e4 + (e2 + e3) / com.model.Utils.CHANGE_RATE, testModel.getExpenses());
         assertEquals(0, testModel.getDifferenceForChart());
-        assertEquals(i2 - (e1 + e4 + (e2 + e3) / f1), testModel.getDifference());
+        assertEquals(i2 - (e1 + e4 + (e2 + e3) / com.model.Utils.CHANGE_RATE), testModel.getDifference());
 
         assertEquals(1, testModel.writeQuery(new Object[0]));
         assertEquals(1, testModel.removeEntryFromDB(new Object[0]));

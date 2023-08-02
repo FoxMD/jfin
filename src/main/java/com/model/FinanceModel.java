@@ -19,8 +19,6 @@ public class FinanceModel extends DefaultTableModel {
     private float expenses;
     private float difference;
 
-    private float transferRate = 23.88f;
-
     /**
      * Constructor for the financial model.
      */
@@ -78,7 +76,8 @@ public class FinanceModel extends DefaultTableModel {
         for (Object[] o : data) {
             String sCurrency = (String) o[Utils.Entries.CURRENCY.ordinal()];
             if ("CZK".equals(sCurrency)) {
-                o[Utils.Entries.VALUE.ordinal()] = (float) o[Utils.Entries.VALUE.ordinal()] / transferRate;
+                o[Utils.Entries.VALUE.ordinal()] =
+                    (float) o[Utils.Entries.VALUE.ordinal()] / com.model.Utils.CHANGE_RATE;
             }
 
             String sType = (String) o[Utils.Entries.TYPE.ordinal()];

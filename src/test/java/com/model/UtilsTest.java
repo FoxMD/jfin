@@ -28,7 +28,7 @@ public class UtilsTest {
         }
 
         try {
-            String id3 = new String(Utils.getUniqueID(obj));
+            new String(Utils.getUniqueID(obj));
             throw new UnsupportedEncodingException();
         } catch (final UnsupportedEncodingException e) {
             assertTrue(true);
