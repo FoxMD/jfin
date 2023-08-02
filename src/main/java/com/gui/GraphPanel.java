@@ -35,7 +35,7 @@ public class GraphPanel extends JPanel {
                         .theme(ChartTheme.GGPlot2)
                         .build();
     private FinanceModel modelOverview;
-    private final String[] columnNames = {"Article", "Cost"};
+    private final String[] columnNames = {"Article", "Sum EUR", "Sum CZK"};
     private JTable textTest;
     private DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
@@ -98,8 +98,8 @@ public class GraphPanel extends JPanel {
 
     public void updateTable() {
         tableModel.setRowCount(0);
-        for (Map.Entry<String, Float> entry : modelOverview.getTest().entrySet()) {
-            Object[] objs = {entry.getKey(), entry.getValue()};
+        for (Map.Entry<String, Float> entry : modelOverview.getChartValues().entrySet()) {
+            Object[] objs = {entry.getKey(), entry.getValue(), entry.getValue() * com.model.Utils.CHANGE_RATE};
             tableModel.addRow(objs);
         }
     }

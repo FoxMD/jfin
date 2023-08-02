@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
 /**
  * Connector for database server, handles work with mysql.
  */
-public final class DBConnector {
+public final class DBConnector implements IDatabase {
     private String dbUrl;
     private String user;
     private String password;
@@ -30,7 +30,6 @@ public final class DBConnector {
         this.password = cred.password;
     }
 
-    // later add credentials as arg
     public static DBConnector getInstance(Credentials cred) {
         DBConnector result = instance;
         if (result == null) {
@@ -56,6 +55,8 @@ public final class DBConnector {
      * @return
      */
     public int writeQuery(Object[] entry) {
+        String uniqueID = com.model.Utils.getUniqueID(entry);
+        entry[com.model.Utils.Entries.ID.ordinal()] = uniqueID;
         try
         (
             Connection conn = DriverManager.getConnection(dbUrl, user, password);
@@ -87,13 +88,26 @@ public final class DBConnector {
         return 0;
     }
 
+    public Object[][] getQuery(String arg1, String arg2, QTYPE type) {
+        switch (type) {
+            case STANDARD:
+                return getQuery(arg1, arg2);
+            case PRECISE:
+                return getPreciseQuery(arg1, arg2);
+            case DATE:
+                return getQueryForYearAndMonth(arg1, arg2);
+            default:
+                return new Object[0][0];
+        }
+    }
+
     /**
      * Returns an array of results from the database.
      * @param what column entry name
      * @param with entry name starts with
      * @return array of mysql entry as array
      */
-    public Object[][] getQuery(String what, String with) {
+    private Object[][] getQuery(String what, String with) {
         ArrayList<Object[]> data = new ArrayList<>();
         String request = "";
         if ("*".equals(with.trim())) {
@@ -141,7 +155,7 @@ public final class DBConnector {
      * @param month month in this year
      * @return array of mysql array entries for this specific date
      */
-    public Object[][] getQueryForYearAndMonth(String year, String month) {
+    private Object[][] getQueryForYearAndMonth(String year, String month) {
         ArrayList<Object[]> data = new ArrayList<>();
         String request = "";
 
@@ -186,7 +200,7 @@ public final class DBConnector {
      * @param with what is the value of the coumn
      * @return array of mysql array entries for this specific date
      */
-    public Object[][] getPreciseQuery(String what, String with) {
+    private Object[][] getPreciseQuery(String what, String with) {
         ArrayList<Object[]> data = new ArrayList<>();
 
         final float testCZK = 199.99f;

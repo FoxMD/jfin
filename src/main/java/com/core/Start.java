@@ -4,6 +4,7 @@ import javax.swing.SwingUtilities;
 
 import com.connector.Credentials;
 import com.connector.DBConnector;
+import com.connector.IDatabase;
 import com.gui.View;
 import com.model.FinanceModel;
 
@@ -27,7 +28,8 @@ public final class Start {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    createDependenciesAndShowGUI();
+                    Credentials loginData = new Credentials();
+                    createDependenciesAndShowGUI(loginIntoDatabase(loginData));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -35,14 +37,17 @@ public final class Start {
         });
     }
 
+    public static IDatabase loginIntoDatabase(Credentials loginData) {
+        DBConnector database = DBConnector.getInstance(loginData);
+        return database;
+    }
+
     /**
      * Create UI and start the app.
      * @throws Exception For not starting
      */
-    public static void createDependenciesAndShowGUI() throws Exception {
+    public static void createDependenciesAndShowGUI(IDatabase database) throws Exception {
         System.out.println("Create GUI");
-        Credentials loginData = new Credentials();
-        DBConnector database = DBConnector.getInstance(loginData);
         if (database.testConnection() != -1) {
             FinanceModel modelDB = new FinanceModel(database);
             FinanceModel modelSum = new FinanceModel(database);

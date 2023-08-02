@@ -1,0 +1,11 @@
+com\core\AppTest.class
+com\model\FinanceModelTest$MockDB.class
+com\model\FinanceModelTest.class
+com\core\AppTest$MockDB.class
+com\model\FinanceModelTest$1.class
+com\core\MockDB.class
+com\model\ConstantsTest.class
+com\gui\AddTest.class
+com\connector\ConnectorTest.class
+com\model\UtilsTest.class
+com\core\AppTest$1.class

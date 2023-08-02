@@ -17,6 +17,8 @@ public final class Utils {
 
     }
 
+    public static final float CHANGE_RATE = 23.88f;
+
     public enum Entries { YEAR, MONTH, TYPE, VALUE, CURRENCY, DESC, ID }
 
     /**

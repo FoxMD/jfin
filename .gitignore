@@ -6,3 +6,5 @@ application-dev.properties
 target/classes/*
 settings.json
 *.html
+*.class
+*.lst
