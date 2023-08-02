@@ -98,7 +98,7 @@ public class GraphPanel extends JPanel {
 
     public void updateTable() {
         tableModel.setRowCount(0);
-        for (Map.Entry<String, Float> entry : modelOverview.getTest().entrySet()) {
+        for (Map.Entry<String, Float> entry : modelOverview.getChartValues().entrySet()) {
             Object[] objs = {entry.getKey(), entry.getValue()};
             tableModel.addRow(objs);
         }

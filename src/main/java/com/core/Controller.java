@@ -91,7 +91,7 @@ public class Controller implements ActionListener {
 
         if (((JButton) e.getSource()).getActionCommand().equals("AddEntry")) {
             System.out.println("Add table");
-            model.addEntryToDB(this.valuesToAdd);
+            model.writeQuery(this.valuesToAdd);
             updateOverview();
         }
 

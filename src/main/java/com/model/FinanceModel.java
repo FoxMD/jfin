@@ -1,17 +1,18 @@
 package com.model;
 
-import com.connector.DBConnector;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.table.DefaultTableModel;
 
+import com.connector.IDatabase;
+import com.connector.IDatabase.QTYPE;
+
 /**
  * Financial model for tables.
  */
 public class FinanceModel extends DefaultTableModel {
-    private DBConnector database;
+    private IDatabase database;
     private Map<String, Float> data;
 
     private float income;
@@ -23,13 +24,20 @@ public class FinanceModel extends DefaultTableModel {
     /**
      * Constructor for the financial model.
      */
-    public FinanceModel(DBConnector database) {
+    public FinanceModel(IDatabase database) {
         super(Constants.databaseData, Constants.TABLE_HEADER);
+        if (database == null) {
+            return;
+        }
 
         this.database = database;
         data = new HashMap<String, Float>();
         this.expenses = 0.0f;
         this.income = 0.0f;
+    }
+
+    public IDatabase getDBInstance() {
+        return this.database;
     }
 
     /**
@@ -39,7 +47,7 @@ public class FinanceModel extends DefaultTableModel {
      * @return return your request
      */
     public Object[][] getDataFromDB(String searchColumn, String searchTerm) {
-        return database.getQuery(searchColumn, searchTerm);
+        return database.getQuery(searchColumn, searchTerm, QTYPE.STANDARD);
     }
 
     /**
@@ -50,7 +58,7 @@ public class FinanceModel extends DefaultTableModel {
      */
     public Object[][] getDataForSpecificDate(String year, String month) {
         Object[][] overview;
-        overview = database.getQueryForYearAndMonth(year, month);
+        overview = database.getQuery(year, month, QTYPE.DATE);
 
         for (Object[] o: overview) {
             System.out.println(o[2]);
@@ -154,26 +162,20 @@ public class FinanceModel extends DefaultTableModel {
     /**
      * Test function.
      * @return some data
-     */
+     *//*
     public Map<String, Float> getTest() {
         return this.data;
     }
-
-    public void addEntryToDB(String year, String month, String type, float value, String currency, String description) {
-        //database.writeQuery(year, month, type, value, currency, description);
+    */
+    public int writeQuery(Object[] entry) {
+        return database.writeQuery(entry);
     }
 
-    public void addEntryToDB(Object[] entry) {
-        String uniqueID = com.model.Utils.getUniqueID(entry);
-        entry[com.model.Utils.Entries.ID.ordinal()] = uniqueID;
-        database.writeQuery(entry);
+    public int removeEntryFromDB(Object[] entry) {
+        return database.removeEntryFromDB(entry);
     }
 
-    public void removeEntryFromDB(Object[] entry) {
-        database.removeEntryFromDB(entry);
-    }
-
-    public void modifyEntryFromDB(Object[] entry) {
-        database.modifyEntryFromDB(entry);
+    public int modifyEntryFromDB(Object[] entry) {
+        return database.modifyEntryFromDB(entry);
     }
 }

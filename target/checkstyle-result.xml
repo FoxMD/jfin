@@ -1,45 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="10.12.1">
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\connector\Credentials.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\connector\DBConnector.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\connector\SysHandler.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\core\Controller.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\core\Start.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\gui\AddFrame.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\gui\ControlPanel.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\gui\GraphPanel.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\gui\SearchPanel.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\gui\SelectorPanel.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\gui\SumActionPanel.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\gui\VHelperPanel.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\gui\View.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\model\Constants.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\model\FinanceModel.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\main\java\com\model\Utils.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\test\java\com\connector\ConnectorTest.java">
-</file>
 <file name="E:\Programming\Java\JFin\jfin\src\test\java\com\core\AppTest.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\test\java\com\gui\AddTest.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\test\java\com\model\ConstantsTest.java">
-</file>
-<file name="E:\Programming\Java\JFin\jfin\src\test\java\com\model\FinanceModelTest.java">
 </file>
 </checkstyle>
